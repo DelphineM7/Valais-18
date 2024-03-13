@@ -6,7 +6,7 @@ async function displayLine(textContainer, line){
             setTimeout(() => {
                 textContainer.text += character
                 fini() // permet de signifier que promise a été effectuée, et le await peut continuer permet d'avoir un caractère après l'autre
-            }, 10); // millisecondes
+            }, 4); // millisecondes
         })
     }
 
@@ -28,7 +28,7 @@ export async function dialog(k,pos, content){ // box de dialogue // 1216 = 76 fr
         k.fixed(),
     ]);
     const textContainerInstruction = dialogBox.add([
-        k.text("Appuie sur Enter", {
+        k.text("Appuie sur enter", {
             font: "NiceFont",
             width : 700,
             lineSpacing : 15,

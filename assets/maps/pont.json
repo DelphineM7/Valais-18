@@ -807,6 +807,18 @@
                  "width":0,
                  "x":441.681818181818,
                  "y":352.045454545454
+                }, 
+                {
+                 "height":0,
+                 "id":57,
+                 "name":"pnj-Torrent",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":248,
+                 "y":414.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -937,7 +949,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":57,
+ "nextobjectid":58,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

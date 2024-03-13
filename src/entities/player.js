@@ -61,7 +61,7 @@ export function setPlayerMovement(k, player){
 export function generateBigPlayerComponents(k, pos){ //Player pour la scène dans le bureau
     return [
         k.sprite("big-player-idle-down"),
-        k.area({shape: new k.Rect(k.vec2(0,0), 145, 395)}), // hitbox du player + vec2 = position relative 10 = width du rectange 12 = height
+        k.area({shape: new k.Rect(k.vec2(0,360), 145, 35)}), // hitbox du player + vec2 = position relative 10 = width du rectange 12 = height
         k.body({}), // affect le player par la physique, être poussé et poussé p.ex
         k.pos(pos),
         k.opacity(1), // dans notre code pas utile, mais ca peut être utilie pour donner une impression de clignoter quand le personnage est touché 

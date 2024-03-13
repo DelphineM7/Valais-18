@@ -1,5 +1,5 @@
 export function globalStateManager1(){
-    let instance = null; //
+    let instance = null; 
 
     function createInstance(){
         let freezePlayer = false 
@@ -26,7 +26,7 @@ export function globalStateManager2(){
     let instance2 = null; 
 
     function createInstance2(){
-        let firstTimepont = true 
+        let firstTimepont = true //true 
 
         return{
             setfirstTimepont(value){
@@ -50,7 +50,7 @@ export function globalStateManagerCarnet(){
     let instanceCarnet = null; 
 
     function createInstanceCarnet(){
-        let WeHaveCarnet = false 
+        let WeHaveCarnet = false  //false
 
         return{
             setInstanceCarnet(value){
@@ -74,7 +74,7 @@ export function globalStateManagerJournal(){
     let instanceJournal = null; 
 
     function createInstanceJournal(){
-        let WeHaveSeenJournal = false 
+        let WeHaveSeenJournal = false  //false
 
         return{
             setInstanceJournal(value){
@@ -94,26 +94,123 @@ export function globalStateManagerJournal(){
     }
 }
 
-export function globalStateManagerOnCollide(){
-    let instanceCollide = null; 
+export function globalStateManagerBeck(){
+    let instanceBeck = null; 
 
-    function createInstanceCollide(){
-        let DoWeCollide = false 
+    function createinstanceBeck(){
+        let BeckOk = false //false
 
         return{
-            setInstanceCollide(value){
-                DoWeCollide = value; 
+            setinstanceBeck(value){
+                BeckOk = value; 
             },
-            getInstanceCollide : () =>DoWeCollide,
+            getinstanceBeck : () =>BeckOk,
         }
     }
     return{
-        getInstanceCollide(){
-            if (!instanceCollide){
-                instanceCollide = createInstanceCollide()
+        getinstanceBeck(){
+            if (!instanceBeck){
+                instanceBeck = createinstanceBeck()
             }
 
-            return instanceCollide;
+            return instanceBeck;
         }
     }
 }
+
+export function globalStateManagerTorrent_Meet(){
+    let instanceTorrent = null; 
+
+    function createinstanceTorrent(){
+        let TorrentOk = false //false
+
+        return{
+            setinstanceTorrent(value){
+                TorrentOk = value; 
+            },
+            getinstanceTorrent : () =>TorrentOk,
+        }
+    }
+    return{
+        getinstanceTorrent(){
+            if (!instanceTorrent){
+                instanceTorrent = createinstanceTorrent()
+            }
+
+            return instanceTorrent;
+        }
+    }
+}
+
+export function globalStateManagerPottier_Meet(){
+    let instancePottier = null; 
+
+    function createinstancePottier(){
+        let PottierOk = false //false
+
+        return{
+            setinstancePottier(value){
+                PottierOk = value; 
+            },
+            getinstancePottier : () =>PottierOk,
+        }
+    }
+    return{
+        getinstancePottier(){
+            if (!instancePottier){
+                instancePottier = createinstancePottier()
+            }
+
+            return instancePottier;
+        }
+    }
+}
+
+export function globalStateManagerBellet_Meet(){
+    let instanceBellet = null; 
+
+    function createinstanceBellet(){
+        let BelletOk = false //false
+
+        return{
+            setinstanceBellet(value){
+                BelletOk = value; 
+            },
+            getinstanceBellet : () =>BelletOk,
+        }
+    }
+    return{
+        getinstanceBellet(){
+            if (!instanceBellet){
+                instanceBellet = createinstanceBellet()
+            }
+
+            return instanceBellet;
+        }
+    }
+}
+
+export function globalStateManagerFolken_Meet(){
+    let instanceFolken = null; 
+
+    function createinstanceFolken(){
+        let FolkenOk = false //false
+
+        return{
+            setinstanceFolken(value){
+                FolkenOk = value; 
+            },
+            getinstanceFolken : () =>FolkenOk,
+        }
+    }
+    return{
+        getinstanceFolken(){
+            if (!instanceFolken){
+                instanceFolken = createinstanceFolken()
+            }
+
+            return instanceFolken;
+        }
+    }
+}
+

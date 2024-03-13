@@ -52,7 +52,7 @@ k.loadSpriteAtlas( "./assets/Player_moyen.png", {
     'medium-player-up' : {x:184 , y:4 , width: 76 , height:200 }
 })
 
-k.loadSpriteAtlas( "./assets/pnj-marchand_petit.png", {
+k.loadSpriteAtlas( "./assets/pnj-marchand_petit.png", { // Rey-Bellet
     "marchand-idle-down" : {x:6 , y:5 , width: 39 , height:93 },
     'marchand-down' : {x:6 , y:5 , width: 39 , height:93 },
     'marchand-side-right' : {x:56 , y:6 , width: 28 , height:91 },
@@ -66,6 +66,21 @@ k.loadSpriteAtlas( "./assets/doc_tableau_DeRivaz.png",{
 
 k.loadSpriteAtlas( "./assets/DeRivaBigPortrait.png",{
     "Big_tabl_Rivaz" : {x:8 , y:38, width: 500 , height:623 },
+})
+
+k.loadSpriteAtlas( "./assets/pnj_Folken.png",{
+    "pnj_Folken_down" : {x:7 , y:16, width: 145 , height:400 },
+    "pnj_Folken_left" : {x:175 , y:6, width: 146 , height:409 },
+    "pnj_Folken_right" : {x:537 , y:9, width: 152 , height:400 },
+    "pnj_Folken_up" : {x:348 , y:4, width: 165 , height:399 },
+    "pnj_Folken_down_little" : {x:18 , y:500, width: 36 , height:93 },
+    "pnj_Folken_left_little" : {x:63 , y:503, width: 35 , height:93 },
+    "pnj_Folken_right_little" : {x:170 , y:500, width: 35 , height:95 },
+    "pnj_Folken_up_little" : {x:114 , y:499, width: 39 , height:95 },
+})
+
+k.loadSpriteAtlas( "./assets/papier_1.png",{
+    "Papier_1" : {x:22 , y:14, width: 595 , height:674 },
 })
 
 k.loadSpriteAtlas( "./assets/horloge_Aigu1.png",{
@@ -84,18 +99,41 @@ k.loadSpriteAtlas( "./assets/Dufour.png",{
     "Dufour" : {x:16 , y:17, width: 498 , height:664 },
 })
 
-k.loadSpriteAtlas( "./assets/carnet.png",{
-    "carnet" : {x:0 , y:0, width: 98 , height:62 },
+k.loadSpriteAtlas( "./assets/pnj_Torrent.png",{
+    "pnj_Torrent_down" : {x:5 , y:5, width: 75 , height:202 },
+    "pnj_Torrent_left" : {x:120 , y:3, width: 69 , height:205 },
+    "pnj_Torrent_right" : {x:329 , y:4, width: 76 , height:205 },
+    "pnj_Torrent_up" : {x:232 , y:1, width: 76 , height:204 },
 })
 
-k.loadSpriteAtlas( "./assets/carnet_vide.png",{ 
-    "carnet_vide" : {x:36 , y:32, width: 804 , height:522 },
+k.loadSpriteAtlas( "./assets/pnj_Pottier.png",{
+    "pnj_Pottier_down" : {x:1 , y:1, width: 34 , height:92 },
+    "pnj_Pottier_left" : {x:36 , y:4, width: 30 , height:89 },
+    "pnj_Pottier_right" : {x:106 , y:3, width: 29 , height:90 },
+    "pnj_Pottier_up" : {x:68 , y:2, width: 33 , height:90 },
 })
 
 k.loadSpriteAtlas( "./assets/journal.png",{ 
     "journal_petit" : {x:12 , y:5, width: 75 , height:82 },
     "journal_grand" : {x:111 , y:15, width: 471 , height:542 }
 })
+
+k.loadSpriteAtlas( "./assets/carnet.png",{
+    "carnet" : {x:0 , y:0, width: 98 , height:62 },
+})
+
+k.loadSpriteAtlas( "./assets/carnet_1.png",{ 
+    "carnet_p_1" : {x:45, y:45, width: 822 , height:543 },
+    "carnet_Beck_vide" : {x:895 , y:45, width: 816 , height:533 },
+})
+k.loadSpriteAtlas( "./assets/carnet_2.png",{ 
+    "carnet_Beck" : {x:15 , y:14, width: 817 , height:531 },
+})
+k.loadSpriteAtlas( "./assets/carnet_3.png",{ 
+    "carnet_Beck_plein" : {x:25 , y:16, width: 810 , height:520 },
+})
+
+
 
 
 

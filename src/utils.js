@@ -1,4 +1,4 @@
-import {DoCollide} from "./state/stateManagers.js"
+import {gameState} from "./state/stateManagers.js"
 
 export function SetSprite(k,player,spriteName){
     if(player.currentSprite !== spriteName){
@@ -90,7 +90,7 @@ export function drawBoundaries(k, map, layer){
     }
 }
 
-export function Instruction(k, widthrec,heightrec, pos, id, content,functionInstru){
+export function Instruction(k, widthrec,heightrec, pos, id, content){
     const InstructionBox = k.add([k.rect(widthrec, heightrec), k.pos(pos), k.outline(4), k.opacity(0.7),k.offscreen(),id]) 
     const textInstructionBox = InstructionBox.add([
         k.text(content, {
@@ -102,10 +102,41 @@ export function Instruction(k, widthrec,heightrec, pos, id, content,functionInst
         k.pos(10,10), // par rappor à dialogbox  
         k.opacity(0.7)
     ]);
+}
 
-    if(DoCollide.getInstanceCollide){
-        k.onKeyPress("e", () =>{ 
-            functionInstru(k)       
-        });
+export function DestroyInstruction(k,id){
+    k.destroyAll(id)
+}
+
+export function ShowObject(k,idInstructionE, nameSprite, pos, idObject){
+    gameState.setFreezePlayer(true)
+    k.destroyAll(idInstructionE)
+    const objectShowed = k.add([k.sprite(nameSprite), k.pos(pos), k.offscreen(), idObject])
+}
+
+export function DestroyShowObject(k,idinstrEnter,idObject ){
+    k.destroyAll(idObject)
+    k.destroyAll(idinstrEnter)
+    gameState.setFreezePlayer(false)
+}
+
+export function startInteractionPNJ (k, pnj, player, spriteright,spriteleft,spritedown, spriteup){
+    if(player.direction === "left"){
+        SetSprite(k,pnj,spriteright) 
+        return
+    }
+
+    if(player.direction === "right"){
+        SetSprite(k,pnj,spriteleft) 
+        return
+    }
+
+    if(player.direction === "up"){
+        SetSprite(k,pnj,spritedown) 
+        return
+    }
+    if(player.direction === "down"){
+        SetSprite(k,pnj,spriteup) 
+        return
     }
 }

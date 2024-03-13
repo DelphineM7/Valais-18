@@ -127,8 +127,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":437.333333333333,
-                 "y":563.333333333333
+                 "x":927.333333333333,
+                 "y":480
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -150,8 +150,31 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":292.276368491322,
+                 "x":330.943035157989,
                  "y":578.259714707329
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":11,
+         "name":"Spawn",
+         "objects":[
+                {
+                 "height":0,
+                 "id":35,
+                 "name":"PNJ-Pottier",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":422,
+                 "y":605.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -215,8 +238,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":870.666666666667,
-                 "x":210,
+                 "width":934.666666666667,
+                 "x":186,
                  "y":502.666666666667
                 }, 
                 {
@@ -347,8 +370,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":11,
- "nextobjectid":35,
+ "nextlayerid":12,
+ "nextobjectid":36,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

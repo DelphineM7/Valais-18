@@ -1,103 +1,111 @@
-import { HaveCarnet, gameState } from "../state/stateManagers.js";
-let onCollideControle = false
+import { gameState, Beck_ok } from "../state/stateManagers.js";
+import { SetSprite } from "../utils.js";
 
 export function generateCarnetComponents(k, pos){ 
     return [
         k.sprite("carnet"),
-        k.area({shape: new k.Rect(k.vec2(8,8), 95, 60)}),
-        k.body({isStatic : true}), 
-        k.offscreen(),
+        k.body({isStatic : true}),
+        k.area({shape: new k.Rect(k.vec2(0,0), 98, 62)}),
         k.pos(pos),
-        k.opacity(1), 
-        {
-            currentSprite : 'carnet',
-        },
+        k.offscreen(),
         "carnet", 
     ];
 }
-
-export function instructionCarnet(k){
-    const dialogBoxFCarnet = k.add([k.rect(135, 55), k.pos(1115,25), k.fixed(), k.outline(4), k.opacity(0.7),k.offscreen(), "InstructionF"]) 
-    const textContainerFcarnet = dialogBoxFCarnet.add([
-        k.text("Appuie sur f pour ouvrir le carnet", {
-            font: "NiceFont",
-            width : 150,
-            size : 20
-        }), 
-        k.color(27,29,52),
-        k.pos(10,10), // par rappor à dialogbox
-        k.offscreen(),
-        k.opacity(0.7)
-    ]);
-    k.wait(5, () => {
-        k.destroyAll("InstructionF")
-    })
-
-}
-
-export function interactionCarnet(k, pos){
-    onCollideControle = true
-    const dialogBoxTabl = k.add([k.rect(120, 75), k.pos(pos), k.fixed(), k.outline(4), k.opacity(0.7),k.offscreen(),"InstructionECarnet"]) 
-    const textContainer = dialogBoxTabl.add([
-        k.text("Appuie sur e pour ramasser le carnet", {
-            font: "NiceFont",
-            width : 110,
-            size : 20
-        }), 
-        k.color(27,29,52),
-        k.pos(10,10), // par rappor à dialogbox
-        k.offscreen(),
-        k.opacity(0.7)
-    ]);
-
-    k.onKeyPress("e", () =>{
-        if (onCollideControle === true ){  
-            k.destroyAll("InstructionECarnet")
-            k.destroyAll("carnet")   
-            HaveCarnet.setInstanceCarnet(true)
-            instructionCarnet(k)
-        }
-    });
-}
-
-export function endInteractionCarnet (k){
-    onCollideControle = false
-    k.destroyAll("InstructionECarnet")
-}
+const Assets_carnet = [
+    ["Adrien_Felix","carnet_Felix_vide", "carnet_Felix",205],
+    ["Alphonse_Beck","carnet_Beck_vide", "carnet_Beck", 150, "carnet_Beck_plein"], 
+    ["Charles_Emmanuel","carnetEmmanuel_vide", "carnet_Emmanuel",270],
+    ["Dufour_Michel","carnet_Dufour_vide", "carnet_Dufour",150],
+    ["Emile_Vuilloud","carnet_Vuilloud_vide", "carnet_Vuilloud",160],
+    ["Joseph_Torrent" ,"carnet_Torrent_vide", "carnet_Torrent",150],
+    ["Louis_Robriquet","carnet_Robriquet_vide", "carnet_Robriquet",170],
+    ["Pierre_Guillot", "carnet_Guillot_vide","carnet_Guillot",150], 
+    ["Pierre_DuFay", "carnet_DuFay_vide","carnet_DuFay",195],
+    ["Rey_Bellet", "carnet_Bellet_vide","carnet_Bellet", 120]
+]
 
 export function Carnet(k){
     gameState.setFreezePlayer(true)
-    const BoxCarnetImage = k.add([
-        k.sprite("carnet_vide"),
-        k.pos(230,100),
-        "CarnetOPEN"
-    ])
-    const Alphonse_Beck= BoxCarnetImage.add([
-        k.text("Alphonse Beck", {
-            font: "NiceFont",
-            width : 110,
-            size : 20
-        }), 
-        k.area({shape: new k.Rect(k.vec2(-5,0), 100, 20)}),
-        k.color(133,31,0),
-        k.pos(80,120), 
-        k.offscreen(),
-        k.opacity(0.7),
-        "Alphonse_Beck"
 
-    ])
-
-
-
-    k.onClick("Alphonse_Beck", () => console.log("hehehe ca marche"))
-
-    k.onKeyPress("enter", () =>{  
-        k.destroyAll("CarnetOPEN")
-        gameState.setFreezePlayer(false)   
-    })
+    for (let i = 0; i < Assets_carnet.length; i++) {
+        const Entry= k.add([  
+            k.area({shape: new k.Rect(k.vec2(305,190+i*39.5), Assets_carnet[i][3], 20,)}),
+            "entree",
+            Assets_carnet[i][0],
+        ])
+    }   
 }
 
-export function OnkeyF(k){
-    if(!HaveCarnet.getInstanceCarnet())return;
-        Carnet(k)     
+export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,pos1, widthProof1, heightProof1,pos2, widthProof2, heightProof2,id_proof1,id_proof2){
+    if(!ManagementInfo2){
+    let Flag = ManagementInfo1 ? 2 :1
+    SetSprite(k,Carnetname, Assets_carnet[nbr][Flag])
+    k.destroyAll("entree")
+
+    if (!ManagementInfo1) return; 
+
+    const Proof1= k.add([  
+        k.area({shape: new k.Rect(pos1, widthProof1, heightProof1)}),
+        "proof",
+        id_proof1
+    ])
+    const Proof2= k.add([  
+        k.area({shape: new k.Rect(pos2, widthProof2, heightProof2)}),
+        "proof",
+        id_proof2
+    ])
+    return;
+    }
+    if(ManagementInfo2){
+    SetSprite(k,Carnetname, Assets_carnet[nbr][4])
+    return;
+    }
 }
+
+
+async function AllProofsfound(k, content, pos, id_text){
+    Beck_ok.setinstanceBeck(true)
+    const TextProof = k.add([
+        k.text("", {
+            font: "Pristina",
+            width : 300,
+            lineSpacing : 3,
+            size : 21,
+        }),
+        k.pos(pos),
+        k.color(25.1,8.2,10.2),
+        id_text
+    ])
+    for (const character of content){
+        await new Promise((fini)=>{  
+            setTimeout(() => {
+                TextProof.text += character
+                fini() // permet de signifier que promise a été effectuée, et le await peut continuer permet d'avoir un caractère après l'autre
+            }, 2); // millisecondes
+        })
+    }
+}
+
+let proof1 = false 
+let proof2 = false 
+export function ToDoWithProof(k,id, id_text){
+    if(id === "proof1_Beck"){
+        k.add([k.rect(120,20), k.pos(390,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        proof1 = true
+        k.destroyAll("proof1_Beck")
+        if (!proof2)return;
+        AllProofsfound(k,"Alphonse Beck n'était pas encore né en 1815, ce n'est pas lui sur le tableau.", k.vec2(310,545),id_text)
+        return;
+
+    } 
+    if ( id === "proof2_Beck" ){
+        k.add([k.rect(50,20), k.pos(815,195),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        proof2 = true
+        k.destroyAll("proof2_Beck")
+        if (!proof1)return;
+        AllProofsfound(k,"Alphonse Beck n'était pas né en 1815, ce n'est pas lui sur le tableau.", k.vec2(310,545),id_text)
+        return;
+    }
+    //TO DO ADD action 
+}
+
