@@ -9,9 +9,14 @@ import { dialog } from "../uiComponents/dialog.js";
 export default async function world(k){
     
     colorizeBackground(k, 27,29,52 );
-    const mapData = await fetchMapData("./assets/maps/place.json");
-
+    const mapData = await fetchMapData("./assets/maps/place.json")
     const map = k.add([k.pos(0,0)])
+    const test = map.add([k.sprite("assets_place"),
+    //k.body({isStatic : true}),
+    //k.area({shape: new k.Rect(k.vec2(0,0), 98, 62)}),
+    k.pos(32,16),
+    //k.offscreen(),
+    "test",])
 
     const entities = {
         player : null,
@@ -44,8 +49,9 @@ export default async function world(k){
             continue;
         }
         
-        drawTiles(k, map, layer, mapData.tileheight,mapData.tilewidth, "place" );
-        
+        //drawTiles(k, map, layer, mapData.tileheight,mapData.tilewidth, "place" );
+        //const test = k.add([k.sprite("assets_place"), k.pos(0,0)])
+        //const carnet = k.add(generateCarnetComponents(k,k.vec2(1000, 645)));
     }
 
     // k.camScale(2) // permet de faire un zoom 

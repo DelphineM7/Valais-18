@@ -11,10 +11,10 @@ k.loadSprite("assets_pont", "./assets/pont.png", {
     sliceY: 105,
 });
 
-k.loadSprite("assets_place", "./assets/place.png", {
+/*k.loadSprite("assets_place", "./assets/place.png", {
     sliceX: 112,
     sliceY: 64,
-});
+});*/
 
 k.loadSprite("assets_bureau", "./assets/bureau.png", {
     sliceX: 112,
@@ -29,6 +29,10 @@ k.loadSprite("assets_intro_1", "assets/scene_intro_1.png", {
 k.loadSprite("assets_intro_2", "assets/scene_intro_2.png", {
     sliceX: 43,
     sliceY: 43,
+});
+
+k.loadSpriteAtlas("./assets/place_test.png", {
+    "assets_place" : {x:5 , y:5 , width: 1216 , height:688 },
 });
 
 k.loadSpriteAtlas( "./assets/Player.png", {
@@ -152,4 +156,4 @@ for (const sceneName in scenes) {
     
 }
 
-k.go("intro_1");
+k.go("world");
