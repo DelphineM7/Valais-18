@@ -1,4 +1,4 @@
-import { colorizeBackground, drawTiles, fetchMapData } from "../utils.js";
+import { colorizeBackground, fetchMapData } from "../utils.js";
 import { generateAigu1Components,generateAigu2Components, rotateAigu} from "../entities/horloge_sceneIntro2.js";
 
 export default async function intro_2(k){  
@@ -6,6 +6,7 @@ export default async function intro_2(k){
     const mapData = await fetchMapData("./assets/maps/intro_2.json");
 
     const map = k.add([k.pos(0,0)])
+    const intro_2 = map.add([k.sprite("assets_intro_2"),k.pos(415,13),"intro_2"])
 
     const entities = {
         aigu1 : null,
@@ -27,8 +28,6 @@ export default async function intro_2(k){
             }
             continue;
         }
-        
-        drawTiles(k, map, layer, mapData.tileheight,mapData.tilewidth, "intro_2" );
         
     }
 

@@ -1,18 +1,13 @@
-import { colorizeBackground, drawTiles, fetchMapData } from "../utils.js";
+import { colorizeBackground, fetchMapData } from "../utils.js";
 import introLines from "../content/into_dialogue.js"
 
 export default async function intro_1(k){  
     colorizeBackground(k, 27,29,52);
-    const mapData = await fetchMapData("./assets/maps/intro_1.json");
 
     const map = k.add([k.pos(0,0)])
+    const intro_1 = map.add([k.sprite("assets_intro_1"),k.pos(32,16),"intro_1"])
 
-    const layers = mapData.layers;
-    for (const layer of layers){
-        drawTiles(k, map, layer, mapData.tileheight,mapData.tilewidth, "intro_1" );
-        
-    }
-    async function displayLine(textContainer, line){
+    async function displayLine(textContainer, line){ 
         for (const character of line){
             await new Promise((fini)=>{  
                 setTimeout(() => {

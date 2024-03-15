@@ -1,4 +1,4 @@
-import { Instruction, DestroyInstruction, DestroyShowObject, colorizeBackground, drawBoundaries, drawTiles, fetchMapData, ShowObject, startInteractionPNJ, SetSprite} from "../utils.js";
+import { Instruction, DestroyInstruction, DestroyShowObject, colorizeBackground, drawBoundaries, fetchMapData, ShowObject, startInteractionPNJ, SetSprite} from "../utils.js";
 import { setBigPlayerMovement, generateBigPlayerComponents } from "../entities/player.js";
 import { HaveCarnet,SeenJournal,Beck_ok,Meet_Folken_ok} from "../state/stateManagers.js";
 import { Carnet,createProof, ToDoWithProof} from "../entities/carnet.js";
@@ -9,6 +9,7 @@ export default async function house(k){
     colorizeBackground(k, 27,29,52 );
     const mapData = await fetchMapData("./assets/maps/bureau.json");
     const map = k.add([k.pos(0,0)])
+    const bureau = map.add([k.sprite("assets_bureau"),k.pos(32,16),"bureau"])
 
     const entities = {
         big_player : null,
@@ -43,10 +44,7 @@ export default async function house(k){
                 }
             }
             continue;
-        }
-        
-        drawTiles(k, map, layer, mapData.tileheight,mapData.tilewidth, "bureau");
-        
+        }    
     }
 
     let onCollideTableau = false

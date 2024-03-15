@@ -6,33 +6,24 @@ import intro_1 from "./scenes/intro_1.js"
 import intro_2 from "./scenes/intro_2.js"
  
 
-k.loadSprite("assets_pont", "./assets/pont.png", {
-    sliceX: 127,
-    sliceY: 105,
+k.loadSpriteAtlas("./assets/scene_intro_1.png", {
+    "assets_intro_1" : {x:0 , y:0 , width: 1216 , height:688 },
 });
 
-/*k.loadSprite("assets_place", "./assets/place.png", {
-    sliceX: 112,
-    sliceY: 64,
-});*/
-
-k.loadSprite("assets_bureau", "./assets/bureau.png", {
-    sliceX: 112,
-    sliceY: 64,
+k.loadSpriteAtlas("./assets/scene_intro_2.png", {
+    "assets_intro_2" : {x:0 , y:0 , width: 450 , height:700 },
 });
 
-k.loadSprite("assets_intro_1", "assets/scene_intro_1.png", {
-    sliceX: 112,
-    sliceY: 64,
+k.loadSpriteAtlas("./assets/pont.png", {
+    "assets_pont" : {x:30 , y:24 , width: 1215 , height:688 },
 });
 
-k.loadSprite("assets_intro_2", "assets/scene_intro_2.png", {
-    sliceX: 43,
-    sliceY: 43,
-});
-
-k.loadSpriteAtlas("./assets/place_test.png", {
+k.loadSpriteAtlas("./assets/place.png", {
     "assets_place" : {x:5 , y:5 , width: 1216 , height:688 },
+});
+
+k.loadSpriteAtlas("./assets/bureau.png", {
+    "assets_bureau" : {x:7 , y:8 , width: 1216 , height:688 },
 });
 
 k.loadSpriteAtlas( "./assets/Player.png", {
@@ -115,6 +106,10 @@ k.loadSpriteAtlas( "./assets/pnj_Pottier.png",{
     "pnj_Pottier_left" : {x:36 , y:4, width: 30 , height:89 },
     "pnj_Pottier_right" : {x:106 , y:3, width: 29 , height:90 },
     "pnj_Pottier_up" : {x:68 , y:2, width: 33 , height:90 },
+})
+
+k.loadSpriteAtlas( "./assets/fontaine.png",{
+    "fontaine" : {x:0 , y:0, width: 135 , height:47 },
 })
 
 k.loadSpriteAtlas( "./assets/journal.png",{ 

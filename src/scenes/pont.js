@@ -1,4 +1,4 @@
-import { colorizeBackground, drawBoundaries, drawTiles, fetchMapData, Instruction,DestroyInstruction, ShowObject, DestroyShowObject,startInteractionPNJ,SetSprite } from "../utils.js";
+import { colorizeBackground, drawBoundaries, fetchMapData, Instruction,DestroyInstruction, ShowObject, DestroyShowObject,startInteractionPNJ,SetSprite } from "../utils.js";
 import { setMoyenPlayerMovement, generateMoyenPlayerComponents } from "../entities/player.js";
 import  dialogintrogameplay from "../content/pont_innerdialogue.js";
 import { pnj_TorrentLines} from "../content/pnj_dialogues.js"
@@ -10,6 +10,7 @@ export default async function pont(k){
     colorizeBackground(k, 27,29,52 );
     const mapData = await fetchMapData("./assets/maps/pont.json");
     const map = k.add([k.pos(0,0)])
+    const pont = map.add([k.sprite("assets_pont"),k.pos(32,16),"pont"])
 
     const entities = {
         moyen_player : null,
@@ -48,8 +49,6 @@ export default async function pont(k){
             }
             continue;
         }
-        
-        drawTiles(k, map, layer, mapData.tileheight,mapData.tilewidth, "pont");
         
     }
 

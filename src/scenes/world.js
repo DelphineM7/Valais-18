@@ -1,6 +1,6 @@
 import { generatePlayerComponents, setPlayerMovement } from "../entities/player.js";
 import { generatepnj_marchandComponents, EventMarieAnneFolken} from "../entities/pnj_other.js";
-import { colorizeBackground, drawBoundaries, drawTiles, fetchMapData, SetSprite, Instruction, DestroyShowObject,startInteractionPNJ, DestroyInstruction,} from "../utils.js";
+import { colorizeBackground, drawBoundaries, fetchMapData, SetSprite, Instruction, DestroyShowObject,startInteractionPNJ, DestroyInstruction,} from "../utils.js";
 import { Carnet,createProof, ToDoWithProof} from "../entities/carnet.js";
 import { HaveCarnet,SeenJournal,Beck_ok,Meet_Pottier_ok,Meet_Bellet_ok} from "../state/stateManagers.js";
 import { pnj_BelletLines, pnj_PottierLines}  from "../content/pnj_dialogues.js"
@@ -11,12 +11,7 @@ export default async function world(k){
     colorizeBackground(k, 27,29,52 );
     const mapData = await fetchMapData("./assets/maps/place.json")
     const map = k.add([k.pos(0,0)])
-    const test = map.add([k.sprite("assets_place"),
-    //k.body({isStatic : true}),
-    //k.area({shape: new k.Rect(k.vec2(0,0), 98, 62)}),
-    k.pos(32,16),
-    //k.offscreen(),
-    "test",])
+    const place = map.add([k.sprite("assets_place"),k.pos(32,16),"place"])
 
     const entities = {
         player : null,
@@ -45,13 +40,15 @@ export default async function world(k){
                     entities.pnj_pottier = map.add([k.sprite("pnj_Pottier_down"), k.pos(object.x, object.y),k.body({isStatic : true}),k.area({shape: new k.Rect(k.vec2(0,70), 34, 22)}),"pnj-Pottier" ]);
                     continue; 
                 }
+                if (object.name === "fontaine"){
+                    entities.fontaine = map.add([k.sprite("fontaine"), k.pos(object.x, object.y),"fontaine" ]);
+                    continue; 
+                }
             }
+            
             continue;
         }
-        
-        //drawTiles(k, map, layer, mapData.tileheight,mapData.tilewidth, "place" );
-        //const test = k.add([k.sprite("assets_place"), k.pos(0,0)])
-        //const carnet = k.add(generateCarnetComponents(k,k.vec2(1000, 645)));
+
     }
 
     // k.camScale(2) // permet de faire un zoom 
