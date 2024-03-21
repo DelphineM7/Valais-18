@@ -25,7 +25,7 @@ export default async function intro_1(k){
         const textContainer = dialogBox.add([
             k.text("", {
                 font: "NiceFont",
-                width : 700,
+                width : 1000,
                 lineSpacing : 15,
                 size : 34
             }), 

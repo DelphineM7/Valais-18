@@ -1,12 +1,10 @@
 const french = [
     [   
-        "bla bla bla bla d'intro .",
-        "bla bla bla je vsuis allée chez mon G-p, il m'a donné ce livre.", 
-        "bla bla bla ce livre appartenait à mon arrière*6 g-p.",
-        "bla bla bla, mon arrière*6 g-p était trop coll, il livrait des tableaux.",
-        "bla bla bla, au mdr c'est écrit qqch en tout petit...",
-        "bla bla bla, 'à ton tour...' ?"
-
+        "Je suis allée chez mon grand-papa cette après-midi et il m'a donné ce journal.", 
+        "Il appartenait à mon arrière-arrière-arrière-arrière-arrière-arrière grand-père.",
+        "Il a vécu pendant le 19ème siècle. Son métier était de livrer des objets dans le Bas-Valais.",
+        "Dans son journal, il y a les différentes livraisons qu'il a réalisé et des informations sur les personnes qu'il a rencontrées.",
+        "Sur cette page, il est écrit quelque chose en tout petit... 'à ton tour' ?",
     ]
 ]
 //const deutsch = []

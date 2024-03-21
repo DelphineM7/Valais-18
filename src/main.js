@@ -78,6 +78,10 @@ k.loadSpriteAtlas( "./assets/papier_1.png",{
     "Papier_1" : {x:22 , y:14, width: 595 , height:674 },
 })
 
+k.loadSpriteAtlas( "./assets/papier_2.png",{
+    "Papier_2" : {x:212 , y:135, width: 655 , height:671 },
+})
+
 k.loadSpriteAtlas( "./assets/horloge_Aigu1.png",{
     "Aigu1" : {x:0 , y:0, width: 84 , height:90 },
 })
@@ -121,20 +125,68 @@ k.loadSpriteAtlas( "./assets/carnet.png",{
     "carnet" : {x:0 , y:0, width: 98 , height:62 },
 })
 
-k.loadSpriteAtlas( "./assets/carnet_1.png",{ 
-    "carnet_p_1" : {x:45, y:45, width: 822 , height:543 },
-    "carnet_Beck_vide" : {x:895 , y:45, width: 816 , height:533 },
+k.loadSpriteAtlas( "./assets/carnet_1_1.png",{ 
+    "carnet_p_1" : {x:54, y:54, width: 816 , height:524 },
+    "carnet_Pottier_vide" : {x:1078 , y:39, width: 816 , height:533 },
+    "carnet_Beck_vide" : {x:58 , y:621, width: 816 , height:533 },
+    "carnet_Rivaz_vide" : {x:1068 , y:635, width: 816 , height:533 },
+    "carnet_Dufour_vide" : {x:57 , y:1271, width: 816 , height:533 },
+    "carnet_Vuilloud_vide" : {x:1055 , y:1270, width: 816 , height:533 },
 })
-k.loadSpriteAtlas( "./assets/carnet_2.png",{ 
-    "carnet_Beck" : {x:15 , y:14, width: 817 , height:531 },
+k.loadSpriteAtlas( "./assets/carnet_1_2.png",{ 
+    "carnet_Torrent_vide" : {x:71 , y:30, width: 816 , height:533 },
+    "carnet_Robriquet_vide" : {x:1046 , y:47, width: 816 , height:533 },
+    "carnet_Guillot_vide" : {x:70 , y:671, width: 816 , height:533 },
+    "carnet_DuFay_vide" : {x:1046 , y:671, width: 816 , height:533 },
+    "carnet_Bellet_vide" : {x:1047 , y:1344, width: 816 , height:533 },
 })
-k.loadSpriteAtlas( "./assets/carnet_3.png",{ 
-    "carnet_Beck_plein" : {x:25 , y:16, width: 810 , height:520 },
+
+k.loadSpriteAtlas( "./assets/carnet_2_1.png",{ 
+    "carnet_Pottier" : {x:1078 , y:39, width: 816 , height:533 },
+    "carnet_Beck" : {x:58 , y:621, width: 816 , height:533 },
+    "carnet_Rivaz" : {x:1068 , y:635, width: 816 , height:533 },
+    "carnet_Dufour" : {x:57 , y:1271, width: 816 , height:533 },
+    "carnet_Vuilloud" : {x:1055 , y:1270, width: 816 , height:533 },
+})
+k.loadSpriteAtlas( "./assets/carnet_2_2.png",{ 
+    "carnet_Torrent" : {x:71 , y:30, width: 816 , height:533 },
+    "carnet_Robriquet" : {x:1046 , y:47, width: 816 , height:533 },
+    "carnet_Guillot" : {x:70 , y:671, width: 816 , height:533 },
+    "carnet_DuFay" : {x:1046 , y:671, width: 816 , height:533 },
+    "carnet_Bellet" : {x:1047 , y:1344, width: 816 , height:533 },
 })
 
+k.loadSpriteAtlas( "./assets/carnet_3_1.png",{ 
+    "carnet_Pottier_plein" : {x:1078 , y:39, width: 816 , height:533 },
+    "carnet_Beck_plein": {x:58 , y:621, width: 816 , height:533 },
+    "carnet_Rivaz_plein" : {x:1068 , y:635, width: 816 , height:533 },
+    "carnet_Dufour_plein" : {x:57 , y:1271, width: 816 , height:533 },
+    "carnet_Vuilloud_plein" : {x:1055 , y:1270, width: 816 , height:533 },
+})
+k.loadSpriteAtlas( "./assets/carnet_3_2.png",{ 
+    "carnet_Torrent_plein" : {x:71 , y:30, width: 816 , height:533 },
+    "carnet_Robriquet_plein" : {x:1046 , y:47, width: 816 , height:533 },
+    "carnet_Guillot_plein" : {x:70 , y:671, width: 816 , height:533 },
+    "carnet_DuFay_plein" : {x:1046 , y:671, width: 816 , height:533 },
+    "carnet_Bellet_plein" : {x:1047 , y:1344, width: 816 , height:533 },
+})
 
+k.loadSpriteAtlas( "./assets/cross.png",{ 
+    "cross" : {x:6 , y:4, width: 17 , height:20 },
+})
 
-
+k.loadSpriteAtlas( "./assets/lignes.png",{ 
+    "ligne_Pottier" : {x:33 , y:32, width: 207 , height:3 },
+    "ligne_Beck": {x:33 , y:76, width: 140 , height:3 },
+    "ligne_Rivaz" : {x:33 , y:114, width: 275 , height:3 },
+    "ligne_Dufour" : {x:33 , y:154, width: 143 , height:3 },
+    "ligne_Vuilloud" : {x:33, y:194, width: 159 , height:3 },
+    "ligne_Torrent" : {x:33 , y:231, width: 150 , height:3 },
+    "ligne_Robriquet" : {x:33 , y:271, width: 160 , height:3 },
+    "ligne_Guillot" : {x:33 , y:311, width: 144 , height:3 },
+    "ligne_DuFay" : {x:33 , y:351, width: 200 , height:3 },
+    "ligne_Bellet" : {x:33 , y:391, width: 205 , height:3 },
+})
 
 k.loadFont("NiceFont", "./assets/jupiterc.ttf")
 
@@ -151,4 +203,4 @@ for (const sceneName in scenes) {
     
 }
 
-k.go("world");
+k.go("intro_1");

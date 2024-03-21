@@ -19,7 +19,7 @@ export async function dialog(k,pos, content){ // box de dialogue // 1216 = 76 fr
     const textContainer = dialogBox.add([
         k.text("", {
             font: "NiceFont",
-            width : 700,
+            width : 1000,
             lineSpacing : 15,
             size : 34
         }), 
@@ -44,20 +44,23 @@ export async function dialog(k,pos, content){ // box de dialogue // 1216 = 76 fr
 
     await displayLine(textContainer,content[index]);
     let lineFinishedDisplay = true;
-    const dialogKey = k.onKeyPress("enter", async() =>{
-        if (!lineFinishedDisplay) return;
+    return new Promise((resolve) => {
+        const dialogKey = k.onKeyPress("enter", async() =>{
+            if (!lineFinishedDisplay) return;
 
-        index++
-        if(!content[index]){ //permet de controler quand l'index est super à la quantité dans content
-            k.destroy(dialogBox)
-            dialogKey.cancel()
-            gameState.setFreezePlayer(false)
-            return;
-        }
+            index++
+            if(!content[index]){ //permet de controler quand l'index est super à la quantité dans content
+                k.destroy(dialogBox)
+                dialogKey.cancel()
+                gameState.setFreezePlayer(false)
+                resolve()
+                return;
+            }
 
-        textContainer.text ="";
-        lineFinishedDisplay = false;
-        await displayLine(textContainer, content[index]);
-        lineFinishedDisplay = true
+            textContainer.text ="";
+            lineFinishedDisplay = false;
+            await displayLine(textContainer, content[index]);
+            lineFinishedDisplay = true
+        })
     })
 }
