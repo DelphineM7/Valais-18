@@ -95,9 +95,11 @@ export default async function pont(k){
 
         }  
         if(CollidDoorEntrance){
-            gameStatePont.setfirstTimepont(false)
+            if(TutoDone.getInstanceTuto()){
             river.stop()
+            gameStatePont.setfirstTimepont(false);
             k.go("world");
+            }
         }  
         if(CarnetOpen){
             RectoVersoLecture(k)
