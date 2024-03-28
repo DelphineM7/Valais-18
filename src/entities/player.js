@@ -1,3 +1,5 @@
+// fonctions qui permettent de créer le player dans les différentes seaines en 3 tailles différentes + les fonctions qui permettent le mouvement 
+
 import { gameState } from "../state/stateManagers.js";
 import { SetSprite } from "../utils.js";
 
@@ -121,7 +123,8 @@ export function generateMoyenPlayerComponents(k, pos){
         k.area({shape: new k.Rect(k.vec2(0,150), 70, 50)}), 
         k.body({}), 
         k.pos(pos),
-        k.opacity(1), 
+        k.opacity(1),
+        k.z(2),
         {
             currentSprite : 'medium-player-idle-down',
             speed : 220,
@@ -160,6 +163,61 @@ export function setMoyenPlayerMovement(k, player){
         }
         if(["down","s"].includes(key)){
             SetSprite(k,player,"medium-player-down")    
+            player.move(0, player.speed);
+            player.direction = "down";     
+            return; 
+        }
+
+
+    })
+    k.onKeyRelease(() => {  
+        player.stop();
+      })
+}
+
+export function generateBigMediumPlayerComponents(k, pos){
+    return [
+        k.sprite("medium-big--player-idle-down"),
+        k.area({shape: new k.Rect(k.vec2(0,210), 80, 30)}), 
+        k.body({}), 
+        k.pos(pos),
+        k.opacity(1),
+        {
+            currentSprite : 'medium-big--player-idle-down',
+            speed : 200,
+            direction: "down",
+
+
+        },
+        "big-medium-player", // tag du personnage -> k.get("player")
+    ];
+}
+
+export function setBigMediumPlayerMovement(k, player){
+    k.onKeyDown((key) =>{
+        if (gameState.getFreezePlayer()) return; 
+        if (["left","a"].includes(key)){   
+            player.flipX = false;  
+            SetSprite(k,player,"medium-big-player-side")  
+            player.move(-player.speed, 0);
+            player.direction = "left";     
+            return;                         
+        }
+        if(["right","d"].includes(key)){
+            player.flipX = true; 
+            SetSprite(k,player,"medium-big-player-side")    
+            player.move(player.speed, 0);
+            player.direction = "right";     
+            return; 
+        }
+        if(["up","w"].includes(key)){
+            SetSprite(k,player,"medium-big-player-up")    
+            player.move(0, -player.speed);
+            player.direction = "up";     
+            return; 
+        }
+        if(["down","s"].includes(key)){
+            SetSprite(k,player,"medium-big-player-down")    
             player.move(0, player.speed);
             player.direction = "down";     
             return; 

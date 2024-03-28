@@ -4,128 +4,143 @@ import house from "./scenes/house.js";
 import pont from "./scenes/pont.js"
 import intro_1 from "./scenes/intro_1.js"
 import intro_2 from "./scenes/intro_2.js"
- 
+import outro_1 from "./scenes/outro_1.js"
+import outro_2 from "./scenes/outro_2.js"
+import salon from "./scenes/salon.js"
+import menu from "./scenes/menu.js"
+import historio from "./scenes/historio.js"
+import { Music_Outside} from "./state/stateManagers.js"
 
-k.loadSpriteAtlas("./assets/scene_intro_1.png", {
+
+//assets map en png
+k.loadSpriteAtlas("./assets/png_map/scene_intro_1.png", {
     "assets_intro_1" : {x:0 , y:0 , width: 1216 , height:688 },
 });
 
-k.loadSpriteAtlas("./assets/scene_intro_2.png", {
+k.loadSpriteAtlas("./assets/png_map/scene_intro_2.png", {
     "assets_intro_2" : {x:0 , y:0 , width: 450 , height:700 },
 });
 
-k.loadSpriteAtlas("./assets/pont.png", {
+k.loadSpriteAtlas("./assets/png_map/pont.png", {
     "assets_pont" : {x:30 , y:24 , width: 1215 , height:688 },
 });
 
-k.loadSpriteAtlas("./assets/place.png", {
-    "assets_place" : {x:5 , y:5 , width: 1216 , height:688 },
+k.loadSpriteAtlas("./assets/png_map/place.png", {
+    "assets_place" : {x:247 , y:202 , width: 1216 , height:688 },
 });
 
-k.loadSpriteAtlas("./assets/bureau.png", {
+k.loadSpriteAtlas("./assets/png_map/bureau.png", {
     "assets_bureau" : {x:7 , y:8 , width: 1216 , height:688 },
 });
 
-k.loadSpriteAtlas( "./assets/Player.png", {
-    "player-idle-down" : {x:6 , y:10 , width: 30 , height:86 },
-    'player-down' : {x:6 , y:10 , width: 35 , height:86 },
-    'player-side' : {x:64 , y:10 , width: 35 , height:86 },
-    'player-up' : {x:125 , y:10 , width: 35 , height:86 }
+k.loadSpriteAtlas("./assets/png_map/salon.png", {
+    "assets_salon" : {x:24 , y:15 , width: 1216 , height:688 },
+});
+
+//assets player et pnj
+k.loadSpriteAtlas( "./assets/pnj/Player.png", {
+    "medium-player-idle-down" : {x:24 , y:849 , width: 88 , height:199},
+    'medium-player-down' : {x:24 , y:849 , width: 88 , height:199},
+    'medium-player-side' : {x:129 , y:852 , width: 70 , height:196 },
+    'medium-player-up' : {x:227 , y:852 , width: 86 , height:196 },
+
+    "medium-big--player-idle-down" : {x:24 , y:536 , width: 105 , height:245},
+    'medium-big-player-down' : {x:24 , y:536 , width: 105 , height:245},
+    'medium-big-player-side' : {x:153 , y:536 , width: 82 , height:244 },
+    'medium-big-player-up' : {x:273 , y:535 , width: 110 , height:246 },
+
+    "big-player-idle-down" : {x:29 , y:44 , width: 164 , height:390},
+    'big-player-down' : {x:29 , y:44 , width: 164 , height:390},
+    'big-player-side' : {x:228 , y:44 , width: 136 , height:388 },
+    'big-player-up' : {x:421 , y:43 , width: 166 , height:390 },
+
 })
 
-k.loadSpriteAtlas( "./assets/Player_grand.png", {
-    "big-player-idle-down" : {x:28 , y:4 , width: 145 , height:390},
-    'big-player-down' : {x:28 , y:4 , width: 145 , height:390},
-    'big-player-side' : {x:216 , y:4 , width: 124 , height:394 },
-    'big-player-up' : {x:396 , y:8 , width: 142 , height:392 }
+k.loadSpriteAtlas( "./assets/pnj/pnj_Bellet.png", { 
+    "marchand-idle-down" : {x:26 , y:34 , width: 94 , height:211 },
+    'marchand-down' : {x:26 , y:34 , width: 94 , height:211 },
+    'marchand-side-right' : {x:124, y:35 , width: 60 , height:211 },
+    'marchand-side-left' : {x:121 , y:248 , width: 61 , height:209 },
+    'marchand-up' : {x:186 , y:34 , width: 94 , height:212 },
 })
 
-k.loadSpriteAtlas( "./assets/Player_moyen.png", {
-    "medium-player-idle-down" : {x:5 , y:5 , width: 70 , height:200},
-    'medium-player-down' : {x:5 , y:5 , width: 70 , height:200},
-    'medium-player-side' : {x:100 , y:4 , width: 69 , height:200 },
-    'medium-player-up' : {x:184 , y:4 , width: 76 , height:200 }
+k.loadSpriteAtlas( "./assets/pnj/pnj_Folken_cinematique.png",{
+    "pnj_Folken_down_little" : {x:12 , y:18, width: 94 , height:204 },
+    "pnj_Folken_left_little" : {x:144 , y:17, width: 84 , height:207 },
+    "pnj_Folken_right_little" : {x:370 , y:14, width: 82 , height:205 },
+    "pnj_Folken_up_little" : {x:252 , y:18, width:92 , height:202 },
 })
 
-k.loadSpriteAtlas( "./assets/pnj-marchand_petit.png", { // Rey-Bellet
-    "marchand-idle-down" : {x:6 , y:5 , width: 39 , height:93 },
-    'marchand-down' : {x:6 , y:5 , width: 39 , height:93 },
-    'marchand-side-right' : {x:56 , y:6 , width: 28 , height:91 },
-    'marchand-side-left' : {x:141 , y:5 , width: 35 , height:94 },
-    'marchand-up' : {x:97 , y:7 , width: 36 , height:90 }
+k.loadSpriteAtlas( "./assets/pnj/pnj_Folken.png",{
+    "pnj_Folken_down" : {x:31 , y:3, width: 196 , height:397 },
+    "pnj_Folken_right" : {x:31 , y:3, width: 196 , height:397 },
+    "pnj_Folken_left" : {x:292 , y:0, width: 181 , height:392 },
 })
 
-k.loadSpriteAtlas( "./assets/doc_tableau_DeRivaz.png",{
-    "tabl_Rivaz" : {x:37 , y:34, width: 131 , height:147 },
+k.loadSpriteAtlas( "./assets/pnj/pnj_Torrent.png",{
+    "pnj_Torrent_down" : {x:15 , y:10, width: 68 , height:192 },
+    "pnj_Torrent_left" : {x:111 , y:10, width: 61 , height:190 },
+    "pnj_Torrent_right" : {x:188 , y:10, width: 61 , height:190 },
 })
 
-k.loadSpriteAtlas( "./assets/DeRivaBigPortrait.png",{
+k.loadSpriteAtlas( "./assets/pnj/pnj_Pottier.png",{
+    "pnj_Pottier_down" : {x:21 , y:9, width: 84 , height:245 },
+    "pnj_Pottier_right" : {x:21 , y:9, width: 84 , height:245 },
+    "pnj_Pottier_left" :{x:154 , y:16, width: 83 , height:243 },
+})
+
+k.loadSpriteAtlas( "./assets/pnj/pnj_Dufour.png",{
+    "pnj_Dufour_down" : {x:77 , y:80, width: 84 , height:207 },
+    "pnj_Dufour_right" : {x:197 , y:80, width: 78 , height:208 },
+    "pnj_Dufour_left" :{x:306 , y:78, width: 73 , height:210 },
+})
+    
+//objects
+k.loadSpriteAtlas( "./assets/objects/DeRivaBigPortrait.png",{
     "Big_tabl_Rivaz" : {x:8 , y:38, width: 500 , height:623 },
 })
 
-k.loadSpriteAtlas( "./assets/pnj_Folken.png",{
-    "pnj_Folken_down" : {x:7 , y:16, width: 145 , height:400 },
-    "pnj_Folken_left" : {x:175 , y:6, width: 146 , height:409 },
-    "pnj_Folken_right" : {x:537 , y:9, width: 152 , height:400 },
-    "pnj_Folken_up" : {x:348 , y:4, width: 165 , height:399 },
-    "pnj_Folken_down_little" : {x:18 , y:500, width: 36 , height:93 },
-    "pnj_Folken_left_little" : {x:63 , y:503, width: 35 , height:93 },
-    "pnj_Folken_right_little" : {x:170 , y:500, width: 35 , height:95 },
-    "pnj_Folken_up_little" : {x:114 , y:499, width: 39 , height:95 },
+k.loadSpriteAtlas( "./assets/objects/papier_1.png",{ //Dufay
+    "Papier_1_1" : {x:25 , y:21, width: 657 , height:668},
+    "Papier_1_2" : {x:727 , y:22, width: 650 , height:669},
 })
 
-k.loadSpriteAtlas( "./assets/papier_1.png",{
-    "Papier_1" : {x:22 , y:14, width: 595 , height:674 },
+k.loadSpriteAtlas( "./assets/objects/papier_2.png",{ // Guillot
+    "Papier_2_1" : {x:198 , y:207, width: 597 , height:677 },
+    "Papier_2_2" : {x:825 , y:215, width: 597 , height:673 },
 })
 
-k.loadSpriteAtlas( "./assets/papier_2.png",{
-    "Papier_2" : {x:212 , y:135, width: 655 , height:671 },
-})
-
-k.loadSpriteAtlas( "./assets/horloge_Aigu1.png",{
+k.loadSpriteAtlas( "./assets/objects/horloge_Aigu1.png",{
     "Aigu1" : {x:0 , y:0, width: 84 , height:90 },
 })
 
-k.loadSpriteAtlas( "./assets/horloge_Aigu2.png",{
+k.loadSpriteAtlas( "./assets/objects/horloge_Aigu2.png",{
     "Aigu2" : {x:0 , y:0, width: 93 , height:92 },
 })
 
-k.loadSpriteAtlas( "./assets/ane.png",{
+k.loadSpriteAtlas( "./assets/objects/ane.png",{
     "ane" : {x:16 , y:6, width: 393 , height:255 },
 })
 
-k.loadSpriteAtlas( "./assets/Dufour.png",{
+k.loadSpriteAtlas( "./assets/objects/Dufour.png",{
     "Dufour" : {x:16 , y:17, width: 498 , height:664 },
 })
 
-k.loadSpriteAtlas( "./assets/pnj_Torrent.png",{
-    "pnj_Torrent_down" : {x:5 , y:5, width: 75 , height:202 },
-    "pnj_Torrent_left" : {x:120 , y:3, width: 69 , height:205 },
-    "pnj_Torrent_right" : {x:329 , y:4, width: 76 , height:205 },
-    "pnj_Torrent_up" : {x:232 , y:1, width: 76 , height:204 },
+k.loadSpriteAtlas( "./assets/objects/fontaine.png",{
+    "fontaine" : {x:45 , y:46, width: 176 , height:83 },
 })
 
-k.loadSpriteAtlas( "./assets/pnj_Pottier.png",{
-    "pnj_Pottier_down" : {x:1 , y:1, width: 34 , height:92 },
-    "pnj_Pottier_left" : {x:36 , y:4, width: 30 , height:89 },
-    "pnj_Pottier_right" : {x:106 , y:3, width: 29 , height:90 },
-    "pnj_Pottier_up" : {x:68 , y:2, width: 33 , height:90 },
-})
-
-k.loadSpriteAtlas( "./assets/fontaine.png",{
-    "fontaine" : {x:0 , y:0, width: 135 , height:47 },
-})
-
-k.loadSpriteAtlas( "./assets/journal.png",{ 
+k.loadSpriteAtlas( "./assets/objects/journal.png",{ 
     "journal_petit" : {x:12 , y:5, width: 75 , height:82 },
     "journal_grand" : {x:111 , y:15, width: 471 , height:542 }
 })
 
-k.loadSpriteAtlas( "./assets/carnet.png",{
+k.loadSpriteAtlas( "./assets/objects/carnet.png",{
     "carnet" : {x:0 , y:0, width: 98 , height:62 },
 })
 
-k.loadSpriteAtlas( "./assets/carnet_1_1.png",{ 
+// carnet
+k.loadSpriteAtlas( "./assets/carnet/carnet_1_1.png",{ 
     "carnet_p_1" : {x:54, y:54, width: 816 , height:524 },
     "carnet_Pottier_vide" : {x:1078 , y:39, width: 816 , height:533 },
     "carnet_Beck_vide" : {x:58 , y:621, width: 816 , height:533 },
@@ -133,7 +148,7 @@ k.loadSpriteAtlas( "./assets/carnet_1_1.png",{
     "carnet_Dufour_vide" : {x:57 , y:1271, width: 816 , height:533 },
     "carnet_Vuilloud_vide" : {x:1055 , y:1270, width: 816 , height:533 },
 })
-k.loadSpriteAtlas( "./assets/carnet_1_2.png",{ 
+k.loadSpriteAtlas( "./assets/carnet/carnet_1_2.png",{ 
     "carnet_Torrent_vide" : {x:71 , y:30, width: 816 , height:533 },
     "carnet_Robriquet_vide" : {x:1046 , y:47, width: 816 , height:533 },
     "carnet_Guillot_vide" : {x:70 , y:671, width: 816 , height:533 },
@@ -141,29 +156,31 @@ k.loadSpriteAtlas( "./assets/carnet_1_2.png",{
     "carnet_Bellet_vide" : {x:1047 , y:1344, width: 816 , height:533 },
 })
 
-k.loadSpriteAtlas( "./assets/carnet_2_1.png",{ 
+k.loadSpriteAtlas( "./assets/carnet/carnet_2_1.png",{ 
     "carnet_Pottier" : {x:1078 , y:39, width: 816 , height:533 },
     "carnet_Beck" : {x:58 , y:621, width: 816 , height:533 },
     "carnet_Rivaz" : {x:1068 , y:635, width: 816 , height:533 },
     "carnet_Dufour" : {x:57 , y:1271, width: 816 , height:533 },
     "carnet_Vuilloud" : {x:1055 , y:1270, width: 816 , height:533 },
 })
-k.loadSpriteAtlas( "./assets/carnet_2_2.png",{ 
+k.loadSpriteAtlas( "./assets/carnet/carnet_2_2.png",{ 
     "carnet_Torrent" : {x:71 , y:30, width: 816 , height:533 },
     "carnet_Robriquet" : {x:1046 , y:47, width: 816 , height:533 },
     "carnet_Guillot" : {x:70 , y:671, width: 816 , height:533 },
     "carnet_DuFay" : {x:1046 , y:671, width: 816 , height:533 },
     "carnet_Bellet" : {x:1047 , y:1344, width: 816 , height:533 },
-})
+    "Verso_Guillot" : {x:121 , y:1271, width: 310 , height:451},
+    "Verso_Dufay" : {x:495 , y:1274, width: 352 , height:481}
+ })
 
-k.loadSpriteAtlas( "./assets/carnet_3_1.png",{ 
+k.loadSpriteAtlas( "./assets/carnet/carnet_3_1.png",{ 
     "carnet_Pottier_plein" : {x:1078 , y:39, width: 816 , height:533 },
     "carnet_Beck_plein": {x:58 , y:621, width: 816 , height:533 },
     "carnet_Rivaz_plein" : {x:1068 , y:635, width: 816 , height:533 },
     "carnet_Dufour_plein" : {x:57 , y:1271, width: 816 , height:533 },
     "carnet_Vuilloud_plein" : {x:1055 , y:1270, width: 816 , height:533 },
 })
-k.loadSpriteAtlas( "./assets/carnet_3_2.png",{ 
+k.loadSpriteAtlas( "./assets/carnet/carnet_3_2.png",{ 
     "carnet_Torrent_plein" : {x:71 , y:30, width: 816 , height:533 },
     "carnet_Robriquet_plein" : {x:1046 , y:47, width: 816 , height:533 },
     "carnet_Guillot_plein" : {x:70 , y:671, width: 816 , height:533 },
@@ -171,11 +188,11 @@ k.loadSpriteAtlas( "./assets/carnet_3_2.png",{
     "carnet_Bellet_plein" : {x:1047 , y:1344, width: 816 , height:533 },
 })
 
-k.loadSpriteAtlas( "./assets/cross.png",{ 
+k.loadSpriteAtlas( "./assets/carnet/cross.png",{ 
     "cross" : {x:6 , y:4, width: 17 , height:20 },
 })
 
-k.loadSpriteAtlas( "./assets/lignes.png",{ 
+k.loadSpriteAtlas( "./assets/carnet/lignes.png",{ 
     "ligne_Pottier" : {x:33 , y:32, width: 207 , height:3 },
     "ligne_Beck": {x:33 , y:76, width: 140 , height:3 },
     "ligne_Rivaz" : {x:33 , y:114, width: 275 , height:3 },
@@ -188,14 +205,40 @@ k.loadSpriteAtlas( "./assets/lignes.png",{
     "ligne_Bellet" : {x:33 , y:391, width: 205 , height:3 },
 })
 
-k.loadFont("NiceFont", "./assets/jupiterc.ttf")
+k.loadSpriteAtlas( "./assets/carnet/carnet_vide.png",{ 
+    "carnet_historio_1" : {x:0 , y:0, width: 1047 , height:675 },
+})
+
+
+// font
+k.loadFont("NiceFont", "./assets/font/jupiterc.ttf")
+k.loadFont("CarnetFont", "./assets/font/ITCKRIST.TTF")
+
+// musique 
+k.loadSound("river", "./assets/music/river.mp3")
+k.loadSound("outside", "./assets/music/outside.mp3")
+k.loadSound("inside", "./assets/music/inside.mp3")
+k.loadSound("book", "./assets/music/book.mp3")
+
+// start la musique
+export const music = k.play("outside", {
+    volume: 0.02,
+    loop: true
+})
+Music_Outside.setinstanceOutside(true)
 
 const scenes = {
     world,
     house,
     pont,
+    salon,
     intro_1,
-    intro_2
+    intro_2,
+    outro_1,
+    outro_2,
+    historio,
+    menu,
+
 }
 
 for (const sceneName in scenes) {
@@ -203,4 +246,4 @@ for (const sceneName in scenes) {
     
 }
 
-k.go("intro_1");
+k.go("menu"); 

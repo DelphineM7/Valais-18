@@ -1,3 +1,5 @@
+//Dialogues des PNJ
+
 const french_pottier = [
     [   
         "Bonjour ! ",
@@ -60,3 +62,34 @@ export const pnj_FolkenLines = {
     french_Folken,
     //deutsch
 };
+
+const french_Dufour = [
+    [   
+        "Bonjour ! ",
+        "Je m'apelle Michel Dufour.",
+        "En août de cette année, j'ai signé l'Acte de réunion du Valais à la Confédération ! ",
+        "J'ai commandé un tableau à Félix Cortey et j'ai rendez-vous aujourd'hui pour le recevoir à Monthey.",
+        "Je suis en retard, j'espère que la personne ne m'a pas cherché trop longtemps.",
+        "C'est toi qui me livre ?! Merci beaucoup de m'avoir trouvé.",
+
+    ]
+]
+//const deutsch = []
+
+export const pnj_DufourLines = {
+    french_Dufour,
+    //deutsch
+};
+
+const french_chat = [
+    [   
+        "prrr, prrr, prrr !",
+    ]
+]
+//const deutsch = []
+
+export const pnj_chatLines = {
+    french_chat,
+    //deutsch
+};
+

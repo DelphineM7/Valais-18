@@ -127,8 +127,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1032,
-                 "y":288
+                 "x":972,
+                 "y":290.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -164,6 +164,18 @@
                  "width":0,
                  "x":339.666666666667,
                  "y":511.333333333333
+                }, 
+                {
+                 "height":0,
+                 "id":155,
+                 "name":"papier_1",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":622,
+                 "y":537.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -201,7 +213,7 @@
                 {
                  "height":77.6667,
                  "id":109,
-                 "name":"papier_1",
+                 "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -243,7 +255,7 @@
                  "y":689
                 }, 
                 {
-                 "height":149,
+                 "height":63,
                  "id":141,
                  "name":"",
                  "rotation":0,
@@ -251,10 +263,10 @@
                  "visible":true,
                  "width":90.3333333333333,
                  "x":14.3333333333333,
-                 "y":544.333333333333
+                 "y":630.333333333333
                 }, 
                 {
-                 "height":83.3333333333334,
+                 "height":77.8333333333334,
                  "id":143,
                  "name":"door-exit",
                  "rotation":0,
@@ -296,15 +308,26 @@
                  "width":151.833,
                  "x":728.8335,
                  "y":522.16665
+                }, 
+                {
+                 "height":53.3333333333334,
+                 "id":153,
+                 "name":"door-exit",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":90,
+                 "x":14.6666666666667,
+                 "y":578.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":153,
+ "nextobjectid":156,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

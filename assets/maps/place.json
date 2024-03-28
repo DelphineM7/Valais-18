@@ -3,25 +3,16 @@
  "infinite":false,
  "layers":[
         {
-         "draworder":"topdown",
-         "id":10,
-         "name":"Spawn",
-         "objects":[
-                {
-                 "height":0,
-                 "id":33,
-                 "name":"PNJ-marchand",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":927.333333333333,
-                 "y":480
-                }],
+         "compression":"zlib",
+         "data":"eJzt1VMTZQe7hdGcpG27O2mFbdu2bdu2bdu2bdu2bTvfyG843Xf7qRq3b+29Zq1aP\/3000\/Fg\/70UwlKUorSlKEs5ShPBSpSicpUoSrVqE4NalKL2tShLvWoTwMa0ojGNKEpzWhOC1rSita0oS3taE8HOtKJznShK93oTg960ove9KEv\/ejPAAYyiMEMYSjDGM4IRjKK0YxhLOMYzwQmMonJTGEq0\/jebXdzBzvZxW72sJd97OcABznEYY5wlGMc5wQnOcVpznCWc5znAhe5xGWucJVrXOcGN7nFbe5wl3vc5wEPecRjnvCUZzznBS95xWve8JZ3vOcDH\/nEZ77wlW\/8+98zDfbTT\/\/Hz\/xCEIISjOCEICShCE0YwhIu2PffI7mbKUhJKlKThrSkIz0ZyEgmMpOFrGQjOznISS5yk4e85CM\/BShIIQpThKIUozglKEkpSlOGspSjPBWoSCUqU4WqVKM6NahJLWpTh7rUoz4NaEgjGtOEpjSjOS1oSSta04a2tKM9HehIJzrTha50+wF7THdzBjOZxWzmMJd5zGcBC1nEYpawlGUsZwUrWcVq1rCWdaxnAxvZxGa2sJVtbGcHO9nFbvawl33s5wAHOcRhjnCUYxznBCc5xWnOcJZznOcCF7nEZa5wlWtc5wY3ucVt7nCXe9znAQ95xGOe8JRnP2CP8MF\/+ikCEYlEZKIQlWhEJwYxiUVs4hCXePzKb8QnAQlJRGJ+5w\/+5C\/+5h+SkJRkJCcFKUlFatKQlnSkJwMZyURmspCVbGQnBznJRW7ykJd85KcABSlEYYpQlGIUpwQlKUVpylCWcpSnAhWpRGWqUJVqwb\/\/Ht3d7EFPetGbPvSlH\/0ZwEAGMZghDGUYwxnBSEYxmjGMZRzjmcBEJjGZKUxlGtOZwUxmMZs5zGUe81nAQhaxmCUsZRnLWcFKVrGaNaxlHevZwEY2sZktbGUb29nBTnaxmz3sZR\/7OcBBDnGYIxzl2A\/Y47mbL3jJK17zhre84z0f+MgnPvOFr3zj3\/9+UwjfQ37mF4IQlGAEJwQhCUVowhCWcIQnAhGJRGSiEJVoRCcGMYlFbOIQl3j8ym\/EJwEJSURifucP\/uQv\/uYfkpCUZCQnBSlJRWrSkJZ0pCcDGclEZrKQlWwhvv8e1d2sQU1qUZs61KUe9WlAQxrRmCY0pRnNaUFLWtGaNrSlHe3pQEc60ZkudKUb3elBT3rRmz70pR\/9GcBABjGYIQxlGMMZwUhGMZoxjGUc45nARCYxmSlMZRrTmcFMZjGbOcxlHvNZwEIWsZglLGXZD9jjuJsnOMkpTnOGs5zjPBe4yCUuc4WrXOM6N7jJLW5zh7vc4z4PeMgjHvOEpzzjOS94ySte84a3vOM9H\/jIJz7zha9849\/\/nklI7yc\/8wtBCEowghOCkIQiNGEISzjCE4GIRCIyUYhKNKITg5jEIjZxiEu8kN9\/j+xu5iAnuchNHvKSj\/wUoCCFKEwRilKM4pSgJKUoTRnKUo7yVKAilahMFapSjerUoCa1qE0d6lKP+jSgIY1oTBOa0ozmtKAlrWhNG9rSjvZ0oCOd6EwXutKN7vSgJ73oTR\/60o\/+DGAggxjMEIYy7AfssdzNFaxkFatZw1rWsZ4NbGQTm9nCVraxnR3sZBe72cNe9rGfAxzkEIc5wlGOcZwTnOQUpznDWc5xngtc5BKXucJVrnGdG9zkFre5w13ucZ8HPOQRj3nCU57xnBe85BWvecNb3vGeD3zkE5\/5wle+\/YA9fg3le0h8EpCQRCTmd\/7gT\/7ib\/4hCUlJRnJSkJJUpCYNaUlHejKQkUxkJgtZyUZ2cpCTXOQmD3nJR34KUJBCFKYIRSlGcUpQklKUpgxlKUd5KlCRSlSmClWpRnVqUJNa1KYOdalHfRrQkEY0pglNaRbq++8x3M0RjGQUoxnDWMYxnglMZBKTmcJUpjGdGcxkFrOZw1zmMZ8FLGQRi1nCUpaxnBWsZBWrWcNa1rGeDWxkE5vZwla2sZ0d7GQXu9nDXvaxnwMc5BCHOcJRjnGcE5zkFKc5w1nOcZ4LXOQSl7nCVa79gD3+\/e9maN9DfuYXghCUYAQnBCEJRWjCEJZwhCcCEYlEZKIQlWhEJwYxiUVs4hCXePzKb8QnAQlJRGJ+5w\/+5C\/+5h+SkJRkJCcFKUlFatKQlnSkJwMZyURmspCVbGQnBznJRW7ykJd85KcABSlEYYpQlGKhv\/8ezd1sQUta0Zo2tKUd7elARzrRmS50pRvd6UFPetGbPvSlH\/0ZwEAGMZghDGUYwxnBSEYxmjGMZRzjmcBEJjGZKUxlGtOZwUxmMZs5zGUe81nAQhaxmCUsZRnLWcFKVrGaNaxlHevZwEY2sZktbGXbD9jjups3uMktbnOHu9zjPg94yCMe84SnPOM5L3jJK17zhre84z0f+MgnPvOFr3zj3\/\/+UxjvJz\/zC0EISjCCE4KQhCI0YQhLOMITgYhEIjJRiEo0ohODmMQiNnGISzx+5Tfik4CEJCIxv\/MHf\/IXf\/MPSUhKsjDff4\/ibpagJKUoTRnKUo7yVKAilahMFapSjerUoCa1qE0d6lKP+jSgIY1oTBOa0ozmtKAlrWhNG9rSjvZ0oCOd6EwXutKN7vSgJ73oTR\/60o\/+DGAggxjMEIYyjOGMYCSjGM0YxjKO8UxgIpOYzBSmMu0H7LHdzR3sZBe72cNe9rGfAxzkEIc5wlGOcZwTnOQUpznDWc5xngtc5BKXucJVrnGdG9zkFre5w13ucZ8HPOQRj3nCU57xnBe85BWvecNb3vGeD3zkE5\/5wle+8e9\/zzSs95Of+YUgBCUYwQlBSEIRmjCEJVzY779HcjdTkJJUpCYNaUlHejKQkUxkJgtZyUZ2cpCTXOQmD3nJR34KUJBCFKYIRSlGcUpQklKUpgxlKUd5KlCRSlSmClWpRnVqUJNa1KYOdalHfRrQkEY0pglNaUZzWtCSVrSmDW1pR3s60JFOdKYLXen2A\/aY7uYMZjKL2cxhLvOYzwIWsojFLGEpy1jOClayitWsYS3rWM8GNrKJzWxhK9vYzg52sovd7GEv+9jPAQ5yiMMc4SjHOM4JTnKK05zhLOc4zwUuconLXOEq17jODW5yi9vc4S73uM8DHvKIxzzhKc9+wB7hw\/keEpFIRCYKUYlGdGIQk1jEJg5xicev\/EZ8EpCQRCTmd\/7gT\/7ib\/4hCUlJRnJSkJJUpCYNaUlHejKQkUxkJgtZyUZ2cpCTXOQmD3nJR34KUJBCFKYIRSlGcUpQklKUpgxlKUd5KlCRSlSmClWpFu7779HdzR70pBe96UNf+tGfAQxkEIMZwlCGMZwRjGQUoxnDWMYxnglMZBKTmcJUpjGdGcxkFrOZw1zmMZ8FLGQRi1nCUpaxnBWsZBWrWcNa1rGeDWxkE5vZwla2sZ0d7GQXu9nDXvaxnwMc5BCHOcJRjv2APZ67+YKXvOI1b3jLO97zgY984jNf+Mo3\/v3vN4X3PeRnfiEIQQlGcEIQklCEJgxhCUd4IhCRSEQmClGJRnRiEJNYxCYOcYnHr\/xGfBKQkEQk5nf+4E\/+4m\/+IQlJSUZyUpCSVKQmDWlJR3oykJFMZCYLWckW\/vvvUd3NGtSkFrWpQ13qUZ8GNKQRjWlCU5rRnBa0pBWtaUNb2tGeDnSkE53pQle60Z0e9KQXvelDX\/rRnwEMZBCDGcJQhjGcEYxkFKMZw1jGMZ4JTGQSk5nCVKYxnRnMZBazmcNc5jGfBSxkEYtZwlKW\/YA9jrt5gpOc4jRnOMs5znOBi1ziMle4yjWuc4Ob3OI2d7jLPe7zgIc84jFPeMoznvOCl7ziNW94yzve84GPfOIzX\/jKN\/7975lE8H7yM78QhKAEIzghCEkoQhOGsIQjPBGISCQiE4WoRCM6MYhJLGITh7jEi\/D998juZg5ykovc5CEv+chPAQpSiMIUoSjFKE4JSlKK0pShLOUoTwUqUonKVKEq1ahODWpSi9rUoS71qE8DGtKIxjShKc1oTgta0orWtKEt7WhPBzrSic50oSvd6E4PetKL3vShL\/3ozwAGMojBDGEow37AHsvdXMFKVrGaNaxlHevZwEY2sZktbGUb29nBTnaxmz3sZR\/7OcBBDnGYIxzlGMc5wUlOcZoznOUc57nARS5xmStc5RrXucFNbnGbO9zlHvd5wEMe8ZgnPOUZz3nBS17xmje85R3v+cBHPvGZL3zl2w\/Y49eIvofEJwEJSURifucP\/uQv\/uYfkpCUZCQnBSlJRWrSkJZ0pCcDGclEZrKQlWxkJwc5yUVu8pCXfOSnAAUpRGGKUJRiFKcEJSlFacpQlnKUpwIVqURlqlCValSnBjWpRW3qUJd61KcBDWlEY5rQlGYRv\/8ew90cwUhGMZoxjGUc45nARCYxmSlMZRrTmcFMZjGbOcxlHvNZwEIWsZglLGUZy1nBSlaxmjWsZR3r2cBGNrGZLWxlG9vZwU52sZs97GUf+znAQQ5xmCMc5RjHOcFJTnGaM5zlHOe5wEUucZkrXOXaD9jj3\/9uRvI95Gd+IQhBCUZwQhCSUIQmDGEJR3giEJFIRCYKUYlGdGIQk1jEJg5xicev\/EZ8EpCQRCTmd\/7gT\/7ib\/4hCUlJRnJSkJJUpCYNaUlHejKQkUxkJgtZyUZ2cpCTXOQmD3nJR34KUJBCFKYIRSkW6fvv0dzNFrSkFa1pQ1va0Z4OdKQTnelCV7rRnR70pBe96UNf+tGfAQxkEIMZwlCGMZwRjGQUoxnDWMYxnglMZBKTmcJUpjGdGcxkFrOZw1zmMZ8FLGQRi1nCUpaxnBWsZBWrWcNa1rGeDWxkE5vZwla2\/YA9rrt5g5vc4jZ3uMs97vOAhzziMU94yjOe84KXvOI1b3jLO97zgY984jNf+Mo3\/v3vP0X2fvIzvxCEoAQjOCEISShCE4awhCM8EYhIJCIThahEIzoxiEksYhOHuMTjV34jPglISCIS8zt\/8Cd\/8Tf\/kISkJIv8\/fco7mYJSlKK0pShLOUoTwUqUonKVKEq1ahODWpSi9rUoS71qE8DGtKIxjShKc1oTgta0orWtKEt7WhPBzrSic50oSvd6E4PetKL3vShL\/3ozwAGMojBDGEowxjOCEYyitGMYSzjGM8EJjKJyUxhKtN+wB7b3dzBTnaxmz3sZR\/7OcBBDnGYIxzlGMc5wUlOcZoznOUc57nARS5xmStc5RrXucFNbnGbO9zlHvd5wEMe8ZgnPOUZz3nBS17xmje85R3v+cBHPvGZL3zlG\/\/+90yjeD\/5mV8IQlCCEZwQhCQUoQlDWMJF+f57JHczBSlJRWrSkJZ0pCcDGclEZrKQlWxkJwc5yUVu8pCXfOSnAAUpRGGKUJRiFKcEJSlFacpQlnKUpwIVqURlqlCValSnBjWpRW3qUJd61KcBDWlEY5rQlGY0pwUtaUVr2tCWdrSnAx3pRGe60JVuP2CP6W7OYCazmM0c5jKP+SxgIYtYzBKWsozlrGAlq1jNGtayjvVsYCOb2MwWtrKN7exgJ7vYzR72so\/9HOAghzjMEY5yjOOc4CSnOM0ZznKO81zgIpe4zBWuco3r3OAmt7jNHe5yj\/s84CGPeMwTnvLsB+wRPqrvIRGJRGSiEJVoRCcGMYlFbOIQl3j8ym\/EJwEJSURifucP\/uQv\/uYfkpCUZCQnBSlJRWrSkJZ0pCcDGclEZrKQlWxkJwc5yUVu8pCXfOSnAAUpRGGKUJRiFKcEJSlFacpQlnKUpwIVqURlqlCValG\/\/x7d3exBT3rRmz70pR\/9GcBABjGYIQxlGMMZwUhGMZoxjGUc45nARCYxmSlMZRrTmcFMZjGbOcxlHvNZwEIWsZglLGUZy1nBSlaxmjWsZR3r2cBGNrGZLWxlG9vZwU52sZs97GUf+znAQQ5xmCMc5dgP2OO5my94ySte84a3vOM9H\/jIJz7zha9849\/\/flM030N+5heCEJRgBCcEIQlFaMIQlnCEJwIRiURkohCVaEQnBjGJRWziEJd4\/MpvxCcBCUlEYn7nD\/7kL\/7mH5KQlGQkJwUpSUVq0pCWdKQnAxnJRGaykJVs0b7\/HtXdrEFNalGbOtSlHvVpQEMa0ZgmNKUZzWlBS1rRmja0pR3t6UBHOtGZLnSlG93pQU960Zs+9KUf\/RnAQAYxmCEMZRjDGcFIRjGaMYxlHOOZwEQmMZkpTGUa05nBTGYxmznMZR7zWcBCFrGYJSxl2Q\/Y47ibJzjJKU5zhrOc4zwXuMglLnOFq1zjOje4yS1uc4e73OM+D3jIIx7zhKc84zkveMkrXvOGt7zjPR\/4yCc+84WvfOPf\/55JdO8nP\/MLQQhKMIITgpCEIjRhCEs4whOBiEQiMlGISjSiE4OYxCI2cYhLvOjff4\/sbuYgJ7nITR7yko\/8FKAghShMEYpSjOKUoCSlKE0ZylKO8lSgIpWoTBWqUo3q1KAmtahNHepSj\/o0oCGNaEwTmtKM5rSgJa1oTRva0o72dKAjnehMF7rSje70oCe96E0f+tKP\/gxgIIMYzBCGMuwH7LHczRWsZBWrWcNa1rGeDWxkE5vZwla2sZ0d7GQXu9nDXvaxnwMc5BCHOcJRjnGcE5zkFKc5w1nOcZ4LXOQSl7nCVa5xnRvc5Ba3ucNd7nGfBzzkEY95wlOe8ZwXvOQVr3nDW97xng985BOf+cJXvv2APX6N4XtIfBKQkEQk5nf+4E\/+4m\/+IQlJSUZyUpCSVKQmDWlJR3oykJFMZCYLWclGdnKQk1zkJg95yUd+ClCQQhSmCEUpRnFKUJJSlKYMZSlHeSpQkUpUpgpVqUZ1alCTWtSmDnWpR30a0JBGNKYJTWkW4\/vvMdzNEYxkFKMZw1jGMZ4JTGQSk5nCVKYxnRnMZBazmcNc5jGfBSxkEYtZwlKWsZwVrGQVq1nDWtaxng1sZBOb2cJWtrGdHexkF7vZw172sZ8DHOQQhznCUY5xnBOc5BSnOcNZznGeC1zkEpe5wlWu\/YA9AgUKFChQoECBAgUKFChQoECBAgUKFChQoECBAgUKFChQoECBAgUKFChQoECBAgUKFChQoECBAgUKFChQoECBAgUKFChQoECBAgUKFChQoECBAgUKFChQoECBAgUKFCjQ\/7\/\/AdXJ5uU=",
+         "encoding":"base64",
+         "height":100,
+         "id":12,
+         "name":"Calque de Tuiles 1",
          "opacity":1,
-         "type":"objectgroup",
+         "type":"tilelayer",
          "visible":true,
+         "width":100,
          "x":0,
          "y":0
         }, 
@@ -39,8 +30,43 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":330.943035157989,
-                 "y":578.259714707329
+                 "x":375.821823036777,
+                 "y":470.896078343693
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":10,
+         "name":"Spawn",
+         "objects":[
+                {
+                 "height":0,
+                 "id":33,
+                 "name":"PNJ-marchand",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":965.666666666666,
+                 "y":494.166666666667
+                }, 
+                {
+                 "height":0,
+                 "id":48,
+                 "name":"chat",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":773,
+                 "y":493
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -55,18 +81,6 @@
          "objects":[
                 {
                  "height":0,
-                 "id":35,
-                 "name":"PNJ-Pottier",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":422,
-                 "y":605.333333333333
-                }, 
-                {
-                 "height":0,
                  "id":36,
                  "name":"fontaine",
                  "point":true,
@@ -74,8 +88,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":588.272727272727,
-                 "y":584.454545454545
+                 "x":521.939393939394,
+                 "y":528.0101010101
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -89,37 +103,37 @@
          "name":"Bundaries",
          "objects":[
                 {
-                 "height":244,
+                 "height":178,
                  "id":21,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":201.333333333333,
-                 "x":28.3636363636364,
-                 "y":443.696969696969
+                 "width":15.9999999999997,
+                 "x":15.0303030303031,
+                 "y":510.363636363636
                 }, 
                 {
-                 "height":242.666666666667,
+                 "height":168.333333333334,
                  "id":22,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":151.25,
-                 "x":1096.75,
-                 "y":444.666666666667
+                 "x":1231.41666666667,
+                 "y":529
                 }, 
                 {
-                 "height":77.0833333333334,
+                 "height":104.083333333333,
                  "id":23,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":278.958333333333,
-                 "x":516.708333333334,
-                 "y":611.583333333333
+                 "width":254.958333333333,
+                 "x":496.208333333334,
+                 "y":596.583333333333
                 }, 
                 {
                  "height":32.6666666666666,
@@ -128,9 +142,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":900.583333333333,
-                 "x":203.333333333333,
-                 "y":688
+                 "width":470.583333333333,
+                 "x":32.6666666666664,
+                 "y":688.666666666667
                 }, 
                 {
                  "height":18,
@@ -139,20 +153,108 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":934.666666666667,
-                 "x":186,
-                 "y":502.666666666667
+                 "width":218,
+                 "x":209,
+                 "y":497.666666666667
                 }, 
                 {
-                 "height":6.66666666666669,
+                 "height":35.0000000000001,
                  "id":29,
                  "name":"door-entrance",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":80.3162878787879,
-                 "x":349.183712121211,
-                 "y":515.916666666667
+                 "width":61.6496212121212,
+                 "x":427.850378787878,
+                 "y":481.25
+                }, 
+                {
+                 "height":18,
+                 "id":37,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":214.083,
+                 "x":488.666833333333,
+                 "y":497.666666666667
+                }, 
+                {
+                 "height":40.6666666666666,
+                 "id":38,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":70.9996666666667,
+                 "x":31.3335,
+                 "y":498
+                }, 
+                {
+                 "height":37.0000333333334,
+                 "id":39,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":106.666366666667,
+                 "x":102.50015,
+                 "y":478.66665
+                }, 
+                {
+                 "height":18,
+                 "id":40,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":564.583,
+                 "x":697.0835,
+                 "y":511.5
+                }, 
+                {
+                 "height":18,
+                 "id":42,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":763.249666666667,
+                 "x":503.041833333333,
+                 "y":689.166666666667
+                }, 
+                {
+                 "height":35,
+                 "id":43,
+                 "name":"door-entrance_2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":79.6496,
+                 "x":1114.50853333333,
+                 "y":508.5
+                }, 
+                {
+                 "height":80.25,
+                 "id":44,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":36.75,
+                 "x":460.25,
+                 "y":619.5
+                }, 
+                {
+                 "height":77,
+                 "id":45,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32.75,
+                 "x":751.75,
+                 "y":624
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -160,8 +262,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":12,
- "nextobjectid":37,
+ "nextlayerid":13,
+ "nextobjectid":49,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
@@ -170,7 +272,7 @@
         {
          "columns":112,
          "firstgid":1,
-         "image":"..\/place.png",
+         "image":"..\/png_map\/place.png",
          "imageheight":1024,
          "imagewidth":1792,
          "margin":0,

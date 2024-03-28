@@ -2,11 +2,12 @@ import { colorizeBackground, drawBoundaries, fetchMapData, Instruction,DestroyIn
 import { setMoyenPlayerMovement, generateMoyenPlayerComponents } from "../entities/player.js";
 import  dialogintrogameplay from "../content/pont_innerdialogue.js";
 import { pnj_TorrentLines} from "../content/pnj_dialogues.js"
-import { gameState, gameStatePont, HaveCarnet,HaveReadCarnet,SeenJournal,Beck_ok,Meet_Torrent_ok, Torrent_ok, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
+import { gameState, gameStatePont, TutoDone, Tutodoing,HaveCarnet,HaveReadCarnet,SeenJournal,Beck_ok,Meet_Torrent_ok, Torrent_ok, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
 import { dialog } from "../uiComponents/dialog.js";
-import { generateCarnetComponents, Carnet,createProof, setTournerPage, ToDoWithProof, Souligner} from "../entities/carnet.js";
+import { generateCarnetComponents, Carnet,createProof, setTournerPage, ToDoWithProof, Souligner, RectoVersoLecture, checkfin} from "../entities/carnet.js";
 
 export default async function pont(k){
+
     colorizeBackground(k, 27,29,52 );
     const mapData = await fetchMapData("./assets/maps/pont.json");
     const map = k.add([k.pos(0,0)])
@@ -52,12 +53,18 @@ export default async function pont(k){
         
     }
 
+    const river = k.play("river", {
+        volume: 0.2,
+        loop: true
+    })
+    if(!gameStatePont.getfirstTimepont())Instruction(k, 135,55, k.vec2(1115,25),"InstructionF","Appuie sur J pour ouvrir le carnet");
     setMoyenPlayerMovement(k, entities.moyen_player)
     let CollideJournal = false
     let CollideCarnet = false
     let CollideAne = false
     let CarnetOpen = false
     let CollidTorrent = false 
+    let CollidDoorEntrance = false
     const responses = dialogintrogameplay.french;
 
     k.onKeyPress("e", async ()=>{
@@ -72,10 +79,7 @@ export default async function pont(k){
         if(CollideCarnet){
             DestroyShowObject(k,"InstructionECarnet","carnet" )
             HaveCarnet.setInstanceCarnet(true)
-            Instruction(k, 135,55, k.vec2(1115,25),"InstructionF","Appuie sur f pour ouvrir le carnet")
-            k.wait(7, () => {
-                k.destroyAll("InstructionF")
-            })
+            Instruction(k, 135,55, k.vec2(1115,25),"InstructionF","Appuie sur J pour ouvrir le carnet")
             k.destroyAll(CollideCarnet)
             return;   
         }
@@ -89,22 +93,22 @@ export default async function pont(k){
             dialog(k, k.vec2(32,16), DialogueTorrent[0])
             Meet_Torrent_ok.setinstanceTorrent(true)
 
-        }   
+        }  
+        if(CollidDoorEntrance){
+            gameStatePont.setfirstTimepont(false)
+            river.stop()
+            k.go("world");
+        }  
+        if(CarnetOpen){
+            RectoVersoLecture(k)
+        }
     })
 
+
     k.onKeyPress("enter",()=>{
-        if (CollideJournal){
-            if(!SeenJournal.getInstanceJournal())return
-            DestroyShowObject(k,"InstructionjournalExit","journal_grand" )
-            return;   
-        } if(CollideAne){
-            DestroyShowObject(k,"InstructionExitAne","Bib_tableau_Dufour" ) 
-            if(gameStatePont.getfirstTimepont() && !HaveCarnet.getInstanceCarnet()){
-                const carnet = k.add(generateCarnetComponents(k,k.vec2(1000, 645)));
-            }
-            return; 
-        } if(CarnetOpen){
+        if(CarnetOpen){
             if(HaveReadCarnet.getInstanceCarnet_lecture()) return;
+            if(Tutodoing.getInstanceTuto2()){ k.destroyAll("InstructionTutoCarnet"); Tutodoing.setInstanceTuto2(false); return}
             DestroyShowObject(k,"InstructionExitCarnet","CarnetOPEN" ) 
             k.destroyAll("proof")
             k.destroyAll("entree")
@@ -113,13 +117,32 @@ export default async function pont(k){
             k.destroyAll("cross")
             k.destroyAll("ligne")
             k.destroyAll("InstructionCarnet")
+            k.destroyAll("InstructionVerso")
+            k.destroyAll("InstructionRecto")
+            k.destroyAll("Verso_Guillot_id")
+            k.destroyAll("Verso_Dufay_id")
             entities.carnet.currentSprite = "carnet_p_1"
             CarnetOpen = false
+            const page_ferme= k.play("book", {
+                volume: 0.2,
+            })
+            checkfin ()
             return;   
 
         }
+        if (CollideJournal ){
+            if(!SeenJournal.getInstanceJournal())return
+            DestroyShowObject(k,"InstructionjournalExit","journal_grand" )
+            return;   
+        } if(CollideAne ){
+            DestroyShowObject(k,"InstructionExitAne","Bib_tableau_Dufour" ) 
+            if(gameStatePont.getfirstTimepont() && !HaveCarnet.getInstanceCarnet()){
+                const carnet = k.add(generateCarnetComponents(k,k.vec2(1000, 645)));
+            }
+            return; 
+        }
     })
-    k.onKeyPress("f", async ()  => { //TODO interdire la possibilité de repropduire f quand carnet en cour
+    k.onKeyPress("j", async ()  => { 
         if(HaveCarnet.getInstanceCarnet() && !CarnetOpen && !gameState.getFreezePlayer()) {
             CarnetOpen = true
             entities.carnet = k.add([
@@ -144,16 +167,75 @@ export default async function pont(k){
     })
         // Index carnet
         k.onKeyPress((key) => {if(CarnetOpen && !HaveReadCarnet.getInstanceCarnet_lecture())setTournerPage(k, key, entities.carnet)})
-        k.onClick("Adrien_Felix",() =>     createProof(k,1, entities.carnet, Pottier_ok.getinstancePottier(), Meet_Pottier_ok.getinstancePottier(),k.vec2(305,435),250, 25,k.vec2(305,460),250 , 25, "proof1_Pottier", "proof2_Pottier"))
-        k.onClick("Alphonse_Beck",() =>    createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck"))
+        k.onClick("Adrien_Felix",() =>     createProof(k,1, entities.carnet, Pottier_ok.getinstancePottier(), Meet_Pottier_ok.getinstancePottier(),k.vec2(305,445),285, 25,k.vec2(305,470),285, 50, "proof1_Pottier", "proof2_Pottier"))
+        k.onClick("Alphonse_Beck",() =>   {
+            if(!TutoDone.getInstanceTuto() && !SeenJournal.getInstanceJournal()){ 
+                Tutodoing.setInstanceTuto2(true)
+                createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck")   
+                const InstructionBoxtuto = k.add([k.rect(500, 350), k.pos(375,200), k.outline(4), k.opacity(0.7),k.offscreen(),"InstructionTutoCarnet"]) 
+                const textInstructionBoxtuto = InstructionBoxtuto.add([
+                    k.text("Pour découvrire à qui appartient le mytérieux tableau, tu vas devoir éliminier un profil après l'autre. Pour cela, tu auras besoin d'indices que tu découvriras en explorant les environs. Découvre ton premier indice et reviens sur cette page !", 
+                    {   font: "NiceFont",
+                        width : 490,
+                        size : 35,
+                        lineSpacing : 10,
+                    }), 
+                    k.color(27,29,52),
+                    k.pos(10,10), // par rappor à dialogbox  
+                    k.opacity(0.7)
+                ]);
+                const textInstructionBoxOut = InstructionBoxtuto.add([
+                    k.text("Appuie sur Enter", 
+                    {   font: "NiceFont",
+                        width : 490,
+                        size : 35,
+                        lineSpacing : 10,
+                    }), 
+                    k.color(27,29,52),
+                    k.pos(300,313), // par rappor à dialogbox  
+                    k.opacity(0.5)
+                ]);
+            }
+            if(!TutoDone.getInstanceTuto() && SeenJournal.getInstanceJournal()){
+                Tutodoing.setInstanceTuto2(true)
+                createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck")
+                const InstructionBoxtuto = k.add([k.rect(665, 500), k.pos(300,115), k.outline(4), k.opacity(0.9),k.offscreen(),"InstructionTutoCarnet"]) 
+                const textInstructionBoxtuto = InstructionBoxtuto.add([
+                    k.text("Afin de découvrire à qui appartient le mytérieux tableau, tu vas devoir éliminier un profil après l'autre. Pour se faire, tu vas partir à la chasse à l'indice... quel élément du text de la page de droite ou du document en page gauche t'indique que cette personne n'est pas la bonne ? Dans le cas d'Alphonse Beck, le journal du jour nous indique que nous sommes le 31 octobre 1815, mais Alphonse Beck naît en 1822, il ne peut donc pas être le destinataire du tableau. Dans le profil de Beck, tu vas pouvoir clicker avec ta souris sur 1822 et sur 1815, afin d'éliminer Beck de la liste des potentiels propriétaires. Fais de même avec les autres profils jusqu'à ce qu'il ne t'en reste qu'un seul! Tous les profils ne nécessitent pas deux preuves, parfois il te faudra cliquer une fois, parfois deux. Bonne Chance !", 
+                    {   font: "NiceFont",
+                        width : 660,
+                        size : 30,
+                        lineSpacing : 7,
+                    }), 
+                    k.color(27,29,52),
+                    k.pos(10,10), // par rappor à dialogbox  
+                    k.opacity(0.7)
+                ]);
+                const textInstructionBoxOut = InstructionBoxtuto.add([
+                    k.text("Appuie sur Enter", 
+                    {   font: "NiceFont",
+                        width : 490,
+                        size : 35,
+                        lineSpacing : 10,
+                    }), 
+                    k.color(27,29,52),
+                    k.pos(470,455), // par rappor à dialogbox  
+                    k.opacity(0.5)
+                ]);
+                
+            }    
+            if(TutoDone.getInstanceTuto()){
+                createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck")
+            }
+        })
         k.onClick("Charles_Emmanuel",() => createProof(k,3, entities.carnet, Rivaz_ok.getinstanceRivaz(), Meet_Rivaz_ok.getinstanceRivaz(),k.vec2(410,155),185, 255,k.vec2(295,320),195 , 245, "proof1_Rivaz", "proof2_Rivaz"))
         k.onClick("Dufour_Michel",() =>    createProof(k,4, entities.carnet, Dufour_ok.getinstanceDufour(), Meet_Dufour_ok.getinstanceDufour(),k.vec2(390,250),120, 20,k.vec2(815,195),50 , 20, "proof1_Dufour", "proof2_Dufour"))
         k.onClick("Emile_Vuilloud",() =>   createProof(k,5, entities.carnet, Vuilloud_ok.getinstanceVuilloud(), SeenJournal.getInstanceJournal(),k.vec2(400,260),120, 20,k.vec2(780, 200),50 , 20, "proof1_Vuilloud", "proof2_Vuilloud"))
-        k.onClick("Joseph_Torrent",() =>   createProof(k,6, entities.carnet, Torrent_ok.getinstanceTorrent(), Meet_Torrent_ok.getinstanceTorrent(),k.vec2(375,400),225, 20,k.vec2(305,425),100 , 20, "proof1_Torrent", "proof2_Torrent"))
-        k.onClick("Louis_Robriquet",() =>  createProof(k,7, entities.carnet, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,250),255, 50,k.vec2(815,195),150 , 20, "proof1_Robriquet", "proof2_Robriquet"))
-        k.onClick("Pierre_Guillot",() =>   createProof(k,8, entities.carnet, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,375),250, 40,k.vec2(650,425),135 , 20, "proof1_Guillot", "proof2_Guillot"))
-        k.onClick("Pierre_DuFay",() =>     createProof(k,9, entities.carnet, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(300,550),290, 20,k.vec2(300,570),290 , 20, "proof1_DuFay", "proof2_DuFay"))
-        k.onClick("Rey_Bellet",() =>       createProof(k,10, entities.carnet, Bellet_ok.getinstanceBellet(), Meet_Bellet_ok.getinstanceBellet(),k.vec2(300,285),280, 20,k.vec2(300,305),55 , 25, "proof1_Bellet", "proof2_Bellet"))
+        k.onClick("Joseph_Torrent",() =>   createProof(k,6, entities.carnet, Torrent_ok.getinstanceTorrent(), Meet_Torrent_ok.getinstanceTorrent(),k.vec2(460,410),120, 30,k.vec2(305,435),225 , 55, "proof1_Torrent", "proof2_Torrent"))
+        k.onClick("Louis_Robriquet",() =>  createProof(k,7, entities.carnet, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,270),270, 80,k.vec2(805,195),160 , 20, "proof1_Robriquet", "proof2_Robriquet"))
+        k.onClick("Pierre_Guillot",() =>   createProof(k,8, entities.carnet, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(650,425),135 , 20, "proof1_Guillot", "proof2_Guillot"))
+        k.onClick("Pierre_DuFay",() =>     createProof(k,9, entities.carnet, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(300,450),290, 20,k.vec2(300,470),290 , 20, "proof1_DuFay", "proof2_DuFay"))
+        k.onClick("Rey_Bellet",() =>       createProof(k,10, entities.carnet, Bellet_ok.getinstanceBellet(), Meet_Bellet_ok.getinstanceBellet(),k.vec2(300,305),220, 20,k.vec2(300,325),200 , 25, "proof1_Bellet", "proof2_Bellet"))
     
         // Proof
         k.onClick("proof1_Beck",() => ToDoWithProof(k,"proof1_Beck", "texte_proof"))
@@ -211,14 +293,23 @@ export default async function pont(k){
             k.destroyAll("transitionBox")
         })
         
+        
     } 
 
     entities.moyen_player.onCollide("door-entrance", () =>{
+        CollidDoorEntrance = true 
+        if(!Beck_ok.getinstanceBeck()){
+        Instruction(k, 155,105, k.vec2(740,230),"InstructionEDoor","Pour l'instant, tu ne peux pas poursuivre ton aventure au-delà du pont!")
+        }
         if(Beck_ok.getinstanceBeck()){
-        gameStatePont.setfirstTimepont(false)
-        k.go("world");
+        Instruction(k, 135,60, k.vec2(740,230),"InstructionEDoor","Appuie sur e pour traverser le pont")
         }
     });
+
+    entities.moyen_player.onCollideEnd("door-entrance", ()=>{
+        CollidDoorEntrance = false
+        DestroyInstruction(k,"InstructionEDoor")
+    })
 
     entities.moyen_player.onCollide("pnj-ane", ()=>{
         CollideAne = true

@@ -1,7 +1,7 @@
 import { Instruction, DestroyInstruction, DestroyShowObject, colorizeBackground, drawBoundaries, fetchMapData, ShowObject, startInteractionPNJ, SetSprite} from "../utils.js";
 import { setBigPlayerMovement, generateBigPlayerComponents } from "../entities/player.js";
 import { gameState, Meet_Folken_ok, HaveCarnet,SeenJournal,Beck_ok,Meet_Torrent_ok, Torrent_ok, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
-import { Carnet, setTournerPage, createProof,ToDoWithProof, Souligner} from "../entities/carnet.js";
+import { Carnet, setTournerPage, createProof,ToDoWithProof, Souligner, RectoVersoLecture, checkfin} from "../entities/carnet.js";
 import { pnj_FolkenLines} from "../content/pnj_dialogues.js"
 import { dialog } from "../uiComponents/dialog.js";
 
@@ -19,7 +19,7 @@ export default async function house(k){
         pnj_Folken: null
     }
 
-    const layers = mapData.layers;
+    const layers = mapData.layers; 
     for (const layer of layers){
         if(layer.name === "Bundaries"){
             drawBoundaries(k, map, layer);
@@ -36,8 +36,8 @@ export default async function house(k){
                     entities.tableau = map.add([k.area({shape: new k.Rect(k.vec2(object.x, object.y), 131, 95)}),"tableau_deRivaz"]);
                     continue; 
                 }
-                if (object.name === "papier_2"){
-                    entities.tableau = map.add([k.area({shape: new k.Rect(k.vec2(object.x, object.y), 131, 95)}),"papier_2"]);
+                if (object.name === "papier_1"){
+                    entities.tableau = map.add([k.area({shape: new k.Rect(k.vec2(object.x, object.y), 131, 95)}),"papier_1"]);
                     continue; 
                 }
                 if(Meet_Folken_ok.getinstanceFolken()){
@@ -56,7 +56,14 @@ export default async function house(k){
     let CollidFolken = false
     let LecturePapers_1 = false
     let LecturePapers_2 = false
+    let CollidDoorExit = false 
 
+    const inside = k.play("inside", {
+        volume: 0.02,
+        loop: true
+    })
+
+    Instruction(k, 135,55, k.vec2(1115,25),"InstructionF","Appuie sur J pour ouvrir le carnet");
     setBigPlayerMovement(k, entities.big_player)
     let CarnetOpen = false
     k.onKeyPress("enter",()=>{
@@ -69,8 +76,16 @@ export default async function house(k){
             k.destroyAll("cross")
             k.destroyAll("ligne")
             k.destroyAll("InstructionCarnet")
+            k.destroyAll("InstructionVerso")
+            k.destroyAll("InstructionRecto")
+            k.destroyAll("Verso_Guillot_id")
+            k.destroyAll("Verso_Dufay_id")
             entities.carnet.currentSprite = "carnet_p_1"
             CarnetOpen = false
+            const page_ferme= k.play("book", {
+                volume: 0.2,
+            })
+            checkfin ()
             return;  
         }
         if (onCollideTableau){  
@@ -84,12 +99,18 @@ export default async function house(k){
             DestroyShowObject(k,"InstructionExit","Papier_1_id" ) 
             k.destroyAll("InstructionFleche")
             LecturePapers_1 = false
+            const page_ferme= k.play("book", {
+                volume: 0.2,
+            })
             return
             }
             if(LecturePapers_2){
             DestroyShowObject(k,"InstructionExit","Papier_2_id" ) 
             k.destroyAll("InstructionFleche")
             LecturePapers_2 = false
+            const page_ferme= k.play("book", {
+                volume: 0.2,
+            })
             return;  
             }
                  
@@ -97,28 +118,39 @@ export default async function house(k){
 
     })
     k.onKeyPress("e", () =>{
-        if (onCollideTableau){  
+        if (onCollideTableau && !CarnetOpen){  
             Instruction(k,170,60,k.vec2(950,200),"InstructionExit","Appuie sur enter pour arrêter l'observation" )
             ShowObject(k,"InstructionE", "Big_tabl_Rivaz", k.vec2(416,40), "Bib_tableau_deRivaz")        
             return;  
         }
-        if (onCollidePapier){
+        if (onCollidePapier && !CarnetOpen){
             LecturePapers_1 = true
             Instruction(k,170,60,k.vec2(1000,225),"InstructionExit","Appuie sur enter pour arrêter la lecture" )
-            Instruction(k,170,80,k.vec2(1000,425),"InstructionFleche","Utilise les flèches gauche et droite pour changer de document" )
-            ShowObject(k,"InstructionE", "Papier_1", k.vec2(330,25), "Papier_1_id") 
-            Meet_Guillot_ok.setinstanceGuillot(true)  
+            Instruction(k,170,80,k.vec2(1000,425),"InstructionFleche","Utilise les flèches gauche et droite pour lire recto-verso" )
+            ShowObject(k,"InstructionE", "Papier_1_1", k.vec2(330,25), "Papier_1_id") 
+            Meet_DuFay_ok.setinstanceDuFay(true)  
+            const page_ferme= k.play("book", {
+                volume: 0.2,
+            })
             return;  
         }
-        if(CollidFolken){
+        if(CollidFolken && !CarnetOpen){
             const DialogueFolken = pnj_FolkenLines.french_Folken;
             dialog(k, k.vec2(32,16), DialogueFolken[0])
             Meet_Robriquet_ok.setinstanceRobriquet(true)
             return;  
         }
+        if(CollidDoorExit && !CarnetOpen){
+            inside.stop()
+            k.go("world");
+            return
+        }
+        if(CarnetOpen){
+            RectoVersoLecture(k)
+        }
 
     });
-    k.onKeyPress("f", () => { 
+    k.onKeyPress("j", () => { 
         if(HaveCarnet.getInstanceCarnet()&& !CarnetOpen && !gameState.getFreezePlayer()) {
             CarnetOpen = true
             entities.carnet = k.add([
@@ -142,8 +174,7 @@ export default async function house(k){
         k.destroyAll("Papier_1_id")
         LecturePapers_1 = false
         LecturePapers_2 = true
-        ShowObject(k,"InstructionE", "Papier_2", k.vec2(330,25), "Papier_2_id")  
-        Meet_DuFay_ok.setinstanceDuFay(true)
+        ShowObject(k,"InstructionE", "Papier_1_2", k.vec2(330,25), "Papier_2_id")  
         }
     }})
     k.onKeyPress((key) => {if(["left","a"].includes(key)){
@@ -151,21 +182,21 @@ export default async function house(k){
         k.destroyAll("Papier_2_id")
         LecturePapers_1 = true
         LecturePapers_2 = false
-        ShowObject(k,"InstructionE", "Papier_1", k.vec2(330,25), "Papier_1_id")  
+        ShowObject(k,"InstructionE", "Papier_1_1", k.vec2(330,25), "Papier_1_id")  
         }
     }})
         // Index carnet
         k.onKeyPress((key) => {if(CarnetOpen)setTournerPage(k, key, entities.carnet)})
-        k.onClick("Adrien_Felix",() =>     createProof(k,1, entities.carnet, Pottier_ok.getinstancePottier(), Meet_Pottier_ok.getinstancePottier(),k.vec2(305,435),250, 25,k.vec2(305,460),250 , 25, "proof1_Pottier", "proof2_Pottier"))
+        k.onClick("Adrien_Felix",() =>     createProof(k,1, entities.carnet, Pottier_ok.getinstancePottier(), Meet_Pottier_ok.getinstancePottier(),k.vec2(305,445),285, 25,k.vec2(305,470),285, 50, "proof1_Pottier", "proof2_Pottier"))
         k.onClick("Alphonse_Beck",() =>    createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck"))
         k.onClick("Charles_Emmanuel",() => createProof(k,3, entities.carnet, Rivaz_ok.getinstanceRivaz(), Meet_Rivaz_ok.getinstanceRivaz(),k.vec2(410,155),185, 255,k.vec2(295,320),195 , 245, "proof1_Rivaz", "proof2_Rivaz"))
         k.onClick("Dufour_Michel",() =>    createProof(k,4, entities.carnet, Dufour_ok.getinstanceDufour(), Meet_Dufour_ok.getinstanceDufour(),k.vec2(390,250),120, 20,k.vec2(815,195),50 , 20, "proof1_Dufour", "proof2_Dufour"))
         k.onClick("Emile_Vuilloud",() =>   createProof(k,5, entities.carnet, Vuilloud_ok.getinstanceVuilloud(), SeenJournal.getInstanceJournal(),k.vec2(400,260),120, 20,k.vec2(780, 200),50 , 20, "proof1_Vuilloud", "proof2_Vuilloud"))
-        k.onClick("Joseph_Torrent",() =>   createProof(k,6, entities.carnet, Torrent_ok.getinstanceTorrent(), Meet_Torrent_ok.getinstanceTorrent(),k.vec2(375,400),225, 20,k.vec2(305,425),100 , 20, "proof1_Torrent", "proof2_Torrent"))
-        k.onClick("Louis_Robriquet",() =>  createProof(k,7, entities.carnet, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,250),255, 50,k.vec2(815,195),150 , 20, "proof1_Robriquet", "proof2_Robriquet"))
-        k.onClick("Pierre_Guillot",() =>   createProof(k,8, entities.carnet, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,375),250, 40,k.vec2(650,425),135 , 20, "proof1_Guillot", "proof2_Guillot"))
-        k.onClick("Pierre_DuFay",() =>     createProof(k,9, entities.carnet, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(300,550),290, 20,k.vec2(300,570),290 , 20, "proof1_DuFay", "proof2_DuFay"))
-        k.onClick("Rey_Bellet",() =>       createProof(k,10, entities.carnet, Bellet_ok.getinstanceBellet(), Meet_Bellet_ok.getinstanceBellet(),k.vec2(300,285),280, 20,k.vec2(300,305),55 , 25, "proof1_Bellet", "proof2_Bellet"))
+        k.onClick("Joseph_Torrent",() =>   createProof(k,6, entities.carnet, Torrent_ok.getinstanceTorrent(), Meet_Torrent_ok.getinstanceTorrent(),k.vec2(460,410),120, 30,k.vec2(305,435),225 , 55, "proof1_Torrent", "proof2_Torrent"))
+        k.onClick("Louis_Robriquet",() =>  createProof(k,7, entities.carnet, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,270),270, 80,k.vec2(805,195),160 , 20, "proof1_Robriquet", "proof2_Robriquet"))
+        k.onClick("Pierre_Guillot",() =>   createProof(k,8, entities.carnet, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(650,425),135 , 20, "proof1_Guillot", "proof2_Guillot"))
+        k.onClick("Pierre_DuFay",() =>     createProof(k,9, entities.carnet, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(300,450),290, 20,k.vec2(300,470),290 , 20, "proof1_DuFay", "proof2_DuFay"))
+        k.onClick("Rey_Bellet",() =>       createProof(k,10, entities.carnet, Bellet_ok.getinstanceBellet(), Meet_Bellet_ok.getinstanceBellet(),k.vec2(300,305),220, 20,k.vec2(300,325),200 , 25, "proof1_Bellet", "proof2_Bellet"))
     
         // Proof
         k.onClick("proof1_Beck",() => ToDoWithProof(k,"proof1_Beck", "texte_proof"))
@@ -212,7 +243,13 @@ export default async function house(k){
         k.onHoverEnd("Rey_Bellet",() => k.destroyAll("ligne")) 
 
    entities.big_player.onCollide("door-exit", () =>{
-        k.go("world");
+        CollidDoorExit = true
+        Instruction(k, 160,60, k.vec2(130,150),"InstructionEExit","Appuie sur e pour retourner sur la place")
+    });
+
+    entities.big_player.onCollideEnd("door-exit", () =>{
+        CollidDoorExit = false
+        DestroyInstruction(k,"InstructionEExit")
     });
 
     entities.big_player.onCollide("tableau_deRivaz", ()=>{

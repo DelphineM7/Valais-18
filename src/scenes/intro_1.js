@@ -1,5 +1,5 @@
 import { colorizeBackground, fetchMapData } from "../utils.js";
-import introLines from "../content/into_dialogue.js"
+import {introLines} from "../content/IntroOutro_dialogue.js"
 
 export default async function intro_1(k){  
     colorizeBackground(k, 27,29,52);

@@ -1,3 +1,5 @@
+//  code permet l'animation des aiguilles dans intro_
+
 export function generateAigu1Components(k, pos){
     return [
         k.sprite("Aigu1"),

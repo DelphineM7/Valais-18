@@ -118,6 +118,55 @@ export function globalStateManagerJournal(){
     }
 }
 
+export function globalStateManagerTuto(){
+    let instanceTuto = null; 
+
+    function createInstanceTuo(){
+        let WeHaveDoneTuto = false  //false
+
+        return{
+            setInstanceTuto(value){
+                WeHaveDoneTuto = value; 
+            },
+            getInstanceTuto : () =>WeHaveDoneTuto,
+        }
+    }
+    return{
+        getInstanceTuto(){
+            if (!instanceTuto){
+                instanceTuto = createInstanceTuo()
+            }
+
+            return instanceTuto;
+        }
+    }
+}
+
+export function globalStateManagerTuto2(){
+    let instanceTuto2 = null; 
+
+    function createInstanceTuo2(){
+        let DoingTuto = false  //false
+
+        return{
+            setInstanceTuto2(value){
+                DoingTuto = value; 
+            },
+            getInstanceTuto2 : () =>DoingTuto,
+        }
+    }
+    return{
+        getInstanceTuto2(){
+            if (!instanceTuto2){
+                instanceTuto2 = createInstanceTuo2()
+            }
+
+            return instanceTuto2;
+        }
+    }
+}
+
+// Personnages 
 export function globalStateManagerBeck(){
     let instanceBeck = null; 
 
@@ -574,8 +623,50 @@ export function globalStateManagerDuFay_Meet(){
     }
 }
 
+export function globalStateManagerOutside(){
+    let instanceOutside = null; 
 
+    function createinstanceOutside(){
+        let OutsidePlaying = false //false
 
+        return{
+            setinstanceOutside(value){
+                OutsidePlaying = value; 
+            },
+            getinstanceOutside : () =>OutsidePlaying,
+        }
+    }
+    return{
+        getinstanceOutside(){
+            if (!instanceOutside){
+                instanceOutside = createinstanceOutside()
+            }
 
+            return instanceOutside;
+        }
+    }
+}
 
+export function globalStateManagerDufourCollide(){
+    let instanceDufourCollide = null; 
 
+    function createinstanceDufourCollide(){
+        let DufourCollide = false //false
+
+        return{
+            setinstanceDufourCollide(value){
+                DufourCollide = value; 
+            },
+            getinstanceDufourCollide : () =>DufourCollide,
+        }
+    }
+    return{
+        getinstanceDufourCollide(){
+            if (!instanceDufourCollide){
+                instanceDufourCollide = createinstanceDufourCollide()
+            }
+
+            return instanceDufourCollide;
+        }
+    }
+}
