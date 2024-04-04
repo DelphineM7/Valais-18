@@ -1,10 +1,18 @@
 import { colorizeBackground } from "../utils.js";
+import {NeedLecture} from "../state/stateManagers.js"
+import {Textes_Outro2} from "../content/Instruction_texte.js"
+
+const Textes = Textes_Outro2.french_Outro2
 
 export default async function menu(k){  
     colorizeBackground(k, 27,29,52);
-
+    let sizeFont = 32
+    if(NeedLecture.getLecture()){
+        sizeFont = 26
+    }
+ 
     k.add([
-        k.text("Félicitation tu as fini le jeu !", {
+        k.text(Textes[0], {
             size : 52, 
             font: "NiceFont"
         }),
@@ -15,8 +23,8 @@ export default async function menu(k){
 
     
     k.add([
-        k.text("Appuie sur E pour découvrir les documents, les tableau et les photos qui ont inspiré le jeu!", {
-            size : 32, 
+        k.text(Textes[1], {
+            size : sizeFont, 
             font: "NiceFont"
         }),
         k.area(),

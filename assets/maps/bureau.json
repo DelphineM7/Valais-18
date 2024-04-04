@@ -322,7 +322,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
@@ -336,7 +336,7 @@
         {
          "columns":112,
          "firstgid":1,
-         "image":"..\/bureau.png",
+         "image":"..\/png_map\/bureau.png",
          "imageheight":1024,
          "imagewidth":1792,
          "margin":0,

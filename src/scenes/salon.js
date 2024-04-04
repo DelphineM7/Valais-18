@@ -1,9 +1,11 @@
 import { colorizeBackground, drawBoundaries, fetchMapData,Instruction, DestroyInstruction, ShowObject, DestroyShowObject, startInteractionPNJ, SetSprite} from "../utils.js";
 import { generateBigMediumPlayerComponents, setBigMediumPlayerMovement } from "../entities/player.js";
-import { gameState, HaveCarnet,SeenJournal,Beck_ok,Meet_Torrent_ok, Torrent_ok, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
+import { NeedLecture, gameState, HaveCarnet,SeenJournal,Beck_ok,Meet_Torrent_ok, Torrent_ok, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
 import { Carnet, setTournerPage, createProof,ToDoWithProof, Souligner, RectoVersoLecture, checkfin} from "../entities/carnet.js";
 import { pnj_PottierLines} from "../content/pnj_dialogues.js"
 import { dialog } from "../uiComponents/dialog.js";
+import { Beck_proof2_y, Beck_proof1_width, Beck_proof2_x,Vuilloud_proof2_y,Vuilloud_proof2_x, Dufay_proof_y, Dufay_proof_x, Robriquet_x, Robriquet_y, Robriquet_width, Robriquet_height, Guillot_x} from "./menu.js";
+import { Textes_Salon} from "../content/Instruction_texte.js"
 
 export default async function salon(k){
     
@@ -11,6 +13,7 @@ export default async function salon(k){
     const mapData = await fetchMapData("./assets/maps/salon.json")
     const map = k.add([k.pos(0,0)])
     const place = map.add([k.sprite("assets_salon"),k.pos(32,16),"salon"])
+    const Textes = Textes_Salon.french_Salon
 
     const entities = {
         big_player : null,
@@ -49,14 +52,25 @@ export default async function salon(k){
     let OnCollidePottier = false 
     let LecturePapers_1 = false
     let LecturePapers_2 = false
+    let ReadingPapers = false
     let CollidDoorExit = false 
+    let Sprite_Carnet = "carnet_Index"
+    let papier_1 = "Papier_2_1"
+    let papier_2 = "Papier_2_2"
+    let adaptlectureJ = 0
+    if(NeedLecture.getLecture()){
+        Sprite_Carnet = "Lecture_carnet_Index"
+        papier_1 = "Papier_2_1_Lecture"
+        papier_2 = "Papier_2_2_Lecture"
+        adaptlectureJ = 20
+    }
+    Instruction(k, 135,55, k.vec2(1115-adaptlectureJ,25),"InstructionF",Textes[0]);
 
     const inside = k.play("inside", {
         volume: 0.02,
         loop: true
     })
 
-    Instruction(k, 135,55, k.vec2(1115,25),"InstructionF","Appuie sur J pour ouvrir le carnet");
     setBigMediumPlayerMovement(k, entities.big_player)
     let CarnetOpen = false
     k.onKeyPress("enter",()=>{
@@ -73,7 +87,7 @@ export default async function salon(k){
             k.destroyAll("InstructionRecto")
             k.destroyAll("Verso_Guillot_id")
             k.destroyAll("Verso_Dufay_id")
-            entities.carnet.currentSprite = "carnet_p_1"
+            entities.carnet.currentSprite = Sprite_Carnet
             CarnetOpen = false
             const page_ferme= k.play("book", {
                 volume: 0.2,
@@ -82,41 +96,43 @@ export default async function salon(k){
             return;  
         }
         if (onCollidePapier){  
+            ReadingPapers = false
             if(LecturePapers_1){
-            DestroyShowObject(k,"InstructionExit","Papier_1_id" ) 
-            k.destroyAll("InstructionFleche")
-            LecturePapers_1 = false
-            const page_ferme= k.play("book", {
-                volume: 0.2,
-            })
+                DestroyShowObject(k,"InstructionExit","Papier_1_id" ) 
+                k.destroyAll("InstructionFleche")
+                LecturePapers_1 = false
+                const page_ferme= k.play("book", {
+                    volume: 0.2,
+                })
             return
             }
             if(LecturePapers_2){
-            DestroyShowObject(k,"InstructionExit","Papier_2_id" ) 
-            k.destroyAll("InstructionFleche")
-            LecturePapers_2 = false
-            const page_ferme= k.play("book", {
-                volume: 0.2,
-            })
+                DestroyShowObject(k,"InstructionExit","Papier_2_id" ) 
+                k.destroyAll("InstructionFleche")
+                LecturePapers_2 = false
+                const page_ferme= k.play("book", {
+                    volume: 0.2,
+                })
             return;  
-            }
+            } 
                  
         }
 
     })
     k.onKeyPress("e", async() =>{
-        if (onCollidePapier && !CarnetOpen){
+        if (onCollidePapier && !CarnetOpen && !ReadingPapers){
             LecturePapers_1 = true
-            Instruction(k,170,60,k.vec2(1000,225),"InstructionExit","Appuie sur enter pour arrêter la lecture" )
-            Instruction(k,170,80,k.vec2(1000,425),"InstructionFleche","Utilise les flèches gauche et droite pour lire recto-verso" )
-            ShowObject(k,"InstructionE", "Papier_2_1", k.vec2(330,25), "Papier_1_id") 
+            ReadingPapers = true
+            Instruction(k,170,60,k.vec2(1000,225),"InstructionExit",Textes[4])
+            Instruction(k,170,80,k.vec2(1000,425),"InstructionFleche",Textes[5] )
+            ShowObject(k,"InstructionE", papier_1, k.vec2(330,25), "Papier_1_id") 
             Meet_Guillot_ok.setinstanceGuillot(true)  
             const page_ferme= k.play("book", {
                 volume: 0.2,
             })
             return;  
         }
-        if(OnCollidePottier){
+        if(OnCollidePottier  && !CarnetOpen){
             const DialoguePottier = pnj_PottierLines.french_pottier;
             await dialog(k, k.vec2(32,16), DialoguePottier[0])
             Meet_Pottier_ok.setinstancePottier(true)
@@ -137,18 +153,17 @@ export default async function salon(k){
         if(HaveCarnet.getInstanceCarnet()&& !CarnetOpen && !gameState.getFreezePlayer()) {
             CarnetOpen = true
             entities.carnet = k.add([
-                k.sprite("carnet_p_1"), 
+                k.sprite(Sprite_Carnet), 
                 k.pos(230,100),
                 k.offscreen(),
                 {
-                    currentSprite : 'carnet_p_1',
+                    currentSprite : Sprite_Carnet,
                 },
                 "CarnetOPEN"
             ])
             Carnet(k)
-            Instruction(k, 170,60, k.vec2(1050,200),"InstructionExitCarnet","Appuie sur enter pour fermer le carnet")
-            Instruction(k, 170,240, k.vec2(1050,300),"InstructionCarnet",
-            "Navigue dans le carnet avec la souris et en appuyant sur les flèches droite et gauche. Pour chaque profil, trouve une ou deux preuves qui excluent la personne d'être celle reprensentée sur le tableau")
+            Instruction(k, 170,60, k.vec2(1050,200),"InstructionExitCarnet",Textes[1])
+            Instruction(k, 170,240, k.vec2(1050,300),"InstructionCarnet", Textes[2])
             return;  
         }
     })
@@ -157,7 +172,7 @@ export default async function salon(k){
         k.destroyAll("Papier_1_id")
         LecturePapers_1 = false
         LecturePapers_2 = true
-        ShowObject(k,"InstructionE", "Papier_2_2", k.vec2(330,25), "Papier_2_id")  
+        ShowObject(k,"InstructionE", papier_2, k.vec2(330,25), "Papier_2_id")  
         }
     }})
     k.onKeyPress((key) => {if(["left","a"].includes(key)){
@@ -165,20 +180,20 @@ export default async function salon(k){
         k.destroyAll("Papier_2_id")
         LecturePapers_1 = true
         LecturePapers_2 = false
-        ShowObject(k,"InstructionE", "Papier_2_1", k.vec2(330,25), "Papier_1_id")  
+        ShowObject(k,"InstructionE", papier_1, k.vec2(330,25), "Papier_1_id")  
         }
     }})
         // Index carnet
         k.onKeyPress((key) => {if(CarnetOpen)setTournerPage(k, key, entities.carnet)})
         k.onClick("Adrien_Felix",() =>     createProof(k,1, entities.carnet, Pottier_ok.getinstancePottier(), Meet_Pottier_ok.getinstancePottier(),k.vec2(305,445),285, 25,k.vec2(305,470),285, 50, "proof1_Pottier", "proof2_Pottier"))
-        k.onClick("Alphonse_Beck",() =>    createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck"))
+        k.onClick("Alphonse_Beck",() =>    createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck"))
         k.onClick("Charles_Emmanuel",() => createProof(k,3, entities.carnet, Rivaz_ok.getinstanceRivaz(), Meet_Rivaz_ok.getinstanceRivaz(),k.vec2(410,155),185, 255,k.vec2(295,320),195 , 245, "proof1_Rivaz", "proof2_Rivaz"))
         k.onClick("Dufour_Michel",() =>    createProof(k,4, entities.carnet, Dufour_ok.getinstanceDufour(), Meet_Dufour_ok.getinstanceDufour(),k.vec2(390,250),120, 20,k.vec2(815,195),50 , 20, "proof1_Dufour", "proof2_Dufour"))
-        k.onClick("Emile_Vuilloud",() =>   createProof(k,5, entities.carnet, Vuilloud_ok.getinstanceVuilloud(), SeenJournal.getInstanceJournal(),k.vec2(400,260),120, 20,k.vec2(780, 200),50 , 20, "proof1_Vuilloud", "proof2_Vuilloud"))
+        k.onClick("Emile_Vuilloud",() =>   createProof(k,5, entities.carnet, Vuilloud_ok.getinstanceVuilloud(), SeenJournal.getInstanceJournal(),k.vec2(400,260),Beck_proof1_width, 20,k.vec2(Vuilloud_proof2_x, Vuilloud_proof2_y),50 , 20, "proof1_Vuilloud", "proof2_Vuilloud"))
         k.onClick("Joseph_Torrent",() =>   createProof(k,6, entities.carnet, Torrent_ok.getinstanceTorrent(), Meet_Torrent_ok.getinstanceTorrent(),k.vec2(460,410),120, 30,k.vec2(305,435),225 , 55, "proof1_Torrent", "proof2_Torrent"))
-        k.onClick("Louis_Robriquet",() =>  createProof(k,7, entities.carnet, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,270),270, 80,k.vec2(805,195),160 , 20, "proof1_Robriquet", "proof2_Robriquet"))
-        k.onClick("Pierre_Guillot",() =>   createProof(k,8, entities.carnet, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(650,425),135 , 20, "proof1_Guillot", "proof2_Guillot"))
-        k.onClick("Pierre_DuFay",() =>     createProof(k,9, entities.carnet, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(300,450),290, 20,k.vec2(300,470),290 , 20, "proof1_DuFay", "proof2_DuFay"))
+        k.onClick("Louis_Robriquet",() =>  createProof(k,7, entities.carnet, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,270),270, 80,k.vec2(Robriquet_x,Robriquet_y),Robriquet_width , Robriquet_height, "proof1_Robriquet", "proof2_Robriquet"))
+        k.onClick("Pierre_Guillot",() =>   createProof(k,8, entities.carnet, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(Guillot_x,425),135 , 20, "proof1_Guillot", "proof2_Guillot"))
+        k.onClick("Pierre_DuFay",() =>     createProof(k,9, entities.carnet, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(Dufay_proof_x,Dufay_proof_y),290, 20,k.vec2(Dufay_proof_x,Dufay_proof_y +20),290 , 20, "proof1_DuFay", "proof2_DuFay"))
         k.onClick("Rey_Bellet",() =>       createProof(k,10, entities.carnet, Bellet_ok.getinstanceBellet(), Meet_Bellet_ok.getinstanceBellet(),k.vec2(300,305),220, 20,k.vec2(300,325),200 , 25, "proof1_Bellet", "proof2_Bellet"))
     
         // Proof
@@ -227,7 +242,7 @@ export default async function salon(k){
 
     entities.big_player.onCollide("door-exit", () =>{
         CollidDoorExit = true
-        Instruction(k, 160,60, k.vec2(170,620),"InstructionEExit","Appuie sur e pour retourner sur la place")
+        Instruction(k, 160,60, k.vec2(170,620),"InstructionEExit",Textes[6])
     });
 
     entities.big_player.onCollideEnd("door-exit", () =>{
@@ -238,7 +253,7 @@ export default async function salon(k){
 
     entities.big_player.onCollide("papier_2", ()=>{
         onCollidePapier = true
-        Instruction(k,140,55,k.vec2(950,300),"InstructionE","Appuie sur e pour fouiller le bureau" )
+        Instruction(k,140,55,k.vec2(950,300),"InstructionE",Textes[7] )
     })
 
     entities.big_player.onCollideEnd("papier_2", ()=>{
@@ -250,7 +265,7 @@ export default async function salon(k){
     entities.big_player.onCollide("pnj-Pottier", () =>{
         OnCollidePottier= true
         startInteractionPNJ (k, entities.pnj_pottier, entities.big_player, "pnj_Pottier_right","pnj_Pottier_left","pnj_Pottier_down", "pnj_Pottier_up" )
-        Instruction(k, 150,55, k.vec2(410,220),"InstructionEPottier","Appuie sur e pour lui parler")
+        Instruction(k, 150,55, k.vec2(410,220),"InstructionEPottier",Textes[3])
     }); 
 
     entities.big_player.onCollideEnd("pnj-Pottier", ()=> {

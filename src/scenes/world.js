@@ -2,10 +2,12 @@ import { generateMoyenPlayerComponents, setMoyenPlayerMovement } from "../entiti
 import { generatepnj_marchandComponents, EventMarieAnneFolken, fin,generatepnj_DufourComponents} from "../entities/pnj_other.js";
 import { colorizeBackground, drawBoundaries, fetchMapData, SetSprite, Instruction, DestroyShowObject,startInteractionPNJ, DestroyInstruction,} from "../utils.js";
 import { Carnet, setTournerPage, createProof, ToDoWithProof, Souligner, RectoVersoLecture,checkfin} from "../entities/carnet.js";
-import { Music_Outside,gameState, HaveCarnet,SeenJournal,Beck_ok,Meet_Torrent_ok, Torrent_ok, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
+import { NeedLecture, Music_Outside,gameState, HaveCarnet,SeenJournal,Beck_ok,Meet_Torrent_ok, Torrent_ok, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
 import { pnj_BelletLines, pnj_DufourLines, pnj_chatLines}  from "../content/pnj_dialogues.js"
 import { dialog } from "../uiComponents/dialog.js";
 import { music } from "../main.js";
+import { Beck_proof2_y, Beck_proof1_width, Beck_proof2_x,Vuilloud_proof2_y,Vuilloud_proof2_x, Dufay_proof_y, Dufay_proof_x, Robriquet_x, Robriquet_y, Robriquet_width, Robriquet_height, Guillot_x} from "./menu.js";
+import { Textes_Place} from "../content/Instruction_texte.js"
 
 export default async function world(k){
     
@@ -13,6 +15,7 @@ export default async function world(k){
     const mapData = await fetchMapData("./assets/maps/place.json")
     const map = k.add([k.pos(0,0)])
     const place = map.add([k.sprite("assets_place"),k.pos(32,16),"place", k.z(0)])
+    const Textes = Textes_Place.french_Place
 
     const entities = {
         player : null,
@@ -59,6 +62,13 @@ export default async function world(k){
     let CollidDoorEntrance_2 = false
     let DufourCollide = false
     let CollideChat = false
+    let Sprite_Carnet = "carnet_Index"
+    let adaptlectureJ = 0
+    if(NeedLecture.getLecture()){
+        Sprite_Carnet = "Lecture_carnet_Index"
+        adaptlectureJ = 20
+    }
+    Instruction(k, 135,55, k.vec2(1115-adaptlectureJ,25),"InstructionF",Textes[0]);
 
     if(!Music_Outside.getinstanceOutside()){
         music.paused = false
@@ -67,7 +77,6 @@ export default async function world(k){
     if(Dufour_ok.getinstanceDufour()) entities.pnj_Dufour = map.add(generatepnj_DufourComponents(k));
     fin(k, entities.pnj_Dufour)
 
-    Instruction(k, 135,55, k.vec2(1115,25),"InstructionF","Appuie sur J pour ouvrir le carnet");
     setMoyenPlayerMovement(k, entities.player)
     EventMarieAnneFolken(k, map)    
     k.onKeyPress("enter",()=>{
@@ -84,9 +93,9 @@ export default async function world(k){
             k.destroyAll("InstructionRecto")
             k.destroyAll("Verso_Guillot_id")
             k.destroyAll("Verso_Dufay_id")
-            entities.carnet.currentSprite = "carnet_p_1"
+            entities.carnet.currentSprite = Sprite_Carnet
             CarnetOpen = false
-            const page_ferme= k.play("book", {
+            const page_ferme= k.play("book", { 
                 volume: 0.2,
             })
             checkfin ()
@@ -96,15 +105,16 @@ export default async function world(k){
         }
     })
     k.onKeyPress("e", async ()=>{
-        if(OnCollideBellet){
+        if(OnCollideBellet && !CarnetOpen){
             const DialogueBellet = pnj_BelletLines.french_Bellet;
             await dialog(k, k.vec2(32,16), DialogueBellet[0])
             Meet_Bellet_ok.setinstanceBellet(true)
             EventMarieAnneFolken(k,map)            
         }
-        if(DufourCollide){
+        if(DufourCollide && !CarnetOpen){
             const DialogueDufour = pnj_DufourLines.french_Dufour;
-            await dialog(k, k.vec2(32,16), DialogueDufour[0])    
+            await dialog(k, k.vec2(32,16), DialogueDufour[0])   
+            gameState.setFreezePlayer(true); 
             const transitionBox = k.add([k.rect(1280, 720), k.pos(0,0), k.opacity(0), k.color(27,29,52), "transitionBox"]) 
             transitionBox.onUpdate(()=>{
                 transitionBox.opacity += 0.4 * k.dt()
@@ -115,20 +125,20 @@ export default async function world(k){
 
         }
 
-        if(CollideChat){
+        if(CollideChat && !CarnetOpen){
             const DialogueChat = pnj_chatLines.french_chat;
             dialog(k, k.vec2(32,16), DialogueChat[0])  
         }
 
-        if(CollidDoorEntrance){
+        if(CollidDoorEntrance && !CarnetOpen){
             music.paused = true
             Music_Outside.setinstanceOutside(false)
             k.go("house");
         }  
-        if(CollidDoorExit){
+        if(CollidDoorExit && !CarnetOpen){
             k.go("pont");
         }  
-        if(CollidDoorEntrance_2){
+        if(CollidDoorEntrance_2 && !CarnetOpen){
             music.paused = true
             Music_Outside.setinstanceOutside(false)
             k.go("salon");
@@ -139,22 +149,20 @@ export default async function world(k){
     })
 
     k.onKeyPress("j", () => { 
-        console.log("HEEEEEEEEE")
         if(HaveCarnet.getInstanceCarnet() && !CarnetOpen && !gameState.getFreezePlayer()) {
             CarnetOpen = true
             entities.carnet = k.add([
-                k.sprite("carnet_p_1"),
+                k.sprite(Sprite_Carnet),
                 k.pos(230,100),
                 k.offscreen(),
                 {
-                    currentSprite : 'carnet_p_1',
+                    currentSprite : Sprite_Carnet,
                 },
                 "CarnetOPEN"
             ])
             Carnet(k)
-            Instruction(k, 170,60, k.vec2(1050,200),"InstructionExitCarnet","Appuie sur enter pour fermer le carnet")
-            Instruction(k, 170,240, k.vec2(1050,300),"InstructionCarnet",
-            "Navigue dans le carnet avec la souris et en appuyant sur les flèches droite et gauche. Pour chaque profil, trouve une ou deux preuves qui excluent la personne d'être celle reprensentée sur le tableau")
+            Instruction(k, 170,60, k.vec2(1050,200),"InstructionExitCarnet",Textes[1])
+            Instruction(k, 170,240, k.vec2(1050,300),"InstructionCarnet", Textes[2])
         }
 
     })
@@ -162,14 +170,14 @@ export default async function world(k){
             // Index carnet
             k.onKeyPress((key) => {if(CarnetOpen)setTournerPage(k, key, entities.carnet)})
             k.onClick("Adrien_Felix",() =>     createProof(k,1, entities.carnet, Pottier_ok.getinstancePottier(), Meet_Pottier_ok.getinstancePottier(),k.vec2(305,445),285, 25,k.vec2(305,470),285, 50, "proof1_Pottier", "proof2_Pottier"))
-            k.onClick("Alphonse_Beck",() =>    createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck"))
+            k.onClick("Alphonse_Beck",() =>    createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck"))
             k.onClick("Charles_Emmanuel",() => createProof(k,3, entities.carnet, Rivaz_ok.getinstanceRivaz(), Meet_Rivaz_ok.getinstanceRivaz(),k.vec2(410,155),185, 255,k.vec2(295,320),195 , 245, "proof1_Rivaz", "proof2_Rivaz"))
             k.onClick("Dufour_Michel",() =>    createProof(k,4, entities.carnet, Dufour_ok.getinstanceDufour(), Meet_Dufour_ok.getinstanceDufour(),k.vec2(390,250),120, 20,k.vec2(815,195),50 , 20, "proof1_Dufour", "proof2_Dufour"))
-            k.onClick("Emile_Vuilloud",() =>   createProof(k,5, entities.carnet, Vuilloud_ok.getinstanceVuilloud(), SeenJournal.getInstanceJournal(),k.vec2(400,260),120, 20,k.vec2(780, 200),50 , 20, "proof1_Vuilloud", "proof2_Vuilloud"))
+            k.onClick("Emile_Vuilloud",() =>   createProof(k,5, entities.carnet, Vuilloud_ok.getinstanceVuilloud(), SeenJournal.getInstanceJournal(),k.vec2(400,260),Beck_proof1_width, 20,k.vec2(Vuilloud_proof2_x, Vuilloud_proof2_y),50 , 20, "proof1_Vuilloud", "proof2_Vuilloud"))
             k.onClick("Joseph_Torrent",() =>   createProof(k,6, entities.carnet, Torrent_ok.getinstanceTorrent(), Meet_Torrent_ok.getinstanceTorrent(),k.vec2(460,410),120, 30,k.vec2(305,435),225 , 55, "proof1_Torrent", "proof2_Torrent"))
-            k.onClick("Louis_Robriquet",() =>  createProof(k,7, entities.carnet, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,270),270, 80,k.vec2(805,195),160 , 20, "proof1_Robriquet", "proof2_Robriquet"))
-            k.onClick("Pierre_Guillot",() =>   createProof(k,8, entities.carnet, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(650,425),135 , 20, "proof1_Guillot", "proof2_Guillot"))
-            k.onClick("Pierre_DuFay",() =>     createProof(k,9, entities.carnet, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(300,450),290, 20,k.vec2(300,470),290 , 20, "proof1_DuFay", "proof2_DuFay"))
+            k.onClick("Louis_Robriquet",() =>  createProof(k,7, entities.carnet, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,270),270, 80,k.vec2(Robriquet_x,Robriquet_y),Robriquet_width , Robriquet_height, "proof1_Robriquet", "proof2_Robriquet"))
+            k.onClick("Pierre_Guillot",() =>   createProof(k,8, entities.carnet, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(Guillot_x,425),135 , 20, "proof1_Guillot", "proof2_Guillot"))
+            k.onClick("Pierre_DuFay",() =>     createProof(k,9, entities.carnet, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(Dufay_proof_x,Dufay_proof_y),290, 20,k.vec2(Dufay_proof_x,Dufay_proof_y +20),290 , 20, "proof1_DuFay", "proof2_DuFay"))
             k.onClick("Rey_Bellet",() =>       createProof(k,10, entities.carnet, Bellet_ok.getinstanceBellet(), Meet_Bellet_ok.getinstanceBellet(),k.vec2(300,305),220, 20,k.vec2(300,325),200 , 25, "proof1_Bellet", "proof2_Bellet"))
         
             // Proof
@@ -218,7 +226,7 @@ export default async function world(k){
 
     entities.player.onCollide("door-entrance", () =>{
         CollidDoorEntrance = true
-        Instruction(k, 135,80, k.vec2(250,340),"InstructionEDoor","Appuie sur e pour rentrer dans le bâtiment")
+        Instruction(k, 135,80, k.vec2(250,340),"InstructionEDoor",Textes[4])
     })
 
     entities.player.onCollideEnd("door-entrance", ()=> {
@@ -228,7 +236,7 @@ export default async function world(k){
 
     entities.player.onCollide("door-entrance_2", () =>{
         CollidDoorEntrance_2 = true
-        Instruction(k, 135,80, k.vec2(1050,260),"InstructionEDoor_2","Appuie sur e pour rentrer dans le bâtiment")
+        Instruction(k, 135,80, k.vec2(1050,260),"InstructionEDoor_2",Textes[4])
     })
 
     entities.player.onCollideEnd("door-entrance_2", ()=> {
@@ -238,7 +246,7 @@ export default async function world(k){
 
     entities.player.onCollide("door-exit", () =>{
         CollidDoorExit = true
-        Instruction(k, 150,80, k.vec2(150,570),"InstructionEExit","Appuie sur e pour retourner de l'autre côté du pont")
+        Instruction(k, 150,80, k.vec2(150,570),"InstructionEExit", Textes[5])
     })
 
     entities.player.onCollideEnd("door-exit", ()=> {
@@ -249,7 +257,7 @@ export default async function world(k){
     entities.player.onCollide("pnj-marchand", () =>{
         OnCollideBellet = true
         startInteractionPNJ (k, entities.pnj_marchand, entities.player, "marchand-side-right","marchand-side-left","marchand-down", 'marchand-up')
-        Instruction(k, 150,55, k.vec2(870,378),"InstructionEBellet","Appuie sur e pour lui parler")
+        Instruction(k, 150,55, k.vec2(870,378),"InstructionEBellet",Textes[3])
     }); 
 
     entities.player.onCollideEnd("pnj-marchand", ()=> {
@@ -262,7 +270,7 @@ export default async function world(k){
     entities.player.onCollide("pnj-dufour", () =>{
         DufourCollide = true
         startInteractionPNJ (k, entities.pnj_Dufour, entities.player, "pnj_Dufour_right","pnj_Dufour_left","pnj_Dufour_down", 'marchand-up')
-        Instruction(k, 150,55, k.vec2(220,300),"InstructionEFour","Appuie sur e pour lui parler")
+        Instruction(k, 150,55, k.vec2(220,300),"InstructionEFour",Textes[3])
     }); 
 
     entities.player.onCollideEnd("pnj-dufour", ()=> {
@@ -274,7 +282,7 @@ export default async function world(k){
 
     entities.player.onCollide("chat", () =>{
         CollideChat = true
-        Instruction(k, 150,55, k.vec2(620,400),"InstructionEchat","Appuie sur e pour caresser le chat")
+        Instruction(k, 150,55, k.vec2(620,400),"InstructionEchat",Textes[6])
     }); 
 
     entities.player.onCollideEnd("chat", ()=> {

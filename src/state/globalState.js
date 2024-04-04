@@ -1,3 +1,27 @@
+export function globalStateManager_Lecture(){
+    let Lecture = null; 
+
+    function createLecture(){
+        let NeedLecture = false // false
+
+        return{
+            setLecture(value){
+                NeedLecture = value; 
+            },
+            getLecture : () =>NeedLecture,
+        }
+    }
+    return{
+        getLecture(){
+            if (!Lecture){
+                Lecture = createLecture()
+            }
+
+            return Lecture;
+        }
+    }
+}
+
 export function globalStateManager1(){
     let instance = null; 
 
@@ -50,7 +74,7 @@ export function globalStateManagerCarnet(){
     let instanceCarnet = null; 
 
     function createInstanceCarnet(){
-        let WeHaveCarnet = false  //false
+        let WeHaveCarnet = true  //false
 
         return{
             setInstanceCarnet(value){
@@ -506,7 +530,7 @@ export function globalStateManagerRobriquet_Meet(){
     let instanceRobriquet = null; 
 
     function createinstanceRobriquet(){
-        let RobriquetOk = false //false
+        let RobriquetOk = false   //false
 
         return{
             setinstanceRobriquet(value){

@@ -1,4 +1,4 @@
-import { gameState } from "../state/stateManagers.js";
+import { gameState,NeedLecture } from "../state/stateManagers.js";
 
 async function displayLine(textContainer, line){
     for (const character of line){
@@ -14,14 +14,19 @@ async function displayLine(textContainer, line){
 
 export async function dialog(k,pos, content){ // box de dialogue // 1216 = 76 frame * 16 px  224 = 14 frame * 16 px
     gameState.setFreezePlayer(true);
-
+    let sizeFont = 34
+    let start = 1020
+    if(NeedLecture.getLecture()){
+        sizeFont = 30
+        start = 950
+    }
     const dialogBox = k.add([k.rect(1216, 160), k.pos(pos), k.fixed(), k.outline(4),]) //k.fixed permet que la box ne soit pas affecter par la camera. dans notre cas on a pas de camera donc ca serait pas utile 
     const textContainer = dialogBox.add([
         k.text("", {
             font: "NiceFont",
             width : 1000,
             lineSpacing : 15,
-            size : 34
+            size : sizeFont
         }), 
         k.color(27,29,52),
         k.pos(20,40), // par rappor à dialogbox
@@ -32,10 +37,10 @@ export async function dialog(k,pos, content){ // box de dialogue // 1216 = 76 fr
             font: "NiceFont",
             width : 700,
             lineSpacing : 15,
-            size : 34,
+            size : sizeFont,
         }), 
         k.color(0,0,0),
-        k.pos(1020,120), // par rappor à dialogbo
+        k.pos(start,120), // par rappor à dialogbo
         k.opacity(0.7),
         k.fixed(),
     ]);

@@ -20,7 +20,7 @@ export function generatePlayerComponents(k, pos){
 
         },
         "player", // tag du personnage -> k.get("player")
-    ];
+    ]; 
 }
 
 export function setPlayerMovement(k, player){

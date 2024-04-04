@@ -1,5 +1,6 @@
 //Dialogues des PNJ
 
+//Dialogue Pottier
 const french_pottier = [
     [   
         "Bonjour ! ",
@@ -11,13 +12,14 @@ const french_pottier = [
         "Désolé. "
     ]
 ]
-//const deutsch = []
+//const deutsch = [] 
 
 export const pnj_PottierLines = {
     french_pottier,
     //deutsch
 };
 
+// Dialogue Bellet
 const french_Bellet= [
     [   
         "Bonjour. Je suis Pierre Maurice Rey-Bellet, on me connaît aussi sous le nom 'Gros Bellet' !",
@@ -29,26 +31,27 @@ const french_Bellet= [
 
     ]
 ]
-//const deutsch = []
+
 
 export const pnj_BelletLines = {
     french_Bellet,
-    //deutsch
 };
 
+// Dialoggue Torrent
 const french_Torrent = [
     [   
         "Je m'appelle Jospeh Torrent, je suis agriculteur comme mon père ! Nous faisons principalement de l'élevage de vers à soie.",
         "Je suis désolée, je n'ai pas commandé de tableau, je ne suis pas la personne que tu cherches !"
     ]
 ]
-//const deutsch = []
+
 
 export const pnj_TorrentLines = {
     french_Torrent,
-    //deutsch
+
 };
 
+// Dialogue Folken
 const french_Folken = [
     [   
         "Je suis Anne-Marie Folken, je suis couturière à Monthey !",
@@ -56,13 +59,13 @@ const french_Folken = [
         "Je ne l'ai pas connu personnelement, mais je sais qu'il est décédé en 1807."
     ]
 ]
-//const deutsch = []
+
 
 export const pnj_FolkenLines = {
     french_Folken,
-    //deutsch
 };
 
+// Dialogue Dufour
 const french_Dufour = [
     [   
         "Bonjour ! ",
@@ -74,22 +77,21 @@ const french_Dufour = [
 
     ]
 ]
-//const deutsch = []
+
 
 export const pnj_DufourLines = {
     french_Dufour,
-    //deutsch
 };
 
+// Dialogue chat
 const french_chat = [
     [   
         "prrr, prrr, prrr !",
     ]
 ]
-//const deutsch = []
+
 
 export const pnj_chatLines = {
     french_chat,
-    //deutsch
 };
 

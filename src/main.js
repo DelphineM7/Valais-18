@@ -9,7 +9,7 @@ import outro_2 from "./scenes/outro_2.js"
 import salon from "./scenes/salon.js"
 import menu from "./scenes/menu.js"
 import historio from "./scenes/historio.js"
-import { Music_Outside} from "./state/stateManagers.js"
+import { Music_Outside,NeedLecture} from "./state/stateManagers.js"
 
 
 //assets map en png
@@ -36,9 +36,9 @@ k.loadSpriteAtlas("./assets/png_map/bureau.png", {
 k.loadSpriteAtlas("./assets/png_map/salon.png", {
     "assets_salon" : {x:24 , y:15 , width: 1216 , height:688 },
 });
-
+ 
 //assets player et pnj
-k.loadSpriteAtlas( "./assets/pnj/Player.png", {
+k.loadSpriteAtlas( "./assets/pnj/player.png", {
     "medium-player-idle-down" : {x:24 , y:849 , width: 88 , height:199},
     'medium-player-down' : {x:24 , y:849 , width: 88 , height:199},
     'medium-player-side' : {x:129 , y:852 , width: 70 , height:196 },
@@ -100,6 +100,10 @@ k.loadSpriteAtlas( "./assets/objects/DeRivaBigPortrait.png",{
     "Big_tabl_Rivaz" : {x:8 , y:38, width: 500 , height:623 },
 })
 
+k.loadSpriteAtlas( "./assets/objects/DeRivaBigPortrait_Lecture.png",{
+    "Big_tabl_Rivaz_Lecture" : {x:8 , y:38, width: 500 , height:623 },
+})
+
 k.loadSpriteAtlas( "./assets/objects/papier_1.png",{ //Dufay
     "Papier_1_1" : {x:25 , y:21, width: 657 , height:668},
     "Papier_1_2" : {x:727 , y:22, width: 650 , height:669},
@@ -108,6 +112,16 @@ k.loadSpriteAtlas( "./assets/objects/papier_1.png",{ //Dufay
 k.loadSpriteAtlas( "./assets/objects/papier_2.png",{ // Guillot
     "Papier_2_1" : {x:198 , y:207, width: 597 , height:677 },
     "Papier_2_2" : {x:825 , y:215, width: 597 , height:673 },
+})
+
+k.loadSpriteAtlas( "./assets/objects/papier_1_Lecture.png",{ //Dufay
+    "Papier_1_1_Lecture" : {x:25 , y:21, width: 657 , height:668},
+    "Papier_1_2_Lecture" : {x:727 , y:22, width: 650 , height:669},
+})
+
+k.loadSpriteAtlas( "./assets/objects/papier_2_Lecture.png",{ // Guillot
+    "Papier_2_1_Lecture" : {x:198 , y:207, width: 597 , height:677 },
+    "Papier_2_2_Lecture" : {x:825 , y:215, width: 597 , height:673 },
 })
 
 k.loadSpriteAtlas( "./assets/objects/horloge_Aigu1.png",{
@@ -135,13 +149,17 @@ k.loadSpriteAtlas( "./assets/objects/journal.png",{
     "journal_grand" : {x:111 , y:15, width: 471 , height:542 }
 })
 
+k.loadSpriteAtlas( "./assets/objects/journal_Lecture.png",{ 
+    "journal_grand_Lecture" : {x:111 , y:15, width: 471 , height:542 }
+})
+
 k.loadSpriteAtlas( "./assets/objects/carnet.png",{
     "carnet" : {x:0 , y:0, width: 98 , height:62 },
 })
 
 // carnet
 k.loadSpriteAtlas( "./assets/carnet/carnet_1_1.png",{ 
-    "carnet_p_1" : {x:54, y:54, width: 816 , height:524 },
+    "carnet_Index" : {x:54, y:54, width: 816 , height:524 },
     "carnet_Pottier_vide" : {x:1078 , y:39, width: 816 , height:533 },
     "carnet_Beck_vide" : {x:58 , y:621, width: 816 , height:533 },
     "carnet_Rivaz_vide" : {x:1068 , y:635, width: 816 , height:533 },
@@ -188,6 +206,54 @@ k.loadSpriteAtlas( "./assets/carnet/carnet_3_2.png",{
     "carnet_Bellet_plein" : {x:1047 , y:1344, width: 816 , height:533 },
 })
 
+k.loadSpriteAtlas( "./assets/carnet/Lecture_carnet_1_1.png",{ 
+    "Lecture_carnet_Index" : {x:54, y:54, width: 816 , height:524 },
+    "Lecture_carnet_Pottier_vide" : {x:1078 , y:39, width: 816 , height:533 },
+    "Lecture_carnet_Beck_vide" : {x:58 , y:621, width: 816 , height:533 },
+    "Lecture_carnet_Rivaz_vide" : {x:1068 , y:635, width: 816 , height:533 },
+    "Lecture_carnet_Dufour_vide" : {x:57 , y:1271, width: 816 , height:533 },
+    "Lecture_carnet_Vuilloud_vide" : {x:1055 , y:1270, width: 816 , height:533 },
+})
+k.loadSpriteAtlas( "./assets/carnet/Lecture_carnet_1_2.png",{ 
+    "Lecture_carnet_Torrent_vide" : {x:71 , y:30, width: 816 , height:533 },
+    "Lecture_carnet_Robriquet_vide" : {x:1046 , y:47, width: 816 , height:533 },
+    "Lecture_carnet_Guillot_vide" : {x:70 , y:671, width: 816 , height:533 },
+    "Lecture_carnet_DuFay_vide" : {x:1046 , y:671, width: 816 , height:533 },
+    "Lecture_carnet_Bellet_vide" : {x:1047 , y:1344, width: 816 , height:533 },
+})
+
+k.loadSpriteAtlas( "./assets/carnet/Lecture_carnet_2_1.png",{ 
+    "Lecture_carnet_Pottier" : {x:1078 , y:39, width: 816 , height:533 },
+    "Lecture_carnet_Beck" : {x:58 , y:621, width: 816 , height:533 },
+    "Lecture_carnet_Rivaz" : {x:1068 , y:635, width: 816 , height:533 },
+    "Lecture_carnet_Dufour" : {x:57 , y:1271, width: 816 , height:533 },
+    "Lecture_carnet_Vuilloud" : {x:1055 , y:1270, width: 816 , height:533 },
+})
+k.loadSpriteAtlas( "./assets/carnet/Lecture_carnet_2_2.png",{ 
+    "Lecture_carnet_Torrent" : {x:71 , y:30, width: 816 , height:533 },
+    "Lecture_carnet_Robriquet" : {x:1046 , y:47, width: 816 , height:533 },
+    "Lecture_carnet_Guillot" : {x:70 , y:671, width: 816 , height:533 },
+    "Lecture_carnet_DuFay" : {x:1046 , y:671, width: 816 , height:533 },
+    "Lecture_carnet_Bellet" : {x:1047 , y:1344, width: 816 , height:533 },
+    "Lecture_Verso_Guillot" : {x:121 , y:1271, width: 310 , height:451},
+    "Lecture_Verso_Dufay" : {x:495 , y:1274, width: 352 , height:481}
+ })
+
+k.loadSpriteAtlas( "./assets/carnet/Lecture_carnet_3_1.png",{ 
+    "Lecture_carnet_Pottier_plein" : {x:1078 , y:39, width: 816 , height:533 },
+    "Lecture_carnet_Beck_plein": {x:58 , y:621, width: 816 , height:533 },
+    "Lecture_carnet_Rivaz_plein" : {x:1068 , y:635, width: 816 , height:533 },
+    "Lecture_carnet_Dufour_plein" : {x:57 , y:1271, width: 816 , height:533 },
+    "Lecture_carnet_Vuilloud_plein" : {x:1055 , y:1270, width: 816 , height:533 },
+})
+k.loadSpriteAtlas( "./assets/carnet/Lecture_carnet_3_2.png",{ 
+    "Lecture_carnet_Torrent_plein" : {x:71 , y:30, width: 816 , height:533 },
+    "Lecture_carnet_Robriquet_plein" : {x:1046 , y:47, width: 816 , height:533 },
+    "Lecture_carnet_Guillot_plein" : {x:70 , y:671, width: 816 , height:533 },
+    "Lecture_carnet_DuFay_plein" : {x:1046 , y:671, width: 816 , height:533 },
+    "Lecture_carnet_Bellet_plein" : {x:1047 , y:1344, width: 816 , height:533 },
+})
+
 k.loadSpriteAtlas( "./assets/carnet/cross.png",{ 
     "cross" : {x:6 , y:4, width: 17 , height:20 },
 })
@@ -205,14 +271,44 @@ k.loadSpriteAtlas( "./assets/carnet/lignes.png",{
     "ligne_Bellet" : {x:33 , y:391, width: 205 , height:3 },
 })
 
-k.loadSpriteAtlas( "./assets/carnet/carnet_vide.png",{ 
-    "carnet_historio_1" : {x:0 , y:0, width: 1047 , height:675 },
+k.loadSpriteAtlas( "./assets/carnet/Lecture_lignes.png",{ 
+    "Lecture_ligne_Pottier" : {x:33 , y:32, width: 231 , height:3 },
+    "Lecture_ligne_Beck": {x:33 , y:76, width: 167 , height:3 },
+    "Lecture_ligne_Rivaz" : {x:33 , y:114, width: 315 , height:3 },
+    "Lecture_ligne_Dufour" : {x:33 , y:154, width: 165 , height:3 },
+    "Lecture_ligne_Vuilloud" : {x:33, y:194, width: 173 , height:3 },
+    "Lecture_ligne_Torrent" : {x:33 , y:231, width: 173 , height:3 },
+    "Lecture_ligne_Robriquet" : {x:33 , y:271, width: 185 , height:3 },
+    "Lecture_ligne_Guillot" : {x:33 , y:311, width: 157 , height:3 },
+    "Lecture_ligne_DuFay" : {x:33 , y:351, width: 226 , height:3 },
+    "Lecture_ligne_Bellet" : {x:33 , y:391, width: 247 , height:3 },
+})
+
+k.loadSpriteAtlas( "./assets/carnet/carnet_Historio_1.png",{ 
+    "carnet_p_1" : {x:0 , y:0, width: 1047 , height:671 },
+    "carnet_p_2" : {x:0 , y:670, width: 1047 , height:671 },
+    "carnet_p_3" : {x:0 , y:1348, width: 1047 , height:671 },
+})
+k.loadSpriteAtlas( "./assets/carnet/carnet_Historio_2.png",{ 
+    "carnet_p_4" : {x:0 , y:0, width: 1047 , height:671 },
+    "carnet_p_5" : {x:0 , y:670, width: 1047 , height:671 },
+    "carnet_p_6" : {x:0 , y:1348, width: 1047 , height:671 },
+   
+})
+k.loadSpriteAtlas( "./assets/carnet/carnet_Historio_3.png",{ 
+    "carnet_p_7" : {x:0 , y:0, width: 1047 , height:671 },
+    "carnet_p_8" : {x:0 , y:670, width: 1047 , height:671 },
+    
 })
 
 
 // font
-k.loadFont("NiceFont", "./assets/font/jupiterc.ttf")
+k.loadFont("DefaultFont", "./assets/font/jupiterc.ttf")
+k.loadFont("LectureMenu", "./assets/font/Luciole-Regular.ttf")
 k.loadFont("CarnetFont", "./assets/font/ITCKRIST.TTF")
+/*if(!NeedLecture.getLecture()){k.loadFont("NiceFont", "./assets/font/jupiterc.ttf")}
+if(NeedLecture.getLecture()){k.loadFont("NiceFont", "./assets/font/Luciole-Regular.ttf")}*/
+
 
 // musique 
 k.loadSound("river", "./assets/music/river.mp3")

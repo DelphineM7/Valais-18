@@ -8,7 +8,7 @@ export function generatepnj_marchandComponents(k, pos){
         k.area({shape: new k.Rect(k.vec2(0,190), 90, 22)}),
         k.body({isStatic : true}), 
         k.pos(pos),
-        k.opacity(1), 
+        k.opacity(1),  
         k.z(3),
         {
             currentSprite : 'marchand-idle-down',

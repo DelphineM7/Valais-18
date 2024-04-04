@@ -11,7 +11,7 @@ export default async function intro_2(k){
     const entities = {
         aigu1 : null,
         aigu2 : null
-    }
+    } 
 
     const layers = mapData.layers;
     for (const layer of layers){

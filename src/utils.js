@@ -1,4 +1,4 @@
-import {gameState} from "./state/stateManagers.js"
+import {NeedLecture, gameState} from "./state/stateManagers.js"
 
 export function SetSprite(k,player,spriteName){
     if(player.currentSprite !== spriteName){
@@ -33,12 +33,17 @@ export function drawBoundaries(k, map, layer){
 }
 
 export function Instruction(k, widthrec,heightrec, pos, id, content){
-    const InstructionBox = k.add([k.rect(widthrec, heightrec), k.pos(pos), k.outline(4), k.opacity(0.7),k.offscreen(),id]) 
+    let sizeFont = 20
+    let adaptlecture = 0
+    if(NeedLecture.getLecture()){sizeFont = 15, adaptlecture=20}
+    const InstructionBox = k.add([k.rect(widthrec+adaptlecture, heightrec), k.pos(pos), k.outline(4), k.opacity(0.7),k.offscreen(),id]) 
     const textInstructionBox = InstructionBox.add([
         k.text(content, {
             font: "NiceFont",
-            width : 150,
-            size : 20
+            width : widthrec + adaptlecture -10 ,
+            size :sizeFont,
+            height : heightrec -10,
+            lineSpacing : adaptlecture/4
         }), 
         k.color(27,29,52),
         k.pos(10,10), // par rappor à dialogbox  

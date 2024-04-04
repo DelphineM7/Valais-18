@@ -1,11 +1,15 @@
-import { colorizeBackground, fetchMapData } from "../utils.js";
-import {introLines} from "../content/IntroOutro_dialogue.js"
+import { colorizeBackground } from "../utils.js";
+import {introLines} from "../content/player_dialogues.js"
+import { NeedLecture } from "../state/stateManagers.js"
+import { Textes_Intro1 } from "../content/Instruction_texte.js";
+
 
 export default async function intro_1(k){  
     colorizeBackground(k, 27,29,52);
 
     const map = k.add([k.pos(0,0)])
     const intro_1 = map.add([k.sprite("assets_intro_1"),k.pos(32,16),"intro_1"])
+    const Textes = Textes_Intro1.french_Intro1;
 
     async function displayLine(textContainer, line){ 
         for (const character of line){
@@ -20,32 +24,36 @@ export default async function intro_1(k){
     }
     
     async function dialog(k,pos, content){ // box de dialogue // 1216 = 76 frame * 16 px  224 = 14 frame * 16 px
-    
+        let sizeFont = 34
+        let start = 1020
+        if(NeedLecture.getLecture()){
+            sizeFont = 30
+            start = 950
+        }
         const dialogBox = k.add([k.rect(1216, 160), k.pos(pos), k.fixed(), k.outline(4),]) //k.fixed permet que la box ne soit pas affecter par la camera. dans notre cas on a pas de camera donc ca serait pas utile 
         const textContainer = dialogBox.add([
             k.text("", {
                 font: "NiceFont",
                 width : 1000,
                 lineSpacing : 15,
-                size : 34
+                size : sizeFont
             }), 
             k.color(0,0,0),
             k.pos(20,40), // par rappor à dialogbox
             k.fixed(),
         ]);
         const textContainerInstruction = dialogBox.add([
-            k.text("Appuie sur Enter", {
+            k.text(Textes[0], {
                 font: "NiceFont",
                 width : 700,
                 lineSpacing : 15,
-                size : 34,
+                size : sizeFont,
             }), 
             k.color(0,0,0),
-            k.pos(1020,120), // par rappor à dialogbo
+            k.pos(start,120), // par rappor à dialogbo
             k.opacity(0.7),
             k.fixed(),
         ]);
-    
         let index = 0 
     
         await displayLine(textContainer,content[index]);
@@ -74,7 +82,7 @@ export default async function intro_1(k){
         })
     }
 
-    const responses = introLines.french;
+    const responses = introLines.french_intro;
     await dialog(k, k.vec2(32,16), responses[0])
 
 }

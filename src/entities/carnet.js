@@ -1,18 +1,22 @@
 // Functions permettant de faire fonctionner le carnet
 
 import { gameState, Meet_Torrent_ok, Torrent_ok, Beck_ok,SeenJournal } from "../state/stateManagers.js";
-import { Tutodoing, TutoDone, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
+import { NeedLecture, Tutodoing, TutoDone, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
 import { SetSprite, ShowObject, Instruction,  DestroyInstruction, DestroyShowObject } from "../utils.js";
+import { Assets_carnet, Verso_DuFay_Show, Verso_Guillot_Show,  Beck_proof2_y, Beck_proof1_width, Beck_proof2_x,Vuilloud_proof2_y,Vuilloud_proof2_x, Dufay_proof_y, Dufay_proof_x, Dufay_red, Robriquet_x, Robriquet_y, Robriquet_width, Robriquet_height, Guillot_x} from "../scenes/menu.js"
+import { Textes_Carnet } from "../content/Instruction_texte.js"
 
 let page = 0
 let proof1_Beck = false 
-let proof2_Beck = false 
+let proof2_Beck = false  
 let proof1_Vuilloud = false 
 let proof2_Vuilloud = false 
 let proof1_Rivaz = false 
 let proof2_Rivaz = false
 let showrecto_Guillot = true
 let showrecto_Dufay = true
+const Textes = Textes_Carnet.french_carnet
+
 export function generateCarnetComponents(k, pos){ 
     return [
         k.sprite("carnet"),
@@ -23,22 +27,23 @@ export function generateCarnetComponents(k, pos){
         "carnet", 
     ];
 }
-const Assets_carnet = [
-    ["page_Garde", "carnet_p_1", "carnet_p_1", ],
-    ["Adrien_Felix","carnet_Pottier_vide", "carnet_Pottier",205,"carnet_Pottier_plein","ligne_Pottier" ],
-    ["Alphonse_Beck","carnet_Beck_vide", "carnet_Beck", 150, "carnet_Beck_plein","ligne_Beck"], 
-    ["Charles_Emmanuel","carnet_Rivaz_vide", "carnet_Rivaz",270, "carnet_Rivaz_plein","ligne_Rivaz"],
-    ["Dufour_Michel","carnet_Dufour_vide", "carnet_Dufour",150, "carnet_Dufour_plein","ligne_Dufour" ],
-    ["Emile_Vuilloud","carnet_Vuilloud_vide", "carnet_Vuilloud",160, "carnet_Vuilloud_plein","ligne_Vuilloud"],
-    ["Joseph_Torrent" ,"carnet_Torrent_vide", "carnet_Torrent",150, "carnet_Torrent_plein","ligne_Torrent"],
-    ["Louis_Robriquet","carnet_Robriquet_vide", "carnet_Robriquet",170, "carnet_Robriquet_plein","ligne_Robriquet"],
-    ["Pierre_Guillot", "carnet_Guillot_vide","carnet_Guillot",150, "carnet_Guillot_plein","ligne_Guillot"], 
-    ["Pierre_DuFay", "carnet_DuFay_vide","carnet_DuFay",195, "carnet_DuFay_plein","ligne_DuFay"],
-    ["Rey_Bellet", "carnet_Bellet_vide","carnet_Bellet", 200, "carnet_Bellet_plein","ligne_Bellet"]
-]
 
 // affiche le carnet et tient à jour l'index avec des croix
 export function Carnet(k){
+    let x_entree_default = 182
+    let y_multi_default =  39.5
+    let adapt_cross_x = 0
+    let adapt_cross_y = 0
+    let adapt_cross_multi = 39.5
+    if(NeedLecture.getLecture()){
+        x_entree_default = 195
+        y_multi_default = 36
+        adapt_cross_x = 35
+        adapt_cross_y =10
+        adapt_cross_multi = 37
+
+    }
+
     const page_ouvert= k.play("book", {
         volume: 0.2,
     })
@@ -46,28 +51,34 @@ export function Carnet(k){
     page = 0
     for (let i = 1; i < Assets_carnet.length; i++) {
         const Entry= k.add([  
-            k.area({shape: new k.Rect(k.vec2(300,182+(i-1)*39.5), Assets_carnet[i][3], 20,)}),
+            k.area({shape: new k.Rect(k.vec2(300,x_entree_default+(i-1)*y_multi_default), Assets_carnet[i][3], 20,)}),
             "entree",
             Assets_carnet[i][0],
         ])
 
-    if(Pottier_ok.getinstancePottier()) {const cross = k.add([k.sprite("cross"), k.pos(300+210, 182+(1-1)*39.5),"cross" ])}
-    if(Beck_ok.getinstanceBeck()) {const cross = k.add([k.sprite("cross"), k.pos(300+155, 182+(2-1)*39.5),"cross" ])}
-    if(Rivaz_ok.getinstanceRivaz()) {const cross = k.add([k.sprite("cross"), k.pos(300+275, 186+(3-1)*39.5),"cross" ])}
-    if(Vuilloud_ok.getinstanceVuilloud()) {const cross = k.add([k.sprite("cross"), k.pos(300+165, 182+(5-1)*39.5),"cross" ])}
-    if(Torrent_ok.getinstanceTorrent()) {const cross = k.add([k.sprite("cross"), k.pos(300+155, 182+(6-1)*39.5),"cross" ])}
-    if(Robriquet_ok.getinstanceRobriquet()){const cross = k.add([k.sprite("cross"), k.pos(300+175, 182+(7-1)*39.5),"cross" ])}
-    if(Guillot_ok.getinstanceGuillot()){const cross = k.add([k.sprite("cross"), k.pos(300+155, 182+(8-1)*39.5),"cross" ])}
-    if(DuFay_ok.getinstanceDuFay()){const cross = k.add([k.sprite("cross"), k.pos(300+210, 182+(9-1)*39.5),"cross" ])}
-    if(Bellet_ok.getinstanceBellet()) {const cross = k.add([k.sprite("cross"), k.pos(300+215, 182+(10-1)*39.5),"cross" ])}
+    if(Pottier_ok.getinstancePottier()) {const cross = k.add([k.sprite("cross"), k.pos(300+210+adapt_cross_x, adapt_cross_y+182+(1-1)*adapt_cross_multi),"cross" ])}
+    if(Beck_ok.getinstanceBeck()) {const cross = k.add([k.sprite("cross"), k.pos(300+155+adapt_cross_x, adapt_cross_y+182+(2-1)*adapt_cross_multi),"cross" ])}
+    if(Rivaz_ok.getinstanceRivaz()) {const cross = k.add([k.sprite("cross"), k.pos(300+275+adapt_cross_x, adapt_cross_y+186+(3-1)*adapt_cross_multi),"cross" ])}
+    if(Vuilloud_ok.getinstanceVuilloud()) {const cross = k.add([k.sprite("cross"), k.pos(300+165+adapt_cross_x, adapt_cross_y+182+(5-1)*adapt_cross_multi),"cross" ])}
+    if(Torrent_ok.getinstanceTorrent()) {const cross = k.add([k.sprite("cross"), k.pos(300+155+adapt_cross_x, adapt_cross_y+182+(6-1)*adapt_cross_multi),"cross" ])}
+    if(Robriquet_ok.getinstanceRobriquet()){const cross = k.add([k.sprite("cross"), k.pos(300+175+adapt_cross_x, adapt_cross_y+ 182+(7-1)*adapt_cross_multi),"cross" ])}
+    if(Guillot_ok.getinstanceGuillot()){const cross = k.add([k.sprite("cross"), k.pos(300+155+adapt_cross_x, adapt_cross_y+182+(8-1)*adapt_cross_multi),"cross" ])}
+    if(DuFay_ok.getinstanceDuFay()){const cross = k.add([k.sprite("cross"), k.pos(300+210+adapt_cross_x, adapt_cross_y+182+(9-1)*adapt_cross_multi),"cross" ])}
+    if(Bellet_ok.getinstanceBellet()) {const cross = k.add([k.sprite("cross"), k.pos(300+215+adapt_cross_x, adapt_cross_y+182+(10-1)*adapt_cross_multi),"cross" ])}
     }
 }
 
 // Souligne les noms et prénoms dans l'index
 export function Souligner (k, id){
+    let x_ligne_default = 202
+    let y_ligne_default =  39.5
+    if(NeedLecture.getLecture()){
+        x_ligne_default = 215
+        y_ligne_default = 36
+    }
     for (let i = 1; i < Assets_carnet.length; i++) {
         if (id == Assets_carnet[i][0]){
-            const ligne = k.add([k.sprite(Assets_carnet[i][5]), k.pos(300, 202+(i-1)*39.5), "ligne"])
+            const ligne = k.add([k.sprite(Assets_carnet[i][5]), k.pos(300, x_ligne_default+(i-1)*y_ligne_default), "ligne"])
             return;
         }
     }
@@ -97,19 +108,19 @@ export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,p
         id_proof2
     ])
     if(proof1_Beck && page == 2){
-        k.add([k.rect(120,20), k.pos(390,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(Beck_proof1_width,20), k.pos(390,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         return;
     } 
     if(proof2_Beck && page == 2){
-        k.add([k.rect(50,20), k.pos(650,225),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(50,20), k.pos(Beck_proof2_x,Beck_proof2_y),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         return;
     } 
     if(proof1_Vuilloud  && page == 5){
-        k.add([k.rect(120,20), k.pos(400,260),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(Beck_proof1_width,20), k.pos(400,260),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         return;
     } 
     if(proof2_Vuilloud  && page == 5){
-        k.add([k.rect(40,20), k.pos(780, 200),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(42,20), k.pos(Vuilloud_proof2_x, Vuilloud_proof2_y),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         return;
     } 
     if(proof1_Rivaz  && page == 3){
@@ -122,11 +133,11 @@ export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,p
     } 
 
     if(page == 8){
-        Instruction(k,170,60,k.vec2(50,200),"InstructionVerso","Appuie sur e pour lire le verso du document" )
+        Instruction(k,170,60,k.vec2(50,200),"Instr uctionVerso",Textes[0] )
         return;
     }
     if(page == 9 ){
-        Instruction(k,170,60,k.vec2(50,200),"InstructionVerso","Appuie sur e pour lire le verso du document" )
+        Instruction(k,170,60,k.vec2(50,200),"InstructionVerso",Textes[0]  )
         return;
     }
 
@@ -135,10 +146,10 @@ export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,p
     if(ManagementInfo2){
     page = nbr
     if(page == 8){
-        Instruction(k,170,60,k.vec2(50,200),"InstructionVerso","Appuie sur e pour lire le verso du document" )
+        Instruction(k,170,60,k.vec2(50,200),"InstructionVerso",Textes[0] )
     }
     if(page == 9 ){
-        Instruction(k,170,60,k.vec2(50,200),"InstructionVerso","Appuie sur e pour lire le verso du document" )
+        Instruction(k,170,60,k.vec2(50,200),"InstructionVerso",Textes[0]  )
     }
     SetSprite(k,Carnetname, Assets_carnet[nbr][4])
     k.destroyAll("ligne")
@@ -175,42 +186,42 @@ async function AllProofsfound(k, content,longeur, pos, id_text){
 // permet de clicker sur les éléments dans le carnet pour exclure des personnages
 export function ToDoWithProof(k,id, id_text){
     if(id === "proof1_Beck"){
-        k.add([k.rect(120,20), k.pos(390,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(Beck_proof1_width,20), k.pos(390,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         proof1_Beck = true
         k.destroyAll("proof1_Beck")
         if (!proof2_Beck)return;
-        AllProofsfound(k,"Alphonse Beck n'était pas né en 1815,     ce n'est pas lui sur le tableau.",320, k.vec2(300,550),id_text)
+        AllProofsfound(k,Textes[1][0],320, k.vec2(300,550),id_text)
         Beck_ok.setinstanceBeck(true)
         TutoDone.setInstanceTuto(true)
         return;
 
     } 
     if ( id === "proof2_Beck" ){
-        k.add([k.rect(50,20), k.pos(650,225),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(50,20), k.pos(Beck_proof2_x,Beck_proof2_y),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         proof2_Beck = true
         k.destroyAll("proof2_Beck")
         if (!proof1_Beck)return;
-        AllProofsfound(k,"Alphonse Beck n'était pas né en 1815,     ce n'est pas lui sur le tableau.", 320,k.vec2(300,550),id_text)
+        AllProofsfound(k,Textes[1][0], 320,k.vec2(300,550),id_text)
         Beck_ok.setinstanceBeck(true)
         TutoDone.setInstanceTuto(true)
         return;
     }
     if(id === "proof1_Vuilloud"){
-        k.add([k.rect(120,20), k.pos(400,260),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(Beck_proof1_width,20), k.pos(400,260),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         proof1_Vuilloud = true
         k.destroyAll("proof1_Vuilloud")
         if (!proof2_Vuilloud)return;
-        AllProofsfound(k,"Emile Vuilloud n'était pas né en 1815,         ce n'est pas lui sur le tableau.", 320, k.vec2(300,555),id_text)
+        AllProofsfound(k,Textes[2][0], 320, k.vec2(300,555),id_text)
         Vuilloud_ok.setinstanceVuilloud(true)
         return;
 
     } 
     if ( id === "proof2_Vuilloud" ){
-        k.add([k.rect(40,20), k.pos(780, 200),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(42,20), k.pos(Vuilloud_proof2_x, Vuilloud_proof2_y),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         proof2_Vuilloud = true
         k.destroyAll("proof2_Vuilloud")
         if (!proof1_Vuilloud)return;
-        AllProofsfound(k,"Emile Vuilloud n'était pas né en 1815,         ce n'est pas lui sur le tableau.", 320, k.vec2(300,555),id_text)
+        AllProofsfound(k,Textes[2][0], 320, k.vec2(300,555),id_text)
         Vuilloud_ok.setinstanceVuilloud(true)
         return;
     }
@@ -219,7 +230,7 @@ export function ToDoWithProof(k,id, id_text){
         k.add([k.rect(225,55), k.pos(305, 435),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         k.destroyAll("proof1_Torrent")
         k.destroyAll("proof2_Torrent")
-        AllProofsfound(k,"Ce n'est pas la personne que je cherche.", 300,k.vec2(305,500),id_text)
+        AllProofsfound(k,Textes[3][0], 300,k.vec2(305,500),id_text)
         Torrent_ok.setinstanceTorrent(true)
         return;
     }   
@@ -228,7 +239,7 @@ export function ToDoWithProof(k,id, id_text){
         proof1_Rivaz = true
         k.destroyAll("proof1_Rivaz")
         if (!proof2_Rivaz)return;
-        AllProofsfound(k,"Charles Emmanuel de Rivaz ne ressemble pas à cet homme. Ce n'est pas lui que je cherche.", 120,k.vec2(295,155),id_text)
+        AllProofsfound(k,Textes[4][0], 120,k.vec2(295,155),id_text)
         Rivaz_ok.setinstanceRivaz(true)
         return;
 
@@ -238,7 +249,7 @@ export function ToDoWithProof(k,id, id_text){
         proof2_Rivaz = true
         k.destroyAll("proof2_Rivaz")
         if (!proof1_Rivaz)return;
-        AllProofsfound(k,"Charles Emmanuel de Rivaz ne ressemble pas à cet homme. Ce n'est pas lui que je cherche.", 120,k.vec2(295,155),id_text)
+        AllProofsfound(k,Textes[4][0], 120,k.vec2(295,155),id_text)
         Rivaz_ok.setinstanceRivaz(true)
         return;
     }
@@ -246,25 +257,28 @@ export function ToDoWithProof(k,id, id_text){
         k.add([k.rect(260,80), k.pos(320,185),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         k.destroyAll("proof1_Guillot")
         k.destroyAll("proof2_Guillot")
-        AllProofsfound(k,"Il est décédé depuis 1791. Ce n'est pas la personne que je cherche.", 300,k.vec2(660,525),id_text)
+        if(NeedLecture.getLecture()){AllProofsfound(k,Textes[5][0], 300,k.vec2(655,535),id_text)}
+        if(!NeedLecture.getLecture()){AllProofsfound(k,Textes[5][0], 300,k.vec2(660,525),id_text)}
         Guillot_ok.setinstanceGuillot(true)
         return;
     }
     if ( id === "proof2_Guillot" ){
-        k.add([k.rect(135,20), k.pos(650,425),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(135,20), k.pos(Guillot_x,425),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         k.destroyAll("proof2_Guillot")
         k.destroyAll("proof1_Guillot")
-        AllProofsfound(k,"Il est décédé depuis 1791. Ce n'est pas la personne que je cherche.", 300,k.vec2(660,525),id_text)
+        if(NeedLecture.getLecture()){AllProofsfound(k,Textes[5][0], 300,k.vec2(655,535),id_text)}
+        if(!NeedLecture.getLecture()){AllProofsfound(k,Textes[5][0], 300,k.vec2(660,525),id_text)}
         Guillot_ok.setinstanceGuillot(true)
         return;
     }    
     if(id === "proof1_DuFay" ||  id === "proof2_DuFay"){
         if(showrecto_Dufay)return;
-        k.add([k.rect(290,20), k.pos(300,450),k.color(194,15,15),k.opacity(0.7),"proof_color"])
-        k.add([k.rect(150,20), k.pos(300,470),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(290,20), k.pos(Dufay_proof_x,Dufay_proof_y),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(Dufay_red,20), k.pos(Dufay_proof_x,Dufay_proof_y +20),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         k.destroyAll("proof1_DuFay")
         k.destroyAll("proof2_DuFay")
-        AllProofsfound(k,"Je dois lui remettre le tableau en main propre. Ce n'est pas lui sur le tableau.", 320,k.vec2(660,525),id_text)
+        if(NeedLecture.getLecture()){AllProofsfound(k,Textes[6][0], 320,k.vec2(300,520),id_text)}
+        if(!NeedLecture.getLecture()){AllProofsfound(k,Textes[6][0], 320,k.vec2(660,525),id_text)}
         DuFay_ok.setinstanceDuFay(true)
         return;
     }
@@ -273,7 +287,7 @@ export function ToDoWithProof(k,id, id_text){
         k.add([k.rect(285,50), k.pos(305,470),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         k.destroyAll("proof1_Pottier")
         k.destroyAll("proof2_Pottier")
-        AllProofsfound(k,"Ce n'est pas la personne que je cherche.", 300,k.vec2(305,530),id_text)
+        AllProofsfound(k,Textes[3][0], 300,k.vec2(305,530),id_text)
         Pottier_ok.setinstancePottier(true)
         return;
     }
@@ -282,7 +296,7 @@ export function ToDoWithProof(k,id, id_text){
         k.add([k.rect(200,25), k.pos(300,325),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         k.destroyAll("proof1_Bellet")
         k.destroyAll("proof2_Bellet")
-        AllProofsfound(k,"Ce n'est pas la personne que je cherche.", 300,k.vec2(305,450),id_text)
+        AllProofsfound(k,Textes[3][0], 300,k.vec2(305,450),id_text)
         Bellet_ok.setinstanceBellet(true)
         return; 
     }
@@ -290,15 +304,21 @@ export function ToDoWithProof(k,id, id_text){
         k.add([k.rect(270,80), k.pos(300,270),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         k.destroyAll("proof1_Robriquet")
         k.destroyAll("proof2_Robriquet")
-        AllProofsfound(k,"Ce n'est pas la personne que je cherche.", 300,k.vec2(305,380),id_text)
+        AllProofsfound(k,Textes[3][0], 300,k.vec2(305,380),id_text)
         Robriquet_ok.setinstanceRobriquet(true)
         return;
     }
-    if ( id === "proof2_Robriquet" ){
-        k.add([k.rect(160,20), k.pos(805,195),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+    if ( id === "proof2_Robriquet" ){ 
+        if(NeedLecture.getLecture()){
+            k.add([k.rect(110,20), k.pos(860,Robriquet_y),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+            k.add([k.rect(45,20), k.pos(658,Robriquet_y+20),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        }
+        if(!NeedLecture.getLecture()){
+            k.add([k.rect(160,20), k.pos(805,195),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        }
         k.destroyAll("proof2_Robriquet")
         k.destroyAll("proof1_Robriquet")
-        AllProofsfound(k,"Ce n'est pas la personne que je cherche.", 300,k.vec2(305,380),id_text)
+        AllProofsfound(k,Textes[3][0], 300,k.vec2(305,380),id_text)
         Robriquet_ok.setinstanceRobriquet(true)
         return;
     } 
@@ -327,6 +347,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("cross")
                 k.destroyAll("ligne")
                 createProof(k,1, Carnetname, Pottier_ok.getinstancePottier(), Meet_Pottier_ok.getinstancePottier(),k.vec2(305,445),285, 25,k.vec2(305,470),285, 50, "proof1_Pottier", "proof2_Pottier")
+                if(Tutodoing.getInstanceTuto2()){ k.destroyAll("InstructionTutoCarnet"); Tutodoing.setInstanceTuto2(false);}
                 return;
             }
             if (page === 2){
@@ -335,15 +356,19 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("texte_proof")
                 k.destroyAll("cross")
                 k.destroyAll("ligne")
+                let FontSize = 35
+                let fontSize2 = 30
+                let adaptlecture =0
                 if(!TutoDone.getInstanceTuto() && !SeenJournal.getInstanceJournal()){ 
                     Tutodoing.setInstanceTuto2(true)
-                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck")   
-                    const InstructionBoxtuto = k.add([k.rect(500, 350), k.pos(375,200), k.outline(4), k.opacity(0.7),k.offscreen(),"InstructionTutoCarnet"]) 
+                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")   
+                    if(NeedLecture.getLecture()){FontSize = 30, adaptlecture = 20}
+                    const InstructionBoxtuto = k.add([k.rect(500, 350+adaptlecture), k.pos(375,200), k.outline(4), k.opacity(0.7),k.offscreen(),"InstructionTutoCarnet"]) 
                     const textInstructionBoxtuto = InstructionBoxtuto.add([
-                        k.text("Pour découvrire à qui appartient le mytérieux tableau, tu vas devoir éliminier un profil après l'autre. Pour cela, tu auras besoin d'indices que tu découvriras en explorant les environs. Découvre ton premier indice et reviens sur cette page !", 
+                        k.text(Textes[7], 
                         {   font: "NiceFont",
                             width : 490,
-                            size : 35,
+                            size : FontSize,
                             lineSpacing : 10,
                         }), 
                         k.color(27,29,52),
@@ -351,27 +376,28 @@ export function setTournerPage(k, key, Carnetname){
                         k.opacity(0.7)
                     ]);
                     const textInstructionBoxOut = InstructionBoxtuto.add([
-                        k.text("Appuie sur Enter", 
+                        k.text(Textes[8], 
                         {   font: "NiceFont",
                             width : 490,
-                            size : 35,
+                            size : FontSize,
                             lineSpacing : 10,
                         }), 
                         k.color(27,29,52),
-                        k.pos(300,313), // par rappor à dialogbox  
+                        k.pos(300-adaptlecture*3,313+adaptlecture), // par rappor à dialogbox  
                         k.opacity(0.5)
                     ]);
                     return;
                 }
                 if(!TutoDone.getInstanceTuto() && SeenJournal.getInstanceJournal()){
                     Tutodoing.setInstanceTuto2(true)
-                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck")
-                    const InstructionBoxtuto = k.add([k.rect(665, 500), k.pos(300,115), k.outline(4), k.opacity(0.9),k.offscreen(),"InstructionTutoCarnet"]) 
+                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")
+                    if(NeedLecture.getLecture()){adaptlecture = 20, fontSize2=23.5}
+                    const InstructionBoxtuto = k.add([k.rect(665, 530), k.pos(300,100), k.outline(4), k.opacity(0.9),k.offscreen(),"InstructionTutoCarnet"]) 
                     const textInstructionBoxtuto = InstructionBoxtuto.add([
-                        k.text("Afin de découvrire à qui appartient le mytérieux tableau, tu vas devoir éliminier un profil après l'autre. Pour se faire, tu vas partir à la chasse à l'indice... quel élément du text de la page de droite ou du document en page gauche t'indique que cette personne n'est pas la bonne ? Dans le cas d'Alphonse Beck, le journal du jour nous indique que nous sommes le 31 octobre 1815, mais Alphonse Beck naît en 1822, il ne peut donc pas être le destinataire du tableau. Dans le profil de Beck, tu vas pouvoir clicker avec ta souris sur 1822 et sur 1815, afin d'éliminer Beck de la liste des potentiels propriétaires. Fais de même avec les autres profils jusqu'à ce qu'il ne t'en reste qu'un seul! Tous les profils ne nécessitent pas deux preuves, parfois il te faudra cliquer une fois, parfois deux. Bonne Chance !", 
+                        k.text(Textes[9], 
                         {   font: "NiceFont",
                             width : 660,
-                            size : 30,
+                            size : fontSize2,
                             lineSpacing : 7,
                         }), 
                         k.color(27,29,52),
@@ -379,21 +405,21 @@ export function setTournerPage(k, key, Carnetname){
                         k.opacity(0.7)
                     ]);
                     const textInstructionBoxOut = InstructionBoxtuto.add([
-                        k.text("Appuie sur Enter", 
+                        k.text(Textes[8], 
                         {   font: "NiceFont",
                             width : 490,
-                            size : 35,
+                            size : fontSize2,
                             lineSpacing : 10,
                         }), 
                         k.color(27,29,52),
-                        k.pos(470,455), // par rappor à dialogbox  
+                        k.pos(490-adaptlecture*1.5,490+adaptlecture/2), // par rappor à dialogbox  
                         k.opacity(0.5)
                     ]);
                     return;
                     
                 }    
                 if(TutoDone.getInstanceTuto()){
-                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck")
+                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")
                     return;
                 }
             }
@@ -421,7 +447,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("texte_proof")
                 k.destroyAll("cross")
                 k.destroyAll("ligne")
-                createProof(k,5, Carnetname, Vuilloud_ok.getinstanceVuilloud(), SeenJournal.getInstanceJournal(),k.vec2(400,260),120, 20,k.vec2(780, 200),50 , 20, "proof1_Vuilloud", "proof2_Vuilloud")
+                createProof(k,5, Carnetname, Vuilloud_ok.getinstanceVuilloud(), SeenJournal.getInstanceJournal(),k.vec2(400,260),Beck_proof1_width, 20,k.vec2(Vuilloud_proof2_x, Vuilloud_proof2_y),50 , 20, "proof1_Vuilloud", "proof2_Vuilloud")
                 return; 
             }
             if (page === 6){
@@ -443,7 +469,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("InstructionRecto")
                 k.destroyAll("Verso_Guillot_id")
                 k.destroyAll("Verso_Dufay_id")
-                createProof(k,7, Carnetname, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,270),270, 80,k.vec2(805,195),160 , 20, "proof1_Robriquet", "proof2_Robriquet")
+                createProof(k,7, Carnetname, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,270),270, 80,k.vec2(Robriquet_x,Robriquet_y),Robriquet_width , Robriquet_height, "proof1_Robriquet", "proof2_Robriquet")
                 return; 
             }
             if (page === 8){
@@ -456,7 +482,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("InstructionRecto")
                 k.destroyAll("Verso_Guillot_id")
                 k.destroyAll("Verso_Dufay_id")
-                createProof(k,8, Carnetname, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(650,425),135 , 20, "proof1_Guillot", "proof2_Guillot")
+                createProof(k,8, Carnetname, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(Guillot_x,425),135 , 20, "proof1_Guillot", "proof2_Guillot")
                 return; 
             }
             if (page === 9){
@@ -469,7 +495,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("InstructionRecto")
                 k.destroyAll("Verso_Guillot_id")
                 k.destroyAll("Verso_Dufay_id")
-                createProof(k,9, Carnetname, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(300,450),290, 20,k.vec2(300,470),290 , 20, "proof1_DuFay", "proof2_DuFay")
+                createProof(k,9, Carnetname, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(Dufay_proof_x,Dufay_proof_y),290, 20,k.vec2(Dufay_proof_x,Dufay_proof_y +20),290 , 20, "proof1_DuFay", "proof2_DuFay")
                 return; 
             }
             if (page === 10){
@@ -514,15 +540,19 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("texte_proof")
                 k.destroyAll("cross")
                 k.destroyAll("ligne")
+                let FontSize = 35
+                let fontSize2 = 30
+                let adaptlecture =0
                 if(!TutoDone.getInstanceTuto() && !SeenJournal.getInstanceJournal()){ 
                     Tutodoing.setInstanceTuto2(true)
-                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck")   
-                    const InstructionBoxtuto = k.add([k.rect(500, 350), k.pos(375,200), k.outline(4), k.opacity(0.7),k.offscreen(),"InstructionTutoCarnet"]) 
+                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")   
+                    if(NeedLecture.getLecture()){FontSize = 30, adaptlecture = 20}
+                    const InstructionBoxtuto = k.add([k.rect(500, 350+adaptlecture), k.pos(375,200), k.outline(4), k.opacity(0.7),k.offscreen(),"InstructionTutoCarnet"]) 
                     const textInstructionBoxtuto = InstructionBoxtuto.add([
-                        k.text("Pour découvrire à qui appartient le mytérieux tableau, tu vas devoir éliminier un profil après l'autre. Pour cela, tu auras besoin d'indices que tu découvriras en explorant les environs. Découvre ton premier indice et reviens sur cette page !", 
+                        k.text(Textes[7], 
                         {   font: "NiceFont",
                             width : 490,
-                            size : 35,
+                            size : FontSize,
                             lineSpacing : 10,
                         }), 
                         k.color(27,29,52),
@@ -530,27 +560,28 @@ export function setTournerPage(k, key, Carnetname){
                         k.opacity(0.7)
                     ]);
                     const textInstructionBoxOut = InstructionBoxtuto.add([
-                        k.text("Appuie sur Enter", 
+                        k.text(Textes[8], 
                         {   font: "NiceFont",
                             width : 490,
-                            size : 35,
+                            size : FontSize,
                             lineSpacing : 10,
                         }), 
                         k.color(27,29,52),
-                        k.pos(300,313), // par rappor à dialogbox  
+                        k.pos(300-adaptlecture*3,313+adaptlecture), // par rappor à dialogbox  
                         k.opacity(0.5)
                     ]);
                     return;
                 }
                 if(!TutoDone.getInstanceTuto() && SeenJournal.getInstanceJournal()){
                     Tutodoing.setInstanceTuto2(true)
-                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck")
-                    const InstructionBoxtuto = k.add([k.rect(665, 500), k.pos(300,115), k.outline(4), k.opacity(0.9),k.offscreen(),"InstructionTutoCarnet"]) 
+                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")
+                    if(NeedLecture.getLecture()){adaptlecture = 20, fontSize2=23.5}
+                    const InstructionBoxtuto = k.add([k.rect(665, 530), k.pos(300,100), k.outline(4), k.opacity(0.9),k.offscreen(),"InstructionTutoCarnet"]) 
                     const textInstructionBoxtuto = InstructionBoxtuto.add([
-                        k.text("Afin de découvrire à qui appartient le mytérieux tableau, tu vas devoir éliminier un profil après l'autre. Pour se faire, tu vas partir à la chasse à l'indice... quel élément du text de la page de droite ou du document en page gauche t'indique que cette personne n'est pas la bonne ? Dans le cas d'Alphonse Beck, le journal du jour nous indique que nous sommes le 31 octobre 1815, mais Alphonse Beck naît en 1822, il ne peut donc pas être le destinataire du tableau. Dans le profil de Beck, tu vas pouvoir clicker avec ta souris sur 1822 et sur 1815, afin d'éliminer Beck de la liste des potentiels propriétaires. Fais de même avec les autres profils jusqu'à ce qu'il ne t'en reste qu'un seul! Tous les profils ne nécessitent pas deux preuves, parfois il te faudra cliquer une fois, parfois deux. Bonne Chance !", 
+                        k.text(Textes[9], 
                         {   font: "NiceFont",
                             width : 660,
-                            size : 30,
+                            size : fontSize2,
                             lineSpacing : 7,
                         }), 
                         k.color(27,29,52),
@@ -558,20 +589,20 @@ export function setTournerPage(k, key, Carnetname){
                         k.opacity(0.7)
                     ]);
                     const textInstructionBoxOut = InstructionBoxtuto.add([
-                        k.text("Appuie sur Enter", 
+                        k.text(Textes[8], 
                         {   font: "NiceFont",
                             width : 490,
-                            size : 35,
+                            size : fontSize2,
                             lineSpacing : 10,
                         }), 
                         k.color(27,29,52),
-                        k.pos(470,455), // par rappor à dialogbox  
+                        k.pos(490-adaptlecture*1.5,490+adaptlecture/2), // par rappor à dialogbox  
                         k.opacity(0.5)
                     ]);
                     return;    
                 }    
                 if(TutoDone.getInstanceTuto()){
-                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),120, 20,k.vec2(650,225),50 , 20, "proof1_Beck", "proof2_Beck")
+                    createProof(k,2, Carnetname, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")
                     return;
                 }
             }
@@ -582,6 +613,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("cross")
                 k.destroyAll("ligne")
                 createProof(k,3, Carnetname, Rivaz_ok.getinstanceRivaz(), Meet_Rivaz_ok.getinstanceRivaz(),k.vec2(410,155),185, 255,k.vec2(295,320),195 , 245, "proof1_Rivaz", "proof2_Rivaz")
+                if(Tutodoing.getInstanceTuto2()){ k.destroyAll("InstructionTutoCarnet"); Tutodoing.setInstanceTuto2(false)}
                 return; 
             }
             if (page === 4){
@@ -599,7 +631,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("texte_proof")
                 k.destroyAll("cross")
                 k.destroyAll("ligne")
-                createProof(k,5, Carnetname, Vuilloud_ok.getinstanceVuilloud(), SeenJournal.getInstanceJournal(),k.vec2(400,260),120, 20,k.vec2(780, 200),50 , 20, "proof1_Vuilloud", "proof2_Vuilloud")
+                createProof(k,5, Carnetname, Vuilloud_ok.getinstanceVuilloud(), SeenJournal.getInstanceJournal(),k.vec2(400,260),Beck_proof1_width, 20,k.vec2(Vuilloud_proof2_x, Vuilloud_proof2_y),50 , 20, "proof1_Vuilloud", "proof2_Vuilloud")
                 return; 
             }
             if (page === 6){
@@ -620,7 +652,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("InstructionRecto")
                 k.destroyAll("Verso_Guillot_id")
                 k.destroyAll("Verso_Dufay_id")
-                createProof(k,7, Carnetname, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,270),270, 80,k.vec2(805,195),160 , 20, "proof1_Robriquet", "proof2_Robriquet")
+                createProof(k,7, Carnetname, Robriquet_ok.getinstanceRobriquet(), Meet_Robriquet_ok.getinstanceRobriquet(),k.vec2(300,270),270, 80,k.vec2(Robriquet_x,Robriquet_y),Robriquet_width , Robriquet_height, "proof1_Robriquet", "proof2_Robriquet")
                 return; 
             }
             if (page === 8){
@@ -633,7 +665,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("InstructionRecto")
                 k.destroyAll("Verso_Guillot_id")
                 k.destroyAll("Verso_Dufay_id")
-                createProof(k,8, Carnetname, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(650,425),135 , 20, "proof1_Guillot", "proof2_Guillot")
+                createProof(k,8, Carnetname, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(Guillot_x,425),135 , 20, "proof1_Guillot", "proof2_Guillot")
                 return; 
             }
             if (page === 9){
@@ -646,7 +678,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("InstructionRecto")
                 k.destroyAll("Verso_Guillot_id")
                 k.destroyAll("Verso_Dufay_id")
-                createProof(k,9, Carnetname, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(300,450),290, 20,k.vec2(300,470),290 , 20, "proof1_DuFay", "proof2_DuFay")
+                createProof(k,9, Carnetname, DuFay_ok.getinstanceDuFay(), Meet_DuFay_ok.getinstanceDuFay(),k.vec2(Dufay_proof_x,Dufay_proof_y),290, 20,k.vec2(Dufay_proof_x,Dufay_proof_y +20),290 , 20, "proof1_DuFay", "proof2_DuFay")
                 return; 
             }
             if (page === 10){
@@ -671,8 +703,8 @@ export function RectoVersoLecture(k){
     if(page == 8 && Meet_Guillot_ok.getinstanceGuillot()){
         if(showrecto_Guillot){
             showrecto_Guillot = false
-            ShowObject(k,"InstructionVerso", "Verso_Guillot", k.vec2(289,126), "Verso_Guillot_id")
-            Instruction(k,170,60,k.vec2(50,200),"InstructionRecto","Appuie sur e pour lire le recto du document" )
+            ShowObject(k,"InstructionVerso", Verso_Guillot_Show, k.vec2(289,126), "Verso_Guillot_id")
+            Instruction(k,170,60,k.vec2(50,200),"InstructionRecto",Textes[10] )
             return;
         }
         if(!showrecto_Guillot){
@@ -680,15 +712,15 @@ export function RectoVersoLecture(k){
             DestroyInstruction(k,"InstructionRecto")
             k.destroyAll("proof_color")
             k.destroyAll("Verso_Guillot_id")
-            Instruction(k,170,60,k.vec2(50,200),"InstructionVerso","Appuie sur e pour lire le verso du document" )
+            Instruction(k,170,60,k.vec2(50,200),"InstructionVerso",Textes[0])
             return;
         }
     }
     if(page == 9 && Meet_DuFay_ok.getinstanceDuFay()){
         if(showrecto_Dufay){
             showrecto_Dufay = false
-            ShowObject(k,"InstructionVerso", "Verso_Dufay", k.vec2(270,121), "Verso_Dufay_id")
-            Instruction(k,170,60,k.vec2(50,200),"InstructionRecto","Appuie sur e pour lire le recto du document" )
+            ShowObject(k,"InstructionVerso", Verso_DuFay_Show , k.vec2(270,121), "Verso_Dufay_id")
+            Instruction(k,170,60,k.vec2(50,200),"InstructionRecto",Textes[10]  )
             return;
         }
         if(!showrecto_Dufay){
@@ -696,7 +728,7 @@ export function RectoVersoLecture(k){
             DestroyInstruction(k,"InstructionRecto")
             k.destroyAll("proof_color")
             k.destroyAll("Verso_Dufay_id")
-            Instruction(k,170,60,k.vec2(50,200),"InstructionVerso","Appuie sur e pour lire le verso du document" )
+            Instruction(k,170,60,k.vec2(50,200),"InstructionVerso",Textes[0]  )
             return;
         }
     }

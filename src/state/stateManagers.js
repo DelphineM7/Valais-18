@@ -1,10 +1,12 @@
-import {globalStateManager1,globalStateManager2, globalStateManagerCarnet, globalStateManagerJournal,globalStateManagerBeck,globalStateManagerPottier_Meet, 
+import {globalStateManager_Lecture, globalStateManager1,globalStateManager2, globalStateManagerCarnet, globalStateManagerJournal,globalStateManagerBeck,globalStateManagerPottier_Meet, 
     globalStateManagerPottier, globalStateManagerBellet, globalStateManagerBellet_Meet,globalStateManagerTorrent_Meet, globalStateManagerTorrent, globalStateManagerFolken_Meet,
     globalStateManagerRivaz_Meet, globalStateManagerRivaz, globalStateManagerDufour, globalStateManagerDufour_Meet, globalStateManagerVuilloud,
     globalStateManagerRobriquet, globalStateManagerRobriquet_Meet, globalStateManagerGuillot, globalStateManagerGuillot_Meet, globalStateManagerDuFay,
     globalStateManagerDuFay_Meet, globalStateManagerCarnet_lecture,globalStateManagerTuto, globalStateManagerTuto2,
     globalStateManagerOutside, globalStateManagerDufourCollide
     } from "./globalState.js";
+
+export const NeedLecture = globalStateManager_Lecture().getLecture();
 
 export const gameState = globalStateManager1().getInstance();
 
