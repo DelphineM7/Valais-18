@@ -43,43 +43,54 @@ L'absence de femmes dans les portraits présentés dans le carnet représentait 
 ## **Sources Historiques**
 Voici les sources qui ont permises d'établir les portraits historiques des personnages présents dans le jeu. 
 
-- Adrien-Félix Pottier 
+- Adrien-Félix Pottier
+
+
 P. Maye: "Pottier, Adrien-Félix", in: Dictionnaire 	historique de la Suisse (DHS), version du 19.12.2008. Online: https://hls-dhs-dss.ch/fr/articles/004122/2008-12-19/, consulté le 29.03.2024.
 
 P. Reichenbach, «Adrien-Félix Pottier (1792-1855)», in 			Ann. val., 2002, 63-115.
 
 - Alphonse Beck
+
 M. Terrettaz: "Beck, Alphonse", in: Dictionnaire historique de la Suisse (DHS), version du 25.04.2002. Online: https://hls-dhs-dss.ch/fr/articles/042243/2002-04-25/, consulté le 29.03.2024.
 
 - Charles Emmanuel de Rivaz
+
 D. Rey: "Rivaz, Charles Emmanuel de", in: Dictionnaire historique de la Suisse (DHS), version du 09.01.2020. Online: https://hls-dhs-dss.ch/fr/articles/005565/2020-01-09/, consulté le 29.03.2024.
 
 - Michel Dufour
+
 P.-A. Putallaz, «La carrière publique de Michel Dufour (1768-1843) jusqu'en 1810», in Ann. val., 1994, 3-160 (1re partie).
 
 P.-A. Putallaz: "Dufour, Michel", in: Dictionnaire historique de la Suisse (DHS), version du 14.02.2006. Online: https://hls-dhs-dss.ch/fr/articles/005561/2006-02-14/, consulté le 29.03.2024.
 
 
 - Emile Vuilloud
+
 V. G. Talamona: "Vuilloud, Emile", in: Dictionnaire historique de la Suisse (DHS), version du 30.08.2013, traduit de l’italien. Online: https://hls-dhs-dss.ch/fr/articles/019446/2013-08-30/, consulté le 29.03.2024.
 
 - Joseph Torrent
+
 B. Truffer: "Torrent, Joseph", in: Dictionnaire historique de la Suisse (DHS), version du 
 01.03.2011, traduit de l’allemand.
 Online: https://hls-dhs-dss.ch/fr/articles/032725/2011-03-01/, consulté le 29.03.2024.
 
 - Louis Robriquet
+
 I. Carruzzo: "Robriquet, Louis", in: Dictionnaire historique de la Suisse (DHS), version du 16.05.2012. Online: https://hls-dhs-dss.ch/fr/articles/021436/2012-05-16/, consulté le 29.03.2024.
 
 P.-A. Grenat, J. de Lavallaz. (1904). Histoire moderne du Valais : de 1536 à 1815. V. Pasche.
 
 - Pierre Guillot 
+
 F. Giroud: "Guillot, Pierre", in: Dictionnaire historique de la Suisse (DHS), version du 13.03.2008. Online: https://hls-dhs-dss.ch/fr/articles/021368/2008-03-13/, consulté le 29.03.2024.
 
 - Pierre Louis du Fay
+
 M. Terrettaz: "Fay, Pierre Louis du", in: Dictionnaire historique de la Suisse (DHS), version du 22.11.2004. Online: https://hls-dhs-dss.ch/fr/articles/021267/2004-11-22/, consulté le 29.03.2024.
 
 - Pierre Maurice Rey-Bellet
+
 P. Devanthey, La révolution bas-valaisanne de 1790, 1972.
 
 P.Reichenbach: "Rey-Bellet, Pierre-Maurice", in: Dictionnaire historique de la Suisse (DHS), 
