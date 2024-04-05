@@ -263,7 +263,7 @@ export default async function house(k){
 
    entities.big_player.onCollide("door-exit", () =>{
         CollidDoorExit = true
-        Instruction(k, 160,60, k.vec2(130,150),"InstructionEExit",Textes[6])
+        Instruction(k, 170,60, k.vec2(130,150),"InstructionEExit",Textes[6])
     });
 
     entities.big_player.onCollideEnd("door-exit", () =>{

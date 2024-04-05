@@ -325,7 +325,7 @@ export default async function pont(k){
         Instruction(k, 155,105, k.vec2(740,230),"InstructionEDoor", Textes[8])
         }
         if(Beck_ok.getinstanceBeck()){
-        Instruction(k, 135,60, k.vec2(740,230),"InstructionEDoor", Textes[9])
+        Instruction(k, 145,60, k.vec2(740,230),"InstructionEDoor", Textes[9])
         }
     });
 
@@ -346,7 +346,7 @@ export default async function pont(k){
 
     entities.moyen_player.onCollide("journal", () =>{
         CollideJournal = true
-        Instruction(k, 135, 55 ,k.vec2(300, 350), "InstructionEJournal", Textes[11])
+        Instruction(k, 145, 55 ,k.vec2(300, 350), "InstructionEJournal", Textes[11])
     });
 
     entities.moyen_player.onCollideEnd("journal", () =>{

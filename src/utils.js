@@ -40,7 +40,7 @@ export function Instruction(k, widthrec,heightrec, pos, id, content){
     const textInstructionBox = InstructionBox.add([
         k.text(content, {
             font: "NiceFont",
-            width : widthrec + adaptlecture -5 ,
+            width : widthrec + adaptlecture -10 ,
             size :sizeFont,
             height : heightrec -10,
             lineSpacing : adaptlecture/4
