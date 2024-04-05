@@ -26,7 +26,7 @@ export function globalStateManager1(){
     let instance = null; 
 
     function createInstance(){
-        let freezePlayer = false 
+        let freezePlayer = false //false
 
         return{
             setFreezePlayer(value){
@@ -74,7 +74,7 @@ export function globalStateManagerCarnet(){
     let instanceCarnet = null; 
 
     function createInstanceCarnet(){
-        let WeHaveCarnet = true  //false
+        let WeHaveCarnet = false  //false
 
         return{
             setInstanceCarnet(value){

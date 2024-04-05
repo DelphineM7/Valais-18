@@ -133,7 +133,7 @@ export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,p
     } 
 
     if(page == 8){
-        Instruction(k,170,60,k.vec2(50,200),"Instr uctionVerso",Textes[0] )
+        Instruction(k,170,60,k.vec2(50,200),"InstructionVerso",Textes[0] )
         return;
     }
     if(page == 9 ){

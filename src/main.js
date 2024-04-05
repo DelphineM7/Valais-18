@@ -306,9 +306,6 @@ k.loadSpriteAtlas( "./assets/carnet/carnet_Historio_3.png",{
 k.loadFont("DefaultFont", "./assets/font/jupiterc.ttf")
 k.loadFont("LectureMenu", "./assets/font/Luciole-Regular.ttf")
 k.loadFont("CarnetFont", "./assets/font/ITCKRIST.TTF")
-/*if(!NeedLecture.getLecture()){k.loadFont("NiceFont", "./assets/font/jupiterc.ttf")}
-if(NeedLecture.getLecture()){k.loadFont("NiceFont", "./assets/font/Luciole-Regular.ttf")}*/
-
 
 // musique 
 k.loadSound("river", "./assets/music/river.mp3")
