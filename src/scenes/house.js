@@ -14,7 +14,7 @@ export default async function house(k){
     const bureau = map.add([k.sprite("assets_bureau"),k.pos(32,16),"bureau"])
     const Textes = Textes_Bureau.french_Bureau
 
-    const entities = {
+    const entities = { 
         big_player : null,
         player : null,
         pnj : [],

@@ -46,16 +46,16 @@ const french_Pont = [
         "Appuie sur enter pour fermer le carnet",
     ],
     [
-        "Navigue dans le carnet avec la souris et en appuyant sur les flèches droite et gauche du clavier. Pour chaque profil, trouve une ou deux preuves qui excluent la personne d'être celle représentée sur le tableau"
-    ],
+        "Navigue dans le carnet avec la souris et en appuyant sur les flèches droite et gauche du clavier. Trouve, pour chaque personnage, une ou deux preuves qui montrent que ça ne peut pas être la personne représentée sur le tableau"
+    ],                                                                                                     
     [
-        "Pour découvrir à qui appartient le mystérieux tableau, tu vas devoir éliminer un profil après l'autre. Pour cela, tu auras besoin d'indices que tu découvriras en explorant les environs. Découvre ton premier indice et reviens sur cette page !"
+        "Pour découvrir à qui appartient le mystérieux tableau, tu vas devoir éliminer un personnage après l'autre. Pour cela, tu auras besoin d'indices que tu découvriras en explorant les environs. Découvre ton premier indice et reviens sur cette page !"
     ],
     [
         "Appuie sur enter"
     ],
     [
-        "Afin de découvrir à qui appartient le mystérieux tableau, tu vas devoir éliminer un profil après l'autre. Pour se faire, tu vas partir à la chasse à l'indice... quels éléments du texte de la page de droite ou du document de la page de gauche t'indiquent que cette personne n'est pas la bonne ? Dans le cas d'Alphonse Beck, le journal du jour nous indique que nous sommes le 31 octobre 1815, mais Alphonse Beck naît en 1822, il ne peut donc pas être le destinataire du tableau. Dans le profil de Beck, tu vas pouvoir cliquer avec ta souris sur '1822' dans le texte et sur '1815' sur le document, afin d'éliminer Beck de la liste des potentiels propriétaires. Trouve les preuves dans les autres profils jusqu'à ce qu'il ne t'en reste qu'un seul ! Tous les profils ne nécessitent pas deux preuves, parfois il te faudra cliquer une fois, parfois deux. Bonne Chance !"
+        "Tu dois découvrir à qui appartient le mystérieux tableau et le lui remettre en main propre. Tu vas devoir éliminer un personnage après l'autre. Pour ce faire, tu vas partir à la chasse à l'indice... quels éléments du texte de la page de droite ou du document de la page de gauche t'indiquent que cette personne n'est pas la bonne ? Dans le cas d'Alphonse Beck, le journal du jour nous indique que nous sommes le 31 octobre 1815, mais Alphonse Beck naît en 1822, il ne peut donc pas être le destinataire du tableau. Dans le profil de Beck, tu vas pouvoir cliquer avec ta souris sur '1822' dans le texte et sur '1815' sur le document, afin d'éliminer Beck de la liste des propriétaires possibles. Fais de même avec les autres personnage jusqu'à ce qu'il ne t'en reste qu'un seul ! Parfois il te faudra cliquer une fois, parfois deux. Bonne chance !"
     ],
     [
         "Pour l'instant, tu ne peux pas poursuivre ton aventure au-delà du pont !"
@@ -63,8 +63,8 @@ const french_Pont = [
     [
         "Appuie sur e pour traverser le pont"
     ],
-    [
-        "Appuie sur e pour observer dans la charrette"
+    [                      
+        "Appuie sur e pour regarder dans la charrette"
     ],
     [
         "Appuie sur e pour observer le journal"
@@ -90,7 +90,7 @@ const french_Place = [
         "Appuie sur enter pour fermer le carnet",
     ],
     [
-        "Navigue dans le carnet avec la souris et en appuyant sur les flèches droite et gauche du clavier. Pour chaque profil, trouve une ou deux preuves qui excluent la personne d'être celle représentée sur le tableau"
+        "Navigue dans le carnet avec la souris et en appuyant sur les flèches droite et gauche du clavier. Trouve, pour chaque personnage, une ou deux preuves qui montrent que ça ne peut pas être la personne représentée sur le tableau"
     ],
     [
         "Appuie sur e pour lui parler"
@@ -119,7 +119,7 @@ const french_Salon = [
         "Appuie sur enter pour fermer le carnet",
     ],
     [
-        "Navigue dans le carnet avec la souris et en appuyant sur les flèches droite et gauche du clavier. Pour chaque profil, trouve une ou deux preuves qui excluent la personne d'être celle représentée sur le tableau"
+        "Navigue dans le carnet avec la souris et en appuyant sur les flèches droite et gauche du clavier. Trouve, pour chaque personnage, une ou deux preuves qui montrent que ça ne peut pas être la personne représentée sur le tableau"
     ],
     [
         "Appuie sur e pour lui parler"
@@ -236,7 +236,7 @@ const french_carnet = [
         "Appuie sur enter"
     ],
     [
-        "Afin de découvrir à qui appartient le mystérieux tableau, tu vas devoir éliminer un profil après l'autre. Pour ce faire, tu vas partir à la chasse à l'indice... quels éléments du texte de la page de droite ou du document de la page de gauche t'indiquent que cette personne n'est pas la bonne ? Dans le cas d'Alphonse Beck, le journal du jour nous indique que nous sommes le 31 octobre 1815, mais Alphonse Beck naît en 1822, il ne peut donc pas être le destinataire du tableau. Dans le profil de Beck, tu vas pouvoir cliquer avec ta souris sur '1822' dans le texte  et sur '1815' sur le document, afin d'éliminer Beck de la liste des potentiels propriétaires. Trouve les preuves dans les autres profils jusqu'à ce qu'il ne t'en reste qu'un seul! Tous les profils ne nécessitent pas deux preuves, parfois il te faudra cliquer une fois, parfois deux. Bonne Chance !"
+        "Afin de découvrir à qui appartient le mystérieux tableau, tu vas devoir éliminer un personnage après l'autre. Pour ce faire, tu vas partir à la chasse à l'indice... quels éléments du texte de la page de droite ou du document de la page de gauche t'indiquent que cette personne n'est pas la bonne ? Dans le cas d'Alphonse Beck, le journal du jour nous indique que nous sommes le 31 octobre 1815, mais Alphonse Beck naît en 1822, il ne peut donc pas être le destinataire du tableau. Dans le profil de Beck, tu vas pouvoir cliquer avec ta souris sur '1822' dans le texte  et sur '1815' sur le document, afin d'éliminer Beck de la liste des propriétaires possibles. Fais de même avec les autres personnages jusqu'à ce qu'il ne t'en reste qu'un seul! Parfois il te faudra cliquer une fois, parfois deux. Bonne chance !"
     ],
     [
         "Appuie sur e pour lire le recto du document"

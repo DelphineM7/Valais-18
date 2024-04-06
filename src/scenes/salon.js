@@ -25,7 +25,7 @@ export default async function salon(k){
         if(layer.name === "Bundaries"){
             drawBoundaries(k, map, layer);
             continue; // Permet d'éviter le else statement 
-        }
+        } 
 
         if (layer.name === "Spawn"){
             for (const object of layer.objects){

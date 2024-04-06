@@ -23,7 +23,7 @@ export default async function world(k){
         pnj_Dufour : [],
         chat : null
     }
-
+ 
     const layers = mapData.layers;
     for (const layer of layers){
         if(layer.name === "Bundaries"){

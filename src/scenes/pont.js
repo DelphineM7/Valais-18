@@ -21,7 +21,7 @@ export default async function pont(k){
         pnj_ane : [],
         carnet : [],
         pnj_Torrent : []
-    }
+    } 
 
     const layers = mapData.layers;
     for (const layer of layers){
