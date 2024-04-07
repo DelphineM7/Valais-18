@@ -151,7 +151,7 @@ const french_Bureau = [
         "Appuie sur enter pour fermer le carnet",
     ],
     [
-        "Navigue dans le carnet avec la souris et en appuyant sur les flèches droite et gauche du clavier. Pour chaque profil, trouve une ou deux preuves qui excluent la personne d'être celle représentée sur le tableau"
+        "Navigue dans le carnet avec la souris et en appuyant sur les flèches droite et gauche du clavier. Trouve, pour chaque personnage, une ou deux preuves qui montrent que ça ne peut pas être la personne représentée sur le tableau"
     ],
     [
         "Appuie sur e pour lui parler"

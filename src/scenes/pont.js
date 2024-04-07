@@ -175,7 +175,7 @@ export default async function pont(k){
             ])
             Carnet(k)
             Instruction(k, 170,60, k.vec2(1050,200),"InstructionExitCarnet",Textes[3])
-            Instruction(k, 170,240, k.vec2(1050,300),"InstructionCarnet", Textes[4])
+            Instruction(k, 170,260, k.vec2(1050,300),"InstructionCarnet", Textes[4])
             if (HaveReadCarnet.getInstanceCarnet_lecture()){
                 await dialog(k, k.vec2(32,16), responses[2])
                 HaveReadCarnet.setInstanceCarnet_lecture(false)

@@ -162,7 +162,7 @@ export default async function world(k){
             ])
             Carnet(k)
             Instruction(k, 170,60, k.vec2(1050,200),"InstructionExitCarnet",Textes[1])
-            Instruction(k, 170,240, k.vec2(1050,300),"InstructionCarnet", Textes[2])
+            Instruction(k, 170,260, k.vec2(1050,300),"InstructionCarnet", Textes[2])
         }
 
     })
