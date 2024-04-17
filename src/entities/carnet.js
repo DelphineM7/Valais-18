@@ -94,6 +94,7 @@ export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,p
     k.destroyAll("ligne")
     k.destroyAll("entree")
     k.destroyAll("cross")
+    k.destroyAll("clignoterBeck")
 
     if (!ManagementInfo1) return; 
     
@@ -108,7 +109,7 @@ export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,p
         id_proof2
     ])
     if(proof1_Beck && page == 2){
-        k.add([k.rect(Beck_proof1_width,20), k.pos(390,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(Beck_proof1_width,20), k.pos(370,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         return;
     } 
     if(proof2_Beck && page == 2){
@@ -186,7 +187,7 @@ async function AllProofsfound(k, content,longeur, pos, id_text){
 // permet de clicker sur les éléments dans le carnet pour exclure des personnages
 export function ToDoWithProof(k,id, id_text){
     if(id === "proof1_Beck"){
-        k.add([k.rect(Beck_proof1_width,20), k.pos(390,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(Beck_proof1_width,20), k.pos(370,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         proof1_Beck = true
         k.destroyAll("proof1_Beck")
         if (!proof2_Beck)return;

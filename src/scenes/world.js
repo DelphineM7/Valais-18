@@ -147,8 +147,8 @@ export default async function world(k){
             RectoVersoLecture(k)
         }
     })
-
-    k.onKeyPress("j", () => { 
+ 
+    k.onKeyPress("c", () => { 
         if(HaveCarnet.getInstanceCarnet() && !CarnetOpen && !gameState.getFreezePlayer()) {
             CarnetOpen = true
             entities.carnet = k.add([

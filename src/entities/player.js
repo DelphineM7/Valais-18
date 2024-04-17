@@ -3,6 +3,14 @@
 import { gameState } from "../state/stateManagers.js";
 import { SetSprite } from "../utils.js";
 
+function AreKeyDownAlready(k, keys){
+    for ( const key of keys){
+        if(k.isKeyDown(key)) return true
+    }
+    return false
+}
+
+
 export function generatePlayerComponents(k, pos){
     return [
         k.sprite("player-idle-down"),
@@ -25,28 +33,28 @@ export function generatePlayerComponents(k, pos){
 
 export function setPlayerMovement(k, player){
     k.onKeyDown((key) =>{
-        if (gameState.getFreezePlayer()) return; /// Ca check si le player est freez ( c'et le cas pdt un dialogue)
-        if (["left","a"].includes(key)){   // ça check si la touche pressée est inclue dans le [] 
+        if (gameState.getFreezePlayer()) return; /// Ca check si le player est freez ( c'est le cas pdt un dialogue)
+        if (["left","a"].includes(key) && !AreKeyDownAlready(k, ["right", "d", "up", "w", "s", "down"])){   // ça check si la touche pressée est inclue dans le [] 
             player.flipX = false;  
             SetSprite(k,player,"player-side")  
             player.move(-player.speed, 0);
             player.direction = "left";     //permet de tenir à jour l'information sur la direcction du player pour les interactions
-            return;                         //on évite les problème si plusieur key sont appuyés
+            return;                         
         }
-        if(["right","d"].includes(key)){
+        if(["right","d"].includes(key) && !AreKeyDownAlready(k, ["left", "a", "up", "w", "s", "down"])){
             player.flipX = true; 
             SetSprite(k,player,"player-side")    
             player.move(player.speed, 0);
             player.direction = "right";     
             return; 
         }
-        if(["up","w"].includes(key)){
+        if(["up","w"].includes(key) && !AreKeyDownAlready(k, ["left", "a", "right", "d", "s", "down"])){
             SetSprite(k,player,"player-up")    
             player.move(0, -player.speed);
             player.direction = "up";     
             return; 
         }
-        if(["down","s"].includes(key)){
+        if(["down","s"].includes(key) && !AreKeyDownAlready(k, ["left", "a", "up", "w", "d", "right"])){
             SetSprite(k,player,"player-down")    
             player.move(0, player.speed);
             player.direction = "down";     
@@ -80,53 +88,79 @@ export function generateBigPlayerComponents(k, pos){ //Player pour la scène dan
     ];
 }
 
+
 export function setBigPlayerMovement(k, player){
     k.onKeyDown((key) =>{
         if (gameState.getFreezePlayer()) return;
-        if (["left","a"].includes(key)){   
+        if (["a"].includes(key) && !AreKeyDownAlready(k, ["up", "w", "s", "down"])){
             player.flipX = false;  
-            SetSprite(k,player,"big-player-side")  
+            if(player.curAnim() !== 'walk-big-side'){
+                SetSprite(k,player,"big-player-idle-side")  
+                player.play("walk-big-side")   
+            }
             player.move(-player.speed, 0);
             player.direction = "left";     
-            return;                         
+            return                 
         }
-        if(["right","d"].includes(key)){
+        if(["d"].includes(key) && !AreKeyDownAlready(k, ["up", "w", "s", "down"])){
             player.flipX = true; 
-            SetSprite(k,player,"big-player-side")    
+            if(player.curAnim() !== 'walk-big-side'){
+                SetSprite(k,player,"big-player-idle-side")   
+                player.play("walk-big-side")
+            }    
             player.move(player.speed, 0);
             player.direction = "right";     
-            return; 
+            return
         }
-        if(["up","w"].includes(key)){
-            SetSprite(k,player,"big-player-up")    
+        if(["w"].includes(key)){
+            if(player.curAnim() !== "walk-big-up"){
+                SetSprite(k,player,"big-player-idle-up")   
+                player.play("walk-big-up")   
+            }  
             player.move(0, -player.speed);
-            player.direction = "up";     
-            return; 
+            player.direction = "up";   
+            return
         }
-        if(["down","s"].includes(key)){
-            SetSprite(k,player,"big-player-idle-down")    
+        if(["s"].includes(key)){
+            if(player.curAnim() !== "walk-big-down"){
+                SetSprite(k,player,"big-player-idle-down")    
+                player.play("walk-big-down")  
+            } 
             player.move(0, player.speed);
-            player.direction = "down";     
-            return; 
+            player.direction = "down";   
+            return
         }
 
 
     })
     k.onKeyRelease(() => {  
         player.stop();
+        if (player.direction === "down"){
+            SetSprite(k,player,"big-player-idle-down-pos")  
+        }
+        if (player.direction === "right"){
+            SetSprite(k,player,"big-player-idle-side-pos")  
+            player.flipX = true; 
+        }
+        if (player.direction === "left"){
+            SetSprite(k,player,"big-player-idle-side-pos")  
+        }
+        if (player.direction === "up"){
+            SetSprite(k,player,"big-player-idle-up-pos")  
+        }
       })
 }
 
 export function generateMoyenPlayerComponents(k, pos){ 
     return [
-        k.sprite("medium-player-idle-down"),
+        k.sprite("petit-player-idle-down"),
         k.area({shape: new k.Rect(k.vec2(0,150), 70, 50)}), 
         k.body({}), 
         k.pos(pos),
         k.opacity(1),
         k.z(2),
         {
-            currentSprite : 'medium-player-idle-down',
+            currentSprite : "petit-player-idle-down",
             speed : 220,
             attackPower: 0, 
             direction: "down",
@@ -141,49 +175,74 @@ export function generateMoyenPlayerComponents(k, pos){
 export function setMoyenPlayerMovement(k, player){
     k.onKeyDown((key) =>{
         if (gameState.getFreezePlayer()) return;
-        if (["left","a"].includes(key)){   
+        if (["a"].includes(key)&& !AreKeyDownAlready(k, ["up", "w", "s", "down"])){
             player.flipX = false;  
-            SetSprite(k,player,"medium-player-side")  
+            if(player.curAnim() !== 'walk-side'){
+                SetSprite(k,player,"petit-player-idle-side")  
+                player.play("walk-side")   
+            }
             player.move(-player.speed, 0);
             player.direction = "left";     
-            return;                         
+                             
         }
-        if(["right","d"].includes(key)){
+        if(["d"].includes(key)&& !AreKeyDownAlready(k, ["up", "w", "s", "down"])){
             player.flipX = true; 
-            SetSprite(k,player,"medium-player-side")    
+            if(player.curAnim() !== 'walk-side'){
+                SetSprite(k,player,"petit-player-idle-side")   
+                player.play("walk-side")
+            }    
             player.move(player.speed, 0);
             player.direction = "right";     
-            return; 
+          
         }
-        if(["up","w"].includes(key)){
-            SetSprite(k,player,"medium-player-up")    
+        if(["w"].includes(key)){
+            if(player.curAnim() !== "walk-up"){
+                SetSprite(k,player,"petit-player-idle-up")   
+                player.play("walk-up")   
+            }  
             player.move(0, -player.speed);
-            player.direction = "up";     
-            return; 
+            player.direction = "up";   
+       
         }
-        if(["down","s"].includes(key)){
-            SetSprite(k,player,"medium-player-down")    
+        if(["s"].includes(key)){
+            if(player.curAnim() !== "walk-down"){
+                SetSprite(k,player,"petit-player-idle-down")    
+                player.play("walk-down")  
+            } 
             player.move(0, player.speed);
-            player.direction = "down";     
-            return; 
+            player.direction = "down";   
+     
         }
 
 
     })
     k.onKeyRelease(() => {  
         player.stop();
+        if (player.direction === "down"){
+            SetSprite(k,player,"petit-player-idle-down-pos")  
+        }
+        if (player.direction === "right"){
+            SetSprite(k,player,"petit-player-idle-side-pos")  
+            player.flipX = true; 
+        }
+        if (player.direction === "left"){
+            SetSprite(k,player,"petit-player-idle-side-pos")  
+        }
+        if (player.direction === "up"){
+            SetSprite(k,player,"petit-player-idle-up-pos")  
+        }
       })
 }
 
 export function generateBigMediumPlayerComponents(k, pos){
     return [
-        k.sprite("medium-big--player-idle-down"),
+        k.sprite("medium-big-player-idle-down"),
         k.area({shape: new k.Rect(k.vec2(0,210), 80, 30)}), 
         k.body({}), 
         k.pos(pos),
         k.opacity(1),
         {
-            currentSprite : 'medium-big--player-idle-down',
+            currentSprite : 'medium-big-player-idle-down',
             speed : 200,
             direction: "down",
 
@@ -196,37 +255,62 @@ export function generateBigMediumPlayerComponents(k, pos){
 export function setBigMediumPlayerMovement(k, player){
     k.onKeyDown((key) =>{
         if (gameState.getFreezePlayer()) return; 
-        if (["left","a"].includes(key)){   
+        if (["a"].includes(key)&& !AreKeyDownAlready(k, ["up", "w", "s", "down"])){
             player.flipX = false;  
-            SetSprite(k,player,"medium-big-player-side")  
+            if(player.curAnim() !== 'walk-medium-side'){
+                SetSprite(k,player,"medium-big-player-idle-side")  
+                player.play("walk-medium-side")   
+            }
             player.move(-player.speed, 0);
             player.direction = "left";     
-            return;                         
+                             
         }
-        if(["right","d"].includes(key)){
+        if(["d"].includes(key)&& !AreKeyDownAlready(k, ["up", "w", "s", "down"])){
             player.flipX = true; 
-            SetSprite(k,player,"medium-big-player-side")    
+            if(player.curAnim() !== 'walk-medium-side'){
+                SetSprite(k,player,"medium-big-player-idle-side")   
+                player.play("walk-medium-side")
+            }    
             player.move(player.speed, 0);
             player.direction = "right";     
-            return; 
+          
         }
-        if(["up","w"].includes(key)){
-            SetSprite(k,player,"medium-big-player-up")    
+        if(["w"].includes(key)){
+            if(player.curAnim() !== "walk-medium-up"){
+                SetSprite(k,player,"medium-big-player-idle-up")   
+                player.play("walk-medium-up")   
+            }  
             player.move(0, -player.speed);
-            player.direction = "up";     
-            return; 
+            player.direction = "up";   
+       
         }
-        if(["down","s"].includes(key)){
-            SetSprite(k,player,"medium-big-player-down")    
+        if(["s"].includes(key)){
+            if(player.curAnim() !== "walk-medium-down"){
+                SetSprite(k,player,"medium-big-player-idle-down")    
+                player.play("walk-medium-down")  
+            } 
             player.move(0, player.speed);
-            player.direction = "down";     
-            return; 
+            player.direction = "down";   
+     
         }
 
 
     })
     k.onKeyRelease(() => {  
         player.stop();
+        if (player.direction === "down"){
+            SetSprite(k,player,"medium-big-player-idle-down-pos")  
+        }
+        if (player.direction === "right"){
+            SetSprite(k,player,"medium-big-player-idle-side-pos")  
+            player.flipX = true; 
+        }
+        if (player.direction === "left"){
+            SetSprite(k,player,"medium-big-player-idle-side-pos")  
+        }
+        if (player.direction === "up"){
+            SetSprite(k,player,"medium-big-player-idle-up-pos")  
+        }
       })
 }
 

@@ -22,7 +22,7 @@ k.loadSpriteAtlas("./assets/png_map/scene_intro_2.png", {
 });
 
 k.loadSpriteAtlas("./assets/png_map/pont.png", {
-    "assets_pont" : {x:30 , y:24 , width: 1215 , height:688 },
+    "assets_pont" : {x:365 , y:452 , width: 1215 , height:688 }, // 30 24
 });
 
 k.loadSpriteAtlas("./assets/png_map/place.png", {
@@ -38,22 +38,73 @@ k.loadSpriteAtlas("./assets/png_map/salon.png", {
 });
  
 //assets player et pnj
-k.loadSpriteAtlas( "./assets/pnj/player.png", {
-    "medium-player-idle-down" : {x:24 , y:849 , width: 88 , height:199},
-    'medium-player-down' : {x:24 , y:849 , width: 88 , height:199},
-    'medium-player-side' : {x:129 , y:852 , width: 70 , height:196 },
-    'medium-player-up' : {x:227 , y:852 , width: 86 , height:196 },
+k.loadSpriteAtlas("./assets/pnj/player_petit.png", {
+    "petit-player-idle-down": {sliceX: 3,sliceY: 1,x: 4,y: 8,width: 256,height: 200,
+        anims: {
+            'walk-down': {from: 1, to:2, speed : 5, loop: true}
+        },
+    },
+    "petit-player-idle-down-pos": {x: 4,y: 8,width: 85,height: 200},
 
-    "medium-big--player-idle-down" : {x:24 , y:536 , width: 105 , height:245},
-    'medium-big-player-down' : {x:24 , y:536 , width: 105 , height:245},
-    'medium-big-player-side' : {x:153 , y:536 , width: 82 , height:244 },
-    'medium-big-player-up' : {x:273 , y:535 , width: 110 , height:246 },
+    'petit-player-idle-side': {sliceX: 5,sliceY: 1,x: 15,y: 220,width: 350,height: 200,
+        anims: {
+            'walk-side': {from: 1, to:4, speed : 5, loop: true}
+        },
+    },
+    "petit-player-idle-side-pos": {x: 4,y: 219,width: 85,height: 200},
 
-    "big-player-idle-down" : {x:29 , y:44 , width: 164 , height:390},
-    'big-player-down' : {x:29 , y:44 , width: 164 , height:390},
-    'big-player-side' : {x:228 , y:44 , width: 136 , height:388 },
-    'big-player-up' : {x:421 , y:43 , width: 166 , height:390 },
+    'petit-player-idle-up': {sliceX: 3,sliceY: 1,x: 4,y: 431,width: 265,height: 206,
+        anims: {
+            'walk-up': {from: 1, to:2, speed : 5, loop: true}
+        },
+    },
+    "petit-player-idle-up-pos": {x: 4,y: 431,width: 85,height: 200},
+})
 
+k.loadSpriteAtlas("./assets/pnj/player_moyen.png", {
+    "medium-big-player-idle-down": {sliceX: 3,sliceY: 1,x: 0,y: 0,width: 341,height: 256,
+        anims: {
+            'walk-medium-down': {from: 1, to:2, speed : 5, loop: true}
+        },
+    },
+    "medium-big-player-idle-down-pos": {x: 0,y: 0,width: 115,height: 256},
+
+    'medium-big-player-idle-side': {sliceX: 5,sliceY: 1,x: 9,y: 261,width: 466,height: 262,
+        anims: {
+            'walk-medium-side': {from: 1, to:4, speed : 5, loop: true}
+        },
+    },
+    "medium-big-player-idle-side-pos": {x: 9,y: 261,width: 98,height: 262},
+
+    'medium-big-player-idle-up': {sliceX: 3,sliceY: 1,x: 5,y: 528,width: 353,height: 253,
+        anims: {
+            'walk-medium-up': {from: 1, to:2, speed : 5, loop: true}
+        },
+    },
+    "medium-big-player-idle-up-pos": {x: 5,y: 528,width: 120,height: 253},
+})
+
+k.loadSpriteAtlas("./assets/pnj/player_grand.png", {
+    "big-player-idle-down": {sliceX: 3,sliceY: 1,x: 24,y: 0,width: 565,height: 408,
+        anims: {
+            'walk-big-down': {from: 1, to:2, speed : 5, loop: true}
+        },
+    },
+    "big-player-idle-down-pos": {x: 26,y: 6,width: 182,height: 400},
+
+    'big-player-idle-side': {sliceX: 5,sliceY: 1,x: 57,y: 424,width: 827,height: 409,
+        anims: {
+            'walk-big-side': {from: 1, to:4, speed : 5, loop: true}
+        },
+    },
+    "big-player-idle-side-pos": {x: 57,y: 424,width: 161,height: 409},
+
+    'big-player-idle-up': {sliceX: 3,sliceY: 1,x: 21,y: 841,width: 583,height: 402,
+        anims: {
+            'walk-big-up': {from: 1, to:2, speed : 5, loop: true}
+        },
+    },
+    "big-player-idle-up-pos": {x: 21,y: 841,width: 192,height: 402},
 })
 
 k.loadSpriteAtlas( "./assets/pnj/pnj_Bellet.png", { 

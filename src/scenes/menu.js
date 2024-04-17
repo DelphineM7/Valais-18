@@ -6,7 +6,7 @@ import { Textes_Menu } from "../content/Instruction_texte.js";
 export const Assets_carnet = []
 export let Verso_Guillot_Show = "Verso_Guillot" 
 export let Verso_DuFay_Show = "Verso_Dufay"
-export let Beck_proof1_width = 120
+export let Beck_proof1_width = 160
 export let Beck_proof2_x = 650
 export let Beck_proof2_y = 225
 export let Vuilloud_proof2_x = 780
@@ -118,7 +118,7 @@ export default async function menu(k){
             Guillot_x = 660
 
         }
-        k.go("intro_1")
+        k.go("pont")
     })
 
 }

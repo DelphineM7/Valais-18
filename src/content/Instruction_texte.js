@@ -34,7 +34,7 @@ export const Textes_Intro1 = {
 // Textes Pont 
 const french_Pont = [
     [   
-        "Appuie sur j pour ouvrir le carnet"
+        "Appuie sur c pour ouvrir le carnet"
     ],
     [
         "Appuie sur enter pour arrêter la lecture"
@@ -75,6 +75,9 @@ const french_Pont = [
     [
         "Appuie sur e pour lui parler"
     ],
+    [
+        "Utilise les touches 'a','w','d' et 's' pour déplacer le personnage"
+    ]
 ]
 
 export const Textes_Pont = {
@@ -84,7 +87,7 @@ export const Textes_Pont = {
 // Textes Place
 const french_Place = [
     [   
-        "Appuie sur j pour ouvrir le carnet"
+        "Appuie sur c pour ouvrir le carnet"
     ],
     [
         "Appuie sur enter pour fermer le carnet",
@@ -113,7 +116,7 @@ export const Textes_Place = {
 // Textes Salon
 const french_Salon = [
     [   
-        "Appuie sur j pour ouvrir le carnet"
+        "Appuie sur c pour ouvrir le carnet"
     ],
     [
         "Appuie sur enter pour fermer le carnet",
@@ -145,7 +148,7 @@ export const Textes_Salon = {
 // Textes Bureau
 const french_Bureau = [
     [   
-        "Appuie sur j pour ouvrir le carnet"
+        "Appuie sur c pour ouvrir le carnet"
     ],
     [
         "Appuie sur enter pour fermer le carnet",

@@ -169,8 +169,8 @@ export default async function house(k){
             RectoVersoLecture(k)
         }
 
-    });
-    k.onKeyPress("j", () => { 
+    }); 
+    k.onKeyPress("c", () => { 
         if(HaveCarnet.getInstanceCarnet()&& !CarnetOpen && !gameState.getFreezePlayer()) {
             CarnetOpen = true
             entities.carnet = k.add([

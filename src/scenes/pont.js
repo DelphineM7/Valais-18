@@ -78,8 +78,7 @@ export default async function pont(k){
         journal = "journal_grand_Lecture"
         adaptlectureJ = 20
     }
-    if(!gameStatePont.getfirstTimepont())Instruction(k, 135,55, k.vec2(1115-adaptlectureJ,25),"InstructionF",Textes[0]);
-
+    if(!gameStatePont.getfirstTimepont())Instruction(k, 135,55, k.vec2(1115-adaptlectureJ,25),"InstructionF",Textes[0]); 
     k.onKeyPress("e", async ()=>{
         if(CollideJournal && !ReadingJournal && !CarnetOpen){
             ReadingJournal = true
@@ -138,6 +137,7 @@ export default async function pont(k){
             k.destroyAll("InstructionRecto")
             k.destroyAll("Verso_Guillot_id")
             k.destroyAll("Verso_Dufay_id")
+            k.destroyAll("clignoterBeck")
             entities.carnet.currentSprite = Sprite_Carnet
             CarnetOpen = false
             const page_ferme= k.play("book", {
@@ -145,12 +145,25 @@ export default async function pont(k){
             })
             checkfin ()
             return;   
-
         }
         if (CollideJournal ){
             if(!SeenJournal.getInstanceJournal())return
             DestroyShowObject(k,"InstructionjournalExit","journal_grand" )
             ReadingJournal = false
+            const clignoterJournal = k.add([k.rect(135, 55), k.pos(1115-adaptlectureJ,25), k.opacity(0), k.color(27,29,52), "clignoterJournal"])
+            if (gameStatePont.getfirstTimepont() && HaveCarnet.getInstanceCarnet() && !Beck_ok.getinstanceBeck()){
+                let increment = true;
+                const updateSubscription = clignoterJournal.onUpdate(() => {
+                    if (increment) {
+                        clignoterJournal.opacity += 0.03; 
+                        if (clignoterJournal.opacity >= 1) increment = false; 
+                    } else {
+                        clignoterJournal.opacity -= 0.03; 
+                        if (clignoterJournal.opacity <= 0) increment = true; 
+                    }
+                });
+
+            }
             return;   
         } if(CollideAne ){
             DestroyShowObject(k,"InstructionExitAne","Bib_tableau_Dufour" ) 
@@ -161,7 +174,7 @@ export default async function pont(k){
             return; 
         }
     })
-    k.onKeyPress("j", async ()  => { 
+    k.onKeyPress("c", async ()  => { 
         if(HaveCarnet.getInstanceCarnet() && !CarnetOpen && !gameState.getFreezePlayer()) {
             CarnetOpen = true
             entities.carnet = k.add([
@@ -174,12 +187,27 @@ export default async function pont(k){
                 "CarnetOPEN"
             ])
             Carnet(k)
+            k.destroyAll("clignoterJournal")
             Instruction(k, 170,60, k.vec2(1050,200),"InstructionExitCarnet",Textes[3])
             Instruction(k, 170,260, k.vec2(1050,300),"InstructionCarnet", Textes[4])
             if (HaveReadCarnet.getInstanceCarnet_lecture()){
                 await dialog(k, k.vec2(32,16), responses[2])
                 HaveReadCarnet.setInstanceCarnet_lecture(false)
                 gameState.setFreezePlayer(true)
+            } 
+            if(!Beck_ok.getinstanceBeck()){
+                const clignoterBeck = k.add([k.rect(200, 30), k.pos(300,220), k.opacity(1), k.color(213,170,113), "clignoterBeck"]) 
+                let incrementBeck = true;
+                const updateSubscriptionBeck = clignoterBeck.onUpdate(() => {
+                    if (incrementBeck) {
+                        clignoterBeck.opacity += 0.01; 
+                        if (clignoterBeck.opacity >= 0.8) incrementBeck = false; 
+                    } else {
+                        clignoterBeck.opacity -= 0.01; 
+                        if (clignoterBeck.opacity <= 0) incrementBeck = true; 
+                    }
+                });
+
             }
         }
     })
@@ -192,7 +220,7 @@ export default async function pont(k){
             let adaptlecture =0
             if(!TutoDone.getInstanceTuto() && !SeenJournal.getInstanceJournal()){ 
                 Tutodoing.setInstanceTuto2(true)
-                createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")  
+                createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(370,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")  
                 if(NeedLecture.getLecture()){FontSize = 30, adaptlecture = 20}
                 const InstructionBoxtuto = k.add([k.rect(500, 350+adaptlecture), k.pos(375,200), k.outline(4), k.opacity(0.7),k.offscreen(),"InstructionTutoCarnet"]) 
                 const textInstructionBoxtuto = InstructionBoxtuto.add([
@@ -220,7 +248,7 @@ export default async function pont(k){
             }
             if(!TutoDone.getInstanceTuto() && SeenJournal.getInstanceJournal()){
                 Tutodoing.setInstanceTuto2(true)
-                createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")
+                createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(370,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")
                 if(NeedLecture.getLecture()){adaptlecture = 20, fontSize2=23.5}
                 const InstructionBoxtuto = k.add([k.rect(665, 530), k.pos(300,100), k.outline(4), k.opacity(0.9),k.offscreen(),"InstructionTutoCarnet"]) 
                 const textInstructionBoxtuto = InstructionBoxtuto.add([
@@ -248,7 +276,7 @@ export default async function pont(k){
                 
             }    
             if(TutoDone.getInstanceTuto()){
-                createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(390,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")
+                createProof(k,2, entities.carnet, Beck_ok.getinstanceBeck(), SeenJournal.getInstanceJournal(),k.vec2(370,250),Beck_proof1_width, 20,k.vec2(Beck_proof2_x,Beck_proof2_y),50 , 20, "proof1_Beck", "proof2_Beck")
             }
         })
         k.onClick("Charles_Emmanuel",() => createProof(k,3, entities.carnet, Rivaz_ok.getinstanceRivaz(), Meet_Rivaz_ok.getinstanceRivaz(),k.vec2(410,155),185, 255,k.vec2(295,320),195 , 245, "proof1_Rivaz", "proof2_Rivaz"))
@@ -305,8 +333,7 @@ export default async function pont(k){
         k.onHoverEnd("Rey_Bellet",() => k.destroyAll("ligne")) 
 
     if (gameStatePont.getfirstTimepont()) {
-        dialog(k, k.vec2(32,16), responses[0])
-        const transitionBox = k.add([k.rect(1280, 720), k.pos(0,0), k.opacity(1), k.color(27,29,52), "transitionBox"]) 
+        const transitionBox = k.add([k.rect(1280, 720), k.pos(0,0), k.opacity(1), k.color(27,29,52),k.z(1), "transitionBox"]) 
         k.wait(1, () => {
             transitionBox.onUpdate(()=>{
                 transitionBox.opacity -= 0.4 * k.dt()
@@ -314,9 +341,15 @@ export default async function pont(k){
         })
         k.wait(4, ()=> {
             k.destroyAll("transitionBox")
+        }) 
+        await dialog(k, k.vec2(32,16), responses[0])
+        Instruction(k, 200,75, k.vec2(570,450),"InstructionTuto",Textes[14])
+        k.onKeyDown((key) =>{
+            if (["a","w","d","s"].includes(key)){
+                k.destroyAll("InstructionTuto")
+            }
+
         })
-        
-        
     } 
 
     entities.moyen_player.onCollide("door-entrance", () =>{

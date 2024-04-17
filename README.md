@@ -50,6 +50,8 @@ L'absence de femmes dans les portraits représentait un problème❌. De ce fait
 
 - Les documents d'archives ont été numérisés par les Archives de l'Etat du Valais 💖.
 
+- Le tutoriel de JSLegendDev m'a grandement aidé pour la structure de code et les mécanismes de base 🎞️ (https://www.youtube.com/watch?v=pVAmEJqK-3A.). 
+
 ## **Sources Historiques** 📖
 Voici les sources qui ont permis d'établir les portraits historiques des personnages présents dans le jeu. 
 

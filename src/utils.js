@@ -32,7 +32,7 @@ export function drawBoundaries(k, map, layer){
     }
 }
 
-export function Instruction(k, widthrec,heightrec, pos, id, content){
+export async function Instruction(k, widthrec,heightrec, pos, id, content){
     let sizeFont = 20
     let adaptlecture = 0
     if(NeedLecture.getLecture()){sizeFont = 15, adaptlecture=20}
