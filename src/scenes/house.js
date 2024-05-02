@@ -175,6 +175,7 @@ export default async function house(k){
             CarnetOpen = true
             entities.carnet = k.add([
                 k.sprite(Sprite_Carnet),
+                k.area({shape: new k.Rect(k.vec2(0,0), 816, 533)}),
                 k.pos(230,100),
                 k.offscreen(),
                 {

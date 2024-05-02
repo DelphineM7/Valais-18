@@ -30,6 +30,8 @@ export function generateCarnetComponents(k, pos){
 
 // affiche le carnet et tient à jour l'index avec des croix
 export function Carnet(k){
+    k.onHover("CarnetOPEN",() =>{ k.setCursor("pointer")})
+    k.onHoverEnd("CarnetOPEN",() =>{ k.setCursor("auto")})
     let x_entree_default = 182
     let y_multi_default =  39.5
     let adapt_cross_x = 0

@@ -155,6 +155,7 @@ export default async function salon(k){
             entities.carnet = k.add([
                 k.sprite(Sprite_Carnet), 
                 k.pos(230,100),
+                k.area({shape: new k.Rect(k.vec2(0,0), 816, 533)}),
                 k.offscreen(),
                 {
                     currentSprite : Sprite_Carnet,
