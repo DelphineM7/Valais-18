@@ -64,7 +64,8 @@ export default async function salon(k){
         papier_2 = "Papier_2_2_Lecture"
         adaptlectureJ = 20
     }
-    Instruction(k, 135,55, k.vec2(1115-adaptlectureJ,25),"InstructionF",Textes[0]);
+    Instruction(k, 145,55, k.vec2(1105-adaptlectureJ,25),"InstructionF",Textes[0]);
+
 
     const inside = k.play("inside", {
         volume: 0.02,

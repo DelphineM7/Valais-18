@@ -78,7 +78,7 @@ export default async function pont(k){
         journal = "journal_grand_Lecture"
         adaptlectureJ = 20
     }
-    if(!gameStatePont.getfirstTimepont())Instruction(k, 135,55, k.vec2(1115-adaptlectureJ,25),"InstructionF",Textes[0]); 
+    if(!gameStatePont.getfirstTimepont())Instruction(k, 145,55, k.vec2(1105-adaptlectureJ,25),"InstructionF",Textes[0]); 
     k.onKeyPress("e", async ()=>{
         if(CollideJournal && !ReadingJournal && !CarnetOpen){
             ReadingJournal = true
@@ -92,7 +92,7 @@ export default async function pont(k){
         if(CollideCarnet){
             DestroyShowObject(k,"InstructionECarnet","carnet" )
             HaveCarnet.setInstanceCarnet(true)
-            Instruction(k, 135,55, k.vec2(1115-adaptlectureJ,25),"InstructionF",Textes[0])
+            Instruction(k, 145,55, k.vec2(1105-adaptlectureJ,25),"InstructionF",Textes[0])
             k.destroyAll(CollideCarnet)
             return;   
         }
@@ -150,7 +150,7 @@ export default async function pont(k){
             if(!SeenJournal.getInstanceJournal())return
             DestroyShowObject(k,"InstructionjournalExit","journal_grand" )
             ReadingJournal = false
-            const clignoterJournal = k.add([k.rect(135, 55), k.pos(1115-adaptlectureJ,25), k.opacity(0), k.color(27,29,52), "clignoterJournal"])
+            const clignoterJournal = k.add([k.rect(145 + adaptlectureJ, 55), k.pos(1105-adaptlectureJ,25), k.opacity(0), k.color(27,29,52), "clignoterJournal"])
             if (gameStatePont.getfirstTimepont() && HaveCarnet.getInstanceCarnet() && !Beck_ok.getinstanceBeck()){
                 let increment = true;
                 const updateSubscription = clignoterJournal.onUpdate(() => {

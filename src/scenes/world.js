@@ -68,7 +68,8 @@ export default async function world(k){
         Sprite_Carnet = "Lecture_carnet_Index"
         adaptlectureJ = 20
     }
-    Instruction(k, 135,55, k.vec2(1115-adaptlectureJ,25),"InstructionF",Textes[0]);
+    Instruction(k, 145,55, k.vec2(1105-adaptlectureJ,25),"InstructionF",Textes[0]);
+
 
     if(!Music_Outside.getinstanceOutside()){
         music.paused = false
