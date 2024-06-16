@@ -74,7 +74,7 @@ export function globalStateManagerCarnet(){
     let instanceCarnet = null; 
 
     function createInstanceCarnet(){
-        let WeHaveCarnet = false  //false
+        let WeHaveCarnet = true  //false
 
         return{
             setInstanceCarnet(value){
@@ -122,7 +122,7 @@ export function globalStateManagerJournal(){
     let instanceJournal = null; 
 
     function createInstanceJournal(){
-        let WeHaveSeenJournal = false  //false
+        let WeHaveSeenJournal = true  //false
 
         return{
             setInstanceJournal(value){

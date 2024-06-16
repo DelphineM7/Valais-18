@@ -73,9 +73,9 @@ export default async function menu(k){
         if(!NeedLecture.getLecture()){
             k.loadFont("NiceFont", "./assets/font/jupiterc.ttf")
             Assets_carnet.push(
-                ["page_Garde", "carnet_Index", "carnet_Index", ],
-                ["Adrien_Felix","carnet_Pottier_vide", "carnet_Pottier",205,"carnet_Pottier_plein","ligne_Pottier" ],
+                ["page_Garde", "carnet_Index_cadenas", "carnet_Index", ],
                 ["Alphonse_Beck","carnet_Beck_vide", "carnet_Beck", 150, "carnet_Beck_plein","ligne_Beck"], 
+                ["Adrien_Felix","carnet_Pottier_vide", "carnet_Pottier",205,"carnet_Pottier_plein","ligne_Pottier" ],
                 ["Charles_Emmanuel","carnet_Rivaz_vide", "carnet_Rivaz",270, "carnet_Rivaz_plein","ligne_Rivaz"],
                 ["Dufour_Michel","carnet_Dufour_vide", "carnet_Dufour",150, "carnet_Dufour_plein","ligne_Dufour" ],
                 ["Emile_Vuilloud","carnet_Vuilloud_vide", "carnet_Vuilloud",160, "carnet_Vuilloud_plein","ligne_Vuilloud"],
@@ -89,9 +89,9 @@ export default async function menu(k){
         if(NeedLecture.getLecture()){
             k.loadFont("NiceFont", "./assets/font/Luciole-Regular.ttf")
             Assets_carnet.push(
-                ["page_Garde", "Lecture_carnet_Index", "Lecture_carnet_Index", ],
-                ["Adrien_Felix","Lecture_carnet_Pottier_vide", "Lecture_carnet_Pottier",225,"Lecture_carnet_Pottier_plein","Lecture_ligne_Pottier" ],
+                ["page_Garde", "Lecture_carnet_Index_cadenas", "Lecture_carnet_Index", ],
                 ["Alphonse_Beck","Lecture_carnet_Beck_vide", "Lecture_carnet_Beck", 160, "Lecture_carnet_Beck_plein","Lecture_ligne_Beck"], 
+                ["Adrien_Felix","Lecture_carnet_Pottier_vide", "Lecture_carnet_Pottier",225,"Lecture_carnet_Pottier_plein","Lecture_ligne_Pottier" ],
                 ["Charles_Emmanuel","Lecture_carnet_Rivaz_vide", "Lecture_carnet_Rivaz",310, "Lecture_carnet_Rivaz_plein","Lecture_ligne_Rivaz"],
                 ["Dufour_Michel","Lecture_carnet_Dufour_vide", "Lecture_carnet_Dufour",160, "Lecture_carnet_Dufour_plein","Lecture_ligne_Dufour" ],
                 ["Emile_Vuilloud","Lecture_carnet_Vuilloud_vide", "Lecture_carnet_Vuilloud",165, "Lecture_carnet_Vuilloud_plein","Lecture_ligne_Vuilloud"],
@@ -118,7 +118,7 @@ export default async function menu(k){
             Guillot_x = 660
 
         }
-        k.go("intro_1")
+        k.go("pont")
     })
 
 }

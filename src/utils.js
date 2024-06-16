@@ -87,3 +87,19 @@ export function startInteractionPNJ (k, pnj, player, spriteright,spriteleft,spri
         return
     }
 }
+
+export function ShowKey (k, sprite, anim, pos1, pos2, area1, area2, opacity,scale, id){
+    const InstructionBox = k.add([k.sprite(sprite), k.pos(pos1,pos2),k.area({shape: new k.Rect(k.vec2(pos1,pos2), area1, area2)}), k.scale(scale), k.opacity(opacity),k.offscreen(),id,]) 
+    InstructionBox.play(anim) 
+}
+
+export function ShowKeynoAnim (k, sprite, pos1, pos2, area1, area2, opacity,scale, id){
+    const InstructionBox = k.add([k.sprite(sprite), k.pos(pos1,pos2),k.area({shape: new k.Rect(k.vec2(pos1,pos2), area1, area2)}), k.scale(scale), k.opacity(opacity),k.offscreen(),id]) 
+}
+
+export function PaiettesE (k){
+    const InstructionPailette = k.add([k.sprite("etoile"), k.pos(1118,19), k.scale(0.2), k.opacity(1),k.offscreen(),"PailetteE",]) 
+    InstructionPailette.play("etoile_anim") 
+    k.wait(2, () => {k.destroy(InstructionPailette) })
+}
+

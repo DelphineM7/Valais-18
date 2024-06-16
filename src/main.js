@@ -107,6 +107,30 @@ k.loadSpriteAtlas("./assets/pnj/player_grand.png", {
     "big-player-idle-up-pos": {x: 21,y: 841,width: 192,height: 402},
 })
 
+k.loadSpriteAtlas( "./assets/pnj/pnj_Folken_cinematique.png",{
+    "pnj_Folken-idle-down": {sliceX: 2,sliceY: 1,x: 10,y: 237,width: 218,height: 204,
+        anims: {
+            'walk-Folken-down': {from: 0, to:1, speed : 3, loop: true}
+        },
+    },
+    "pnj_Folken_down_little" : {x:12 , y:18, width: 94 , height:204 },
+
+    "pnj_Folken-idle-side": {sliceX: 4,sliceY: 1,x: 12,y: 452,width: 380,height: 214,
+        anims: {
+            'walk-Folken-side': {from: 0, to:3, speed : 4, loop: true}
+        },
+    },
+    "pnj_Folken_left_little" : {x:144 , y:17, width: 84 , height:207 },
+    "pnj_Folken_right_little" : {x:370 , y:14, width: 82 , height:205 },
+
+    "pnj_Folken-idle-up": {sliceX: 2,sliceY: 1,x: 251,y: 237,width: 218,height: 208,
+        anims: {
+            'walk-Folken-up': {from: 0, to:1, speed : 3, loop: true}
+        },
+    },
+    "pnj_Folken_up_little" : {x:252 , y:18, width:92 , height:202 },
+})
+
 k.loadSpriteAtlas( "./assets/pnj/pnj_Bellet.png", { 
     "marchand-idle-down" : {x:26 , y:34 , width: 94 , height:211 },
     'marchand-down' : {x:26 , y:34 , width: 94 , height:211 },
@@ -115,12 +139,6 @@ k.loadSpriteAtlas( "./assets/pnj/pnj_Bellet.png", {
     'marchand-up' : {x:186 , y:34 , width: 94 , height:212 },
 })
 
-k.loadSpriteAtlas( "./assets/pnj/pnj_Folken_cinematique.png",{
-    "pnj_Folken_down_little" : {x:12 , y:18, width: 94 , height:204 },
-    "pnj_Folken_left_little" : {x:144 , y:17, width: 84 , height:207 },
-    "pnj_Folken_right_little" : {x:370 , y:14, width: 82 , height:205 },
-    "pnj_Folken_up_little" : {x:252 , y:18, width:92 , height:202 },
-})
 
 k.loadSpriteAtlas( "./assets/pnj/pnj_Folken.png",{
     "pnj_Folken_down" : {x:31 , y:3, width: 196 , height:397 },
@@ -210,7 +228,7 @@ k.loadSpriteAtlas( "./assets/objects/carnet.png",{
 
 // carnet
 k.loadSpriteAtlas( "./assets/carnet/carnet_1_1.png",{ 
-    "carnet_Index" : {x:54, y:54, width: 816 , height:524 },
+    "carnet_Index_cadenas" : {x:54, y:54, width: 816 , height:524 },
     "carnet_Pottier_vide" : {x:1078 , y:39, width: 816 , height:533 },
     "carnet_Beck_vide" : {x:58 , y:621, width: 816 , height:533 },
     "carnet_Rivaz_vide" : {x:1068 , y:635, width: 816 , height:533 },
@@ -226,6 +244,7 @@ k.loadSpriteAtlas( "./assets/carnet/carnet_1_2.png",{
 })
 
 k.loadSpriteAtlas( "./assets/carnet/carnet_2_1.png",{ 
+    "carnet_Index" : {x:54, y:54, width: 816 , height:524 },
     "carnet_Pottier" : {x:1078 , y:39, width: 816 , height:533 },
     "carnet_Beck" : {x:58 , y:621, width: 816 , height:533 },
     "carnet_Rivaz" : {x:1068 , y:635, width: 816 , height:533 },
@@ -258,7 +277,7 @@ k.loadSpriteAtlas( "./assets/carnet/carnet_3_2.png",{
 })
 
 k.loadSpriteAtlas( "./assets/carnet/Lecture_carnet_1_1.png",{ 
-    "Lecture_carnet_Index" : {x:54, y:54, width: 816 , height:524 },
+    "Lecture_carnet_Index_cadenas" : {x:54, y:54, width: 816 , height:524 },
     "Lecture_carnet_Pottier_vide" : {x:1078 , y:39, width: 816 , height:533 },
     "Lecture_carnet_Beck_vide" : {x:58 , y:621, width: 816 , height:533 },
     "Lecture_carnet_Rivaz_vide" : {x:1068 , y:635, width: 816 , height:533 },
@@ -274,6 +293,7 @@ k.loadSpriteAtlas( "./assets/carnet/Lecture_carnet_1_2.png",{
 })
 
 k.loadSpriteAtlas( "./assets/carnet/Lecture_carnet_2_1.png",{ 
+    "Lecture_carnet_Index" : {x:54, y:54, width: 816 , height:524 },
     "Lecture_carnet_Pottier" : {x:1078 , y:39, width: 816 , height:533 },
     "Lecture_carnet_Beck" : {x:58 , y:621, width: 816 , height:533 },
     "Lecture_carnet_Rivaz" : {x:1068 , y:635, width: 816 , height:533 },
@@ -350,6 +370,43 @@ k.loadSpriteAtlas( "./assets/carnet/carnet_Historio_3.png",{
     "carnet_p_7" : {x:0 , y:0, width: 1047 , height:671 },
     "carnet_p_8" : {x:0 , y:670, width: 1047 , height:671 },
     
+})
+// instructions 
+k.loadSpriteAtlas( "./assets/instructions/Instructions_1.png",{ 
+    "a_w_s_d" : {x:15 , y:817, width: 712 , height:505 },
+    "e": {sliceX: 2,sliceY: 1,x: 850,y: 339,width: 461,height: 278,
+        anims: {
+            'e-down': {from: 0, to:1, speed : 2, loop: true}
+        },
+    },
+    "c": {sliceX: 2,sliceY: 1,x: 16,y: 408,width: 456,height: 269,
+        anims: {
+            'c-down': {from: 0, to:1, speed : 2, loop: true}
+        },
+    },
+    "enter": {sliceX: 2,sliceY: 1,x: 733,y: 910,width: 589,height: 416,
+        anims: {
+            'enter-down': {from: 0, to:1, speed : 2, loop: true}
+        },
+    },
+    "fleche_gauche": {sliceX: 2,sliceY: 1,x: 15,y: 10,width: 466,height: 277,
+        anims: {
+            'fleche_gauche-down': {from: 0, to:1, speed : 2, loop: true}
+        },
+    },
+    "fleche_droite": {sliceX: 2,sliceY: 1,x: 850,y: 11,width: 456,height: 273,
+        anims: {
+            'fleche_droite-down': {from: 0, to:1, speed : 2, loop: true}
+        },
+    },
+})
+
+k.loadSpriteAtlas( "./assets/instructions/etoile_touche.png",{ 
+    "etoile": {sliceX: 2,sliceY: 1,x: 133,y: 235,width: 1160,height: 620,
+        anims: {
+            'etoile_anim': {from: 0, to:1, speed : 3, loop: true}
+        },
+    },
 })
 
 

@@ -42,6 +42,9 @@ const french_Torrent = [
     [   
         "Je m'appelle Joseph Torrent, je suis agriculteur comme mon père ! Nous faisons principalement de l'élevage de vers à soie.",
         "Je suis désolé, je n'ai pas commandé de tableau, je ne suis pas la personne que tu cherches !"
+    ],
+    [
+        "Ravi d'avoir fait ta connaissance"
     ]
 ]
 

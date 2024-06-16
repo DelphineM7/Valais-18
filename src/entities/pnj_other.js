@@ -44,8 +44,9 @@ export async function EventMarieAnneFolken(k, map){
     if(!Meet_Bellet_ok.getinstanceBellet() || !Meet_Pottier_ok.getinstancePottier() || Meet_Folken_ok.getinstanceFolken())return;
     Meet_Folken_ok.setinstanceFolken(true)
     gameState.setFreezePlayer(true)
-    const petite_Folken = map.add([k.sprite("pnj_Folken_down_little"), k.pos(31, 400), k.z(0), k.lifespan(7),"pnj-Folken-petite"])
+    const petite_Folken = map.add([k.sprite("pnj_Folken-idle-down"), k.pos(31, 400), k.z(0), k.lifespan(6),"pnj-Folken-petite"])
     k.wait(0, ()=> {
+        petite_Folken.play("walk-Folken-down")   
         k.tween(
             petite_Folken.pos,
             k.vec2(31, 414),
@@ -53,8 +54,10 @@ export async function EventMarieAnneFolken(k, map){
             (val) => petite_Folken.pos = val,
             )
     })
-    k.wait(3, () => {
-        petite_Folken.use(k.sprite("pnj_Folken_right_little"))
+    petite_Folken.stop()
+    k.wait(2, () => {
+        petite_Folken.use(k.sprite("pnj_Folken-idle-side"))
+        petite_Folken.play("walk-Folken-side")
 	    k.tween(
         petite_Folken.pos,
 		k.vec2(410, 370),
@@ -62,8 +65,10 @@ export async function EventMarieAnneFolken(k, map){
 		(val) => petite_Folken.pos = val,
         )
     })
-    k.wait(5, () => {
-        petite_Folken.use(k.sprite("pnj_Folken_up_little"))
+    petite_Folken.stop()
+    k.wait(4, () => {
+        petite_Folken.use(k.sprite("pnj_Folken-idle-up"))
+        petite_Folken.play("walk-Folken-up")   
 	    k.tween(
         petite_Folken.pos,
 		k.vec2(410, 360),
@@ -71,7 +76,8 @@ export async function EventMarieAnneFolken(k, map){
 		(val) => petite_Folken.pos = val,
         )   
     })
-    k.wait(7, () => {gameState.setFreezePlayer(false)})
+    petite_Folken.stop()
+    k.wait(5, () => {gameState.setFreezePlayer(false)})
 }
 
 // fonction de fin de jeu, apparition de dufour
