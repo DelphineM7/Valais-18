@@ -1,4 +1,4 @@
-import { Instruction, DestroyInstruction, DestroyShowObject, colorizeBackground, drawBoundaries, fetchMapData, ShowObject, startInteractionPNJ, SetSprite} from "../utils.js";
+import { Instruction, DestroyInstruction, DestroyShowObject, colorizeBackground, drawBoundaries, fetchMapData, ShowObject, startInteractionPNJ, SetSprite, ShowKey, PaiettesE} from "../utils.js";
 import { setBigPlayerMovement, generateBigPlayerComponents } from "../entities/player.js";
 import { NeedLecture, gameState, Meet_Folken_ok, HaveCarnet,SeenJournal,Beck_ok,Meet_Torrent_ok, Torrent_ok, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
 import { Carnet, setTournerPage, createProof,ToDoWithProof, Souligner, RectoVersoLecture, checkfin} from "../entities/carnet.js";
@@ -74,14 +74,12 @@ export default async function house(k){
         PortraiDerivaz = "Big_tabl_Rivaz_Lecture"
         adaptlectureJ = 20
     }
-    Instruction(k, 145,55, k.vec2(1105-adaptlectureJ,25),"InstructionF",Textes[0]);
-
+    ShowKey (k, "c",  "c-down", 1150, 55, 289, 359, 1, 0.2,"InstructionF")
 
     const inside = k.play("inside", {
         volume: 0.02,
         loop: true
     })
-
     setBigPlayerMovement(k, entities.big_player)
     let CarnetOpen = false
     k.onKeyPress("enter",()=>{
@@ -98,6 +96,10 @@ export default async function house(k){
             k.destroyAll("InstructionRecto")
             k.destroyAll("Verso_Guillot_id")
             k.destroyAll("Verso_Dufay_id")
+            k.destroyAll("InstructionCarnetDroite") 
+            k.destroyAll("InstructionCarnetGauche") 
+            k.destroyAll("InstructionEExit")
+            ShowKey (k, "c",  "c-down", 1150, 55, 289, 359, 1, 0.2,"InstructionF")
             entities.carnet.currentSprite = Sprite_Carnet
             CarnetOpen = false
             const page_ferme= k.play("book", {
@@ -108,49 +110,66 @@ export default async function house(k){
         }
         if (onCollideTableau){  
             DestroyShowObject(k,"InstructionExit","Bib_tableau_deRivaz" ) 
+            if(!Meet_Rivaz_ok.getinstanceRivaz()){
+                PaiettesE(k)
+            }
             Meet_Rivaz_ok.setinstanceRivaz(true)
             ReadingTableau = false
+            k.destroyAll("InstructionExitCarnet")
+            ShowKey (k, "c",  "c-down", 1150, 55, 289, 359, 1, 0.2,"InstructionF")
             return;  
                 
         }
         if (onCollidePapier){ 
             ReadingPapers = false 
+            k.destroyAll("InstructionExitCarnet")
             if(LecturePapers_1){
-            DestroyShowObject(k,"InstructionExit","Papier_1_id" ) 
-            k.destroyAll("InstructionFleche")
-            LecturePapers_1 = false
-            const page_ferme= k.play("book", {
-                volume: 0.2,
-            })
-            return
+                ShowKey (k, "c",  "c-down", 1150, 55, 289, 359, 1, 0.2,"InstructionF")
+                DestroyShowObject(k,"InstructionExit","Papier_1_id" ) 
+                k.destroyAll("InstructionCarnetDroite")
+                LecturePapers_1 = false
+                const page_ferme= k.play("book", {
+                    volume: 0.2,
+                })
+                if(!Meet_DuFay_ok.getinstanceDuFay()){
+                    PaiettesE(k)
+                }
+                Meet_DuFay_ok.setinstanceDuFay(true)  
+                return
             }
+
             if(LecturePapers_2){
-            DestroyShowObject(k,"InstructionExit","Papier_2_id" ) 
-            k.destroyAll("InstructionFleche")
-            LecturePapers_2 = false
-            const page_ferme= k.play("book", {
-                volume: 0.2,
-            })
-            return;  
+                DestroyShowObject(k,"InstructionExit","Papier_2_id" ) 
+                k.destroyAll("InstructionCarnetGauche")
+                LecturePapers_2 = false
+                const page_ferme= k.play("book", {
+                    volume: 0.2,
+                })
+                if(!Meet_DuFay_ok.getinstanceDuFay()){
+                    PaiettesE(k)
+                }
+                Meet_DuFay_ok.setinstanceDuFay(true)  
+                return;  
             }
                  
-        }
+        } 
  
     })
-    k.onKeyPress("e", () =>{
+    k.onKeyPress("e", async () =>{
         if (onCollideTableau && !CarnetOpen && !ReadingTableau){  
             ReadingTableau = true
-            Instruction(k,170,60,k.vec2(950,200),"InstructionExit",Textes[7])
-            ShowObject(k,"InstructionE", PortraiDerivaz, k.vec2(416,40), "Bib_tableau_deRivaz")        
+            ShowKey (k, "enter",  "enter-down", 950, 200, 289, 359, 1, 0.3,"InstructionExitCarnet")
+            k.destroyAll("InstructionF") 
+            ShowObject(k,"InstructionE", PortraiDerivaz, k.vec2(416,40), "Bib_tableau_deRivaz")    
             return;  
         }
         if (onCollidePapier && !CarnetOpen && !ReadingPapers){
             LecturePapers_1 = true
             ReadingPapers = true
-            Instruction(k,170,60,k.vec2(1000,225),"InstructionExit",Textes[4] )
-            Instruction(k,170,80,k.vec2(1000,425),"InstructionFleche",Textes[5] )
+            k.destroyAll("InstructionF") 
+            ShowKey (k, "fleche_droite",  "fleche_droite-down", 1020, 400, 289, 359, 1, 0.3,"InstructionCarnetDroite")
+            ShowKey (k, "enter",  "enter-down", 1000, 200, 289, 359, 1, 0.3,"InstructionExitCarnet")
             ShowObject(k,"InstructionE", Papier_1, k.vec2(330,25), "Papier_1_id") 
-            Meet_DuFay_ok.setinstanceDuFay(true)  
             const page_ferme= k.play("book", {
                 volume: 0.2,
             })
@@ -158,8 +177,13 @@ export default async function house(k){
         }
         if(CollidFolken && !CarnetOpen){
             const DialogueFolken = pnj_FolkenLines.french_Folken;
-            dialog(k, k.vec2(32,16), DialogueFolken[0])
-            Meet_Robriquet_ok.setinstanceRobriquet(true)
+            if(!Meet_Robriquet_ok.getinstanceRobriquet()){
+                await dialog(k, k.vec2(32,16), DialogueFolken[0])
+                PaiettesE(k)
+                Meet_Robriquet_ok.setinstanceRobriquet(true)
+            } else{
+                dialog(k, k.vec2(32,16), DialogueFolken[1])
+            }
             return;  
         }
         if(CollidDoorExit && !CarnetOpen){
@@ -186,22 +210,28 @@ export default async function house(k){
                 "CarnetOPEN"
             ])
             Carnet(k)
-            Instruction(k, 170,60, k.vec2(1050,200),"InstructionExitCarnet",Textes[1])
-            Instruction(k, 170,260, k.vec2(1050,300),"InstructionCarnet", Textes[2])
+            k.destroyAll("PailetteE")
+            k.destroyAll("InstructionF") 
+            ShowKey (k, "enter",  "enter-down", 130, 200, 289, 359, 1, 0.3,"InstructionExitCarnet")
+            ShowKey (k, "fleche_droite",  "fleche_droite-down", 1050, 400, 289, 359, 1, 0.3,"InstructionCarnetDroite")
             return;  
         }
     })
     k.onKeyPress((key) => {if(["right","d"].includes(key)){
         if(LecturePapers_1){
         k.destroyAll("Papier_1_id")
+        k.destroyAll("InstructionCarnetDroite")
         LecturePapers_1 = false
         LecturePapers_2 = true
         ShowObject(k,"InstructionE", Papier_2, k.vec2(330,25), "Papier_2_id")  
+        ShowKey (k, "fleche_gauche",  "fleche_gauche-down", 250, 400, 289, 359, 1, 0.3,"InstructionCarnetGauche")
         }
     }})
     k.onKeyPress((key) => {if(["left","a"].includes(key)){
         if(LecturePapers_2){
+        ShowKey (k, "fleche_droite",  "fleche_droite-down", 1020, 400, 289, 359, 1, 0.3,"InstructionCarnetDroite")
         k.destroyAll("Papier_2_id")
+        k.destroyAll("InstructionCarnetGauche")
         LecturePapers_1 = true
         LecturePapers_2 = false
         ShowObject(k,"InstructionE", Papier_1, k.vec2(330,25), "Papier_1_id")  
@@ -266,7 +296,7 @@ export default async function house(k){
 
    entities.big_player.onCollide("door-exit", () =>{
         CollidDoorExit = true
-        Instruction(k, 170,60, k.vec2(130,150),"InstructionEExit",Textes[6])
+        ShowKey (k, "e","e-down", 190, 80, 225, 240, 1, 0.2,"InstructionEExit")
     });
 
     entities.big_player.onCollideEnd("door-exit", () =>{
@@ -276,7 +306,7 @@ export default async function house(k){
 
     entities.big_player.onCollide("tableau_deRivaz", ()=>{
         onCollideTableau = true
-        Instruction(k,145,55,k.vec2(484,328),"InstructionE",Textes[8] )
+        ShowKey (k, "e","e-down", 590, 160, 225, 240, 1, 0.2,"InstructionE")
     })
 
     entities.big_player.onCollideEnd("tableau_deRivaz", ()=>{
@@ -286,7 +316,7 @@ export default async function house(k){
 
     entities.big_player.onCollide("papier_1", ()=>{
         onCollidePapier = true
-        Instruction(k,160,55,k.vec2(734,258),"InstructionE",Textes[9])
+        ShowKey (k, "e","e-down", 734, 158, 225, 240, 1, 0.2,"InstructionE")
     })
 
     entities.big_player.onCollideEnd("papier_1", ()=>{
@@ -297,7 +327,7 @@ export default async function house(k){
     entities.big_player.onCollide("pnj-Folken", ()=>{
         CollidFolken = true
         startInteractionPNJ(k, entities.pnj_Folken, entities.big_player, "pnj_Folken_right","pnj_Folken_left","pnj_Folken_down", "pnj_Folken_up")
-        Instruction(k, 150,55, k.vec2(1050,218),"InstructionEFolken",Textes[3])
+        ShowKey (k, "e","e-down", 990, 208, 225, 240, 1, 0.2,"InstructionEFolken")
     })
 
     entities.big_player.onCollideEnd("pnj-Folken", ()=>{

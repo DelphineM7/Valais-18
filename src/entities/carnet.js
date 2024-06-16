@@ -155,7 +155,7 @@ export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,p
         return;
     }
     if(page == 9 ){
-        Instruction(k,170,60,k.vec2(50,200),"InstructionVerso",Textes[0]  )
+        ShowKey (k, "e","e-down", 570, 545, 225, 240, 1, 0.15,"InstructionEExit")
         return;
     }
 
@@ -167,7 +167,7 @@ export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,p
         Instruction(k,170,60,k.vec2(50,200),"InstructionVerso",Textes[0] )
     }
     if(page == 9 ){
-        Instruction(k,170,60,k.vec2(50,200),"InstructionVerso",Textes[0]  )
+        ShowKey (k, "e","e-down", 570, 545, 225, 240, 1, 0.15,"InstructionEExit")
     }
     SetSprite(k,Carnetname, Assets_carnet[nbr][4])
     k.destroyAll("ligne")
@@ -535,6 +535,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("InstructionRecto")
                 k.destroyAll("Verso_Guillot_id")
                 k.destroyAll("Verso_Dufay_id")
+                k.destroyAll("InstructionEExit")
                 createProof(k,8, Carnetname, Guillot_ok.getinstanceGuillot(), Meet_Guillot_ok.getinstanceGuillot(),k.vec2(320,185),260, 80,k.vec2(Guillot_x,425),135 , 20, "proof1_Guillot", "proof2_Guillot")
                 return; 
             }
@@ -757,6 +758,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("InstructionRecto")
                 k.destroyAll("Verso_Guillot_id")
                 k.destroyAll("Verso_Dufay_id")
+                k.destroyAll("InstructionEExit")
                 createProof(k,10, Carnetname, Bellet_ok.getinstanceBellet(), Meet_Bellet_ok.getinstanceBellet(),k.vec2(300,305),220, 20,k.vec2(300,325),200 , 25, "proof1_Bellet", "proof2_Bellet")
                 k.destroyAll("InstructionCarnetDroite")
                 return; 
@@ -787,15 +789,17 @@ export function RectoVersoLecture(k){
         if(showrecto_Dufay){
             showrecto_Dufay = false
             ShowObject(k,"InstructionVerso", Verso_DuFay_Show , k.vec2(270,121), "Verso_Dufay_id")
-            Instruction(k,170,60,k.vec2(50,200),"InstructionRecto",Textes[10]  )
+            k.destroyAll("InstructionEExit")
+            ShowKey (k, "e","e-down", 570, 545, 225, 240, 1, 0.15,"InstructionEExit")
             return;
         }
         if(!showrecto_Dufay){
             showrecto_Dufay = true
             DestroyInstruction(k,"InstructionRecto")
+            k.destroyAll("InstructionEExit")
+            ShowKey (k, "e","e-down", 570, 545, 225, 240, 1, 0.15,"InstructionEExit")
             k.destroyAll("proof_color")
             k.destroyAll("Verso_Dufay_id")
-            Instruction(k,170,60,k.vec2(50,200),"InstructionVerso",Textes[0]  )
             return;
         }
     }

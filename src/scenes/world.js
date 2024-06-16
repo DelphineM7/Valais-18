@@ -1,6 +1,6 @@
 import { generateMoyenPlayerComponents, setMoyenPlayerMovement } from "../entities/player.js";
 import { generatepnj_marchandComponents, EventMarieAnneFolken, fin,generatepnj_DufourComponents} from "../entities/pnj_other.js";
-import { colorizeBackground, drawBoundaries, fetchMapData, SetSprite, Instruction, DestroyShowObject,startInteractionPNJ, DestroyInstruction,} from "../utils.js";
+import { colorizeBackground, drawBoundaries, fetchMapData, SetSprite, Instruction, DestroyShowObject,startInteractionPNJ, DestroyInstruction,ShowKey,PaiettesE} from "../utils.js";
 import { Carnet, setTournerPage, createProof, ToDoWithProof, Souligner, RectoVersoLecture,checkfin} from "../entities/carnet.js";
 import { NeedLecture, Music_Outside,gameState, HaveCarnet,SeenJournal,Beck_ok,Meet_Torrent_ok, Torrent_ok, Pottier_ok, Meet_Pottier_ok, Meet_Rivaz_ok, Rivaz_ok, Dufour_ok, Meet_Dufour_ok, Vuilloud_ok, Robriquet_ok, Meet_Robriquet_ok, Guillot_ok, Meet_Guillot_ok, DuFay_ok, Meet_DuFay_ok, Bellet_ok, Meet_Bellet_ok} from "../state/stateManagers.js";
 import { pnj_BelletLines, pnj_DufourLines, pnj_chatLines}  from "../content/pnj_dialogues.js"
@@ -68,8 +68,7 @@ export default async function world(k){
         Sprite_Carnet = "Lecture_carnet_Index"
         adaptlectureJ = 20
     }
-    Instruction(k, 145,55, k.vec2(1105-adaptlectureJ,25),"InstructionF",Textes[0]);
-
+    ShowKey (k, "c",  "c-down", 1150, 55, 289, 359, 1, 0.2,"InstructionF")
 
     if(!Music_Outside.getinstanceOutside()){
         music.paused = false
@@ -94,6 +93,10 @@ export default async function world(k){
             k.destroyAll("InstructionRecto")
             k.destroyAll("Verso_Guillot_id")
             k.destroyAll("Verso_Dufay_id")
+            k.destroyAll("InstructionCarnetDroite")
+            k.destroyAll("InstructionCarnetGauche")
+            ShowKey (k, "c",  "c-down", 1150, 55, 289, 359, 1, 0.2,"InstructionF")
+            
             entities.carnet.currentSprite = Sprite_Carnet
             CarnetOpen = false
             const page_ferme= k.play("book", { 
@@ -108,9 +111,14 @@ export default async function world(k){
     k.onKeyPress("e", async ()=>{
         if(OnCollideBellet && !CarnetOpen){
             const DialogueBellet = pnj_BelletLines.french_Bellet;
-            await dialog(k, k.vec2(32,16), DialogueBellet[0])
-            Meet_Bellet_ok.setinstanceBellet(true)
-            EventMarieAnneFolken(k,map)            
+            if (!Meet_Bellet_ok.getinstanceBellet()){
+                await dialog(k, k.vec2(32,16), DialogueBellet[0])
+                PaiettesE(k)
+                Meet_Bellet_ok.setinstanceBellet(true)
+                EventMarieAnneFolken(k,map)  
+            }else{
+                dialog(k, k.vec2(32,16), DialogueBellet[1])
+            }        
         }
         if(DufourCollide && !CarnetOpen){
             const DialogueDufour = pnj_DufourLines.french_Dufour;
@@ -163,8 +171,10 @@ export default async function world(k){
                 "CarnetOPEN"
             ])
             Carnet(k)
-            Instruction(k, 170,60, k.vec2(1050,200),"InstructionExitCarnet",Textes[1])
-            Instruction(k, 170,260, k.vec2(1050,300),"InstructionCarnet", Textes[2])
+            k.destroyAll("PailetteE")
+            k.destroyAll("InstructionF") 
+            ShowKey (k, "enter",  "enter-down", 130, 200, 289, 359, 1, 0.3,"InstructionExitCarnet")
+            ShowKey (k, "fleche_droite",  "fleche_droite-down", 1050, 400, 289, 359, 1, 0.3,"InstructionCarnetDroite")
         }
 
     })
@@ -228,7 +238,7 @@ export default async function world(k){
 
     entities.player.onCollide("door-entrance", () =>{
         CollidDoorEntrance = true
-        Instruction(k, 135,80, k.vec2(250,340),"InstructionEDoor",Textes[4])
+        ShowKey (k, "e","e-down", 350, 340, 225, 240, 1, 0.2,"InstructionEDoor")
     })
 
     entities.player.onCollideEnd("door-entrance", ()=> {
@@ -238,7 +248,7 @@ export default async function world(k){
 
     entities.player.onCollide("door-entrance_2", () =>{
         CollidDoorEntrance_2 = true
-        Instruction(k, 135,80, k.vec2(1050,260),"InstructionEDoor_2",Textes[4])
+        ShowKey (k, "e","e-down", 1120, 300, 225, 240, 1, 0.2,"InstructionEDoor_2")
     })
 
     entities.player.onCollideEnd("door-entrance_2", ()=> {
@@ -248,7 +258,7 @@ export default async function world(k){
 
     entities.player.onCollide("door-exit", () =>{
         CollidDoorExit = true
-        Instruction(k, 150,80, k.vec2(150,570),"InstructionEExit", Textes[5])
+        ShowKey (k, "e","e-down", 50, 630, 225, 240, 1, 0.2,"InstructionEExit")
     })
 
     entities.player.onCollideEnd("door-exit", ()=> {
@@ -259,7 +269,7 @@ export default async function world(k){
     entities.player.onCollide("pnj-marchand", () =>{
         OnCollideBellet = true
         startInteractionPNJ (k, entities.pnj_marchand, entities.player, "marchand-side-right","marchand-side-left","marchand-down", 'marchand-up')
-        Instruction(k, 150,55, k.vec2(870,378),"InstructionEBellet",Textes[3])
+        ShowKey (k, "e","e-down", 970, 400, 225, 240, 1, 0.2,"InstructionEBellet")
     }); 
 
     entities.player.onCollideEnd("pnj-marchand", ()=> {
@@ -272,7 +282,7 @@ export default async function world(k){
     entities.player.onCollide("pnj-dufour", () =>{
         DufourCollide = true
         startInteractionPNJ (k, entities.pnj_Dufour, entities.player, "pnj_Dufour_right","pnj_Dufour_left","pnj_Dufour_down", 'marchand-up')
-        Instruction(k, 150,55, k.vec2(220,300),"InstructionEFour",Textes[3])
+        ShowKey (k, "e","e-down", 220, 300, 225, 240, 1, 0.2,"InstructionEFour")
     }); 
 
     entities.player.onCollideEnd("pnj-dufour", ()=> {
@@ -284,7 +294,7 @@ export default async function world(k){
 
     entities.player.onCollide("chat", () =>{
         CollideChat = true
-        Instruction(k, 150,55, k.vec2(620,400),"InstructionEchat",Textes[6])
+        ShowKey (k, "e","e-down", 870, 440, 225, 240, 1, 0.2,"InstructionEchat")
     }); 
 
     entities.player.onCollideEnd("chat", ()=> {

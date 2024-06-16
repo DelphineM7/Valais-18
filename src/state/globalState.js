@@ -50,7 +50,7 @@ export function globalStateManager2(){
     let instance2 = null; 
 
     function createInstance2(){
-        let firstTimepont = true //true 
+        let firstTimepont = false //true 
 
         return{
             setfirstTimepont(value){
@@ -98,7 +98,7 @@ export function globalStateManagerCarnet_lecture(){
     let instanceCarnet_lecture = null; 
 
     function createInstanceCarnet_lecture(){
-        let CarnetOpenFirst = true  //true
+        let CarnetOpenFirst = false  //true
 
         return{
             setInstanceCarnet_lecture(value){
@@ -146,7 +146,7 @@ export function globalStateManagerTuto(){
     let instanceTuto = null; 
 
     function createInstanceTuo(){
-        let WeHaveDoneTuto = false  //false
+        let WeHaveDoneTuto = true  //false
 
         return{
             setInstanceTuto(value){
@@ -195,7 +195,7 @@ export function globalStateManagerBeck(){
     let instanceBeck = null; 
 
     function createinstanceBeck(){
-        let BeckOk = false //false
+        let BeckOk = true //false
 
         return{
             setinstanceBeck(value){
@@ -362,7 +362,7 @@ export function globalStateManagerFolken_Meet(){
     let instanceFolken = null; 
 
     function createinstanceFolken(){
-        let FolkenOk = false //false
+        let FolkenOk = true //false
 
         return{
             setinstanceFolken(value){
@@ -434,7 +434,7 @@ export function globalStateManagerDufour(){
     let instanceDufour = null; 
 
     function createinstanceDufour(){
-        let DufourOk = false //false
+        let DufourOk = true //false
 
         return{
             setinstanceDufour(value){

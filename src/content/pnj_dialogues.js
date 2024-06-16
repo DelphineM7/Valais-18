@@ -29,6 +29,9 @@ const french_Bellet= [
         "Avec d'autres de la Vallée, on a récupéré mon cheval et Schiner s'est enfui de peur !",
         "Je ne suis pas la personne que tu recherches, je n'ai pas commandé le tableau dont tu me parles."
 
+    ],
+    [
+        "Je ne suis pas la personne que tu cherches."
     ]
 ]
 
@@ -44,7 +47,7 @@ const french_Torrent = [
         "Je suis désolé, je n'ai pas commandé de tableau, je ne suis pas la personne que tu cherches !"
     ],
     [
-        "Ravi d'avoir fait ta connaissance"
+        "Ravi d'avoir fait ta connaissance."
     ]
 ]
 
@@ -60,6 +63,9 @@ const french_Folken = [
         "Je suis Anne-Marie Folken, je suis couturière à Monthey !",
         "Tu cherches des informations sur Louis Robriquet ? ",
         "Je ne l'ai pas connu personnellement, mais je sais qu'il est décédé en 1807."
+    ],
+    [
+        "Je dois acheter du tissu..."
     ]
 ]
 
