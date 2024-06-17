@@ -100,6 +100,9 @@ export function ShowKeynoAnim (k, sprite, pos1, pos2, area1, area2, opacity,scal
 export function PaiettesE (k){
     const InstructionPailette = k.add([k.sprite("etoile"), k.pos(1118,19), k.scale(0.2), k.opacity(1),k.offscreen(),"PailetteE",]) 
     InstructionPailette.play("etoile_anim") 
+    const pailette = k.play("pailettes", {
+        volume: 0.8,
+    })
     k.wait(2, () => {k.destroy(InstructionPailette) })
 }
 

@@ -10,6 +10,9 @@ const french_pottier = [
         "J'effectue actuellement mon service militaire sous l'armée fédérale.",
         "Je n'ai pas commandé de portrait me représentant, je ne suis pas la personne que tu cherches !",
         "Désolé. "
+    ],
+    [
+        "Je dois me préparer pour partir. "
     ]
 ]
 //const deutsch = [] 

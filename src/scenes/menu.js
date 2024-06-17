@@ -118,7 +118,7 @@ export default async function menu(k){
             Guillot_x = 660
 
         }
-        k.go("world")
+        k.go("pont")
     })
 
 }

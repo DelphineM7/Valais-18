@@ -50,7 +50,7 @@ export function globalStateManager2(){
     let instance2 = null; 
 
     function createInstance2(){
-        let firstTimepont = false //true 
+        let firstTimepont = true //true 
 
         return{
             setfirstTimepont(value){
@@ -74,7 +74,7 @@ export function globalStateManagerCarnet(){
     let instanceCarnet = null; 
 
     function createInstanceCarnet(){
-        let WeHaveCarnet = true  //false
+        let WeHaveCarnet = false  //false
 
         return{
             setInstanceCarnet(value){
@@ -98,7 +98,7 @@ export function globalStateManagerCarnet_lecture(){
     let instanceCarnet_lecture = null; 
 
     function createInstanceCarnet_lecture(){
-        let CarnetOpenFirst = false  //true
+        let CarnetOpenFirst = true  //true
 
         return{
             setInstanceCarnet_lecture(value){
@@ -122,7 +122,7 @@ export function globalStateManagerJournal(){
     let instanceJournal = null; 
 
     function createInstanceJournal(){
-        let WeHaveSeenJournal = true  //false
+        let WeHaveSeenJournal = false  //false
 
         return{
             setInstanceJournal(value){
@@ -146,7 +146,7 @@ export function globalStateManagerTuto(){
     let instanceTuto = null; 
 
     function createInstanceTuo(){
-        let WeHaveDoneTuto = true  //false
+        let WeHaveDoneTuto = false  //false
 
         return{
             setInstanceTuto(value){
@@ -195,7 +195,7 @@ export function globalStateManagerBeck(){
     let instanceBeck = null; 
 
     function createinstanceBeck(){
-        let BeckOk = true //false
+        let BeckOk = false //false
 
         return{
             setinstanceBeck(value){
@@ -362,7 +362,7 @@ export function globalStateManagerFolken_Meet(){
     let instanceFolken = null; 
 
     function createinstanceFolken(){
-        let FolkenOk = true //false
+        let FolkenOk = false //false
 
         return{
             setinstanceFolken(value){
@@ -434,7 +434,7 @@ export function globalStateManagerDufour(){
     let instanceDufour = null; 
 
     function createinstanceDufour(){
-        let DufourOk = true //false
+        let DufourOk = false //false
 
         return{
             setinstanceDufour(value){

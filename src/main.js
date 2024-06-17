@@ -420,6 +420,8 @@ k.loadSound("river", "./assets/music/river.mp3")
 k.loadSound("outside", "./assets/music/outside.mp3")
 k.loadSound("inside", "./assets/music/inside.mp3")
 k.loadSound("book", "./assets/music/book.mp3")
+k.loadSound("pailettes", "./assets/music/pailette.mp3")
+
 
 // start la musique
 export const music = k.play("outside", {
