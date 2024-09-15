@@ -111,5 +111,5 @@ version du 01.09.2010. Online: https://hls-dhs
 
 ## Contexte de développement 💡
 Ce projet a été développé dans le cadre du cours "Developpement Jeu Vidéo 2D" (printemps 2022) enseigné par le Prof. Isaac Pante (SLI, Lettres, UNIL). 👩🏼‍🎓
-Afin que le jeu soit utilisé au delà d'une validation de cours, j'ai proposé à madame Cindy Jaggy et Monsieur Pierre Abbet de le créer pour l'intégrer à leur corpus de cours. Le jeu est disponible à cette adresse (https://valais18.vallesiana.ch/jeu) 🔗.
+Afin que le jeu soit utilisé au delà d'une validation de cours, j'ai proposé à Madame Cindy Jaggy et Monsieur Pierre Abbet de le créer pour l'intégrer à leur corpus de cours. Le jeu est disponible à cette adresse (https://valais18.vallesiana.ch/jeu) 🔗.
 
