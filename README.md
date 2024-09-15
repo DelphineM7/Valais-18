@@ -1,7 +1,7 @@
 # 🔴⚪ Valais-18 - Jeu vidéo ⚪🔴
-# 📖 Le Carnet Mystérieux et le portrait inconnu 🖼
+# 📖 Le Carnet Mystérieux et le Portrait Inconnu 🖼
 
-![](assets/readme/Pont.png)
+![](assets/readme/Itch_ban_2.png)
 
 ## Description du projet 🖋️
 Ce projet est un jeu vidéo pédagogique de type jeu d'aventure. Le jeu commence au 21ème siècle dans la chambre d'une jeune fille. Celle-ci, en lisant un carnet qui lui a été transmis par son grand-père, voyage dans le temps jusqu'en 1815 📅. Le·la joueur.euse joue le personnage de la petite fille. Le jeu se déroule, ensuite, à Monthey (Valais, Suisse) au début du 19ème siècle. Afin de retourner au 21ème siècle, le·la joueur.euse doit retrouver le propriétaire d'un tableau dont elle doit effectuer la livraison 📦. 
