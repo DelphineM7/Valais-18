@@ -125,11 +125,11 @@ export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,p
         "proof",
         id_proof2
     ])
-    if(proof1_Beck && page == 2){
+    if(proof1_Beck && page == 1){
         k.add([k.rect(Beck_proof1_width,20), k.pos(370,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         return;
     } 
-    if(proof2_Beck && page == 2){
+    if(proof2_Beck && page == 1){
         k.add([k.rect(50,20), k.pos(Beck_proof2_x,Beck_proof2_y),k.color(194,15,15),k.opacity(0.7),"proof_color"])
         return;
     } 
@@ -180,6 +180,9 @@ export function createProof(k,nbr,Carnetname,ManagementInfo2 , ManagementInfo1,p
 
 // Permet de créer une animation lorsqu'un personnage est exclu des suspects
 async function AllProofsfound(k, content,longeur, pos, id_text){
+    const proof_found= k.play("correct", {
+        volume: 0.2,
+    })
     const TextProof = k.add([
         k.text("", {
             font: "CarnetFont",
@@ -208,7 +211,7 @@ export function ToDoWithProof(k,id, id_text){
         VuilloudXLecture = 395
     }
     if(id === "proof1_Beck"){
-        k.add([k.rect(Beck_proof1_width,20), k.pos(BeckXLecture,250),k.color(194,15,15),k.opacity(0.7),"proof_color"])
+        k.add([k.rect(Beck_proof1_width,20), k.pos(BeckXLecture,250),k.color(194,15,15),k.opacity(0.7),"proof_color",])
         proof1_Beck = true
         k.destroyAll("proof1_Beck")
         k.setCursor("auto")
@@ -399,7 +402,7 @@ export function setTournerPage(k, key, Carnetname){
                 k.destroyAll("texte_proof")
                 k.destroyAll("cross")
                 k.destroyAll("ligne")
-                createProof(k,1, Carnetname, Pottier_ok.getinstancePottier(), Meet_Pottier_ok.getinstancePottier(),k.vec2(305,445),285, 25,k.vec2(305,470),285, 50, "proof1_Pottier", "proof2_Pottier")
+                //createProof(k,1, Carnetname, Pottier_ok.getinstancePottier(), Meet_Pottier_ok.getinstancePottier(),k.vec2(305,445),285, 25,k.vec2(305,470),285, 50, "proof1_Pottier", "proof2_Pottier")
                 let FontSize = 35
                 let fontSize2 = 30
                 let adaptlecture =0

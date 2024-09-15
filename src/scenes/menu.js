@@ -1,5 +1,5 @@
-import { colorizeBackground } from "../utils.js";
-import { NeedLecture } from "../state/stateManagers.js"
+import { colorizeBackground, ShowKey} from "../utils.js";
+import { NeedLecture,HistorioNow,DufourExist,Music_Outside,Meet_DuFay_ok,DuFay_ok,Meet_Guillot_ok,Guillot_ok,Meet_Robriquet_ok,Robriquet_ok,Vuilloud_ok,Meet_Dufour_ok,Dufour_ok,Rivaz_ok,Meet_Rivaz_ok,Meet_Folken_ok,Torrent_ok,Meet_Torrent_ok,Bellet_ok,Meet_Bellet_ok,Pottier_ok,Meet_Pottier_ok,Beck_ok,Tutodoing,TutoDone,SeenJournal,HaveReadCarnet,HaveCarnet,gameStatePont,gameState } from "../state/stateManagers.js"
 import { music } from "../main.js";
 import { Textes_Menu } from "../content/Instruction_texte.js";
 
@@ -21,49 +21,81 @@ export let Robriquet_height = 20
 export let Guillot_x = 650
 const Textes = Textes_Menu.french_Menu;
 
-
-export default async function menu(k){  
-    colorizeBackground(k, 27,29,52);
+export default async function menu(k){ 
+    colorizeBackground(k, 27,29,52 );
+    const map = k.add([k.pos(0,0)])
+    const intro_credit = map.add([k.sprite("assets_credit_1"),k.pos(32,16),"intro_1"])
     music.paused = false
-    const titre1 =k.add([
+    const titre1 =map.add([ //titre
         k.text(Textes[0], {
-            size : 52, 
-            font: "DefaultFont"
+            size : 47, 
+            width : 400,
+            font: "DefaultFont",
+            align: "center",
+            lineSpacing : 10,
         }),
-        k.anchor("center"),
-        k.pos(k.center().x, k.center().y -100)
+        k.pos(750,100 ),
+        k.color(27,29,52)
     ])
 
-    const titre2 = k.add([
+    const titre2 = k.add([ // flèche
         k.text(Textes[1], {
-            size : 26, 
-            font: "LectureMenu"
+            size : 32, 
+            font: "DefaultFont",
+            width: 450, 
+            lineSpacing : 10,
         }),
-        k.anchor("center"),
-        k.pos(k.center().x, k.center().y +100)
+        k.pos(780, 425),
+        k.color(27,29,52)
     ])
     
-    const titre3 = k.add([
+    const titre3 = k.add([ //E
         k.text(Textes[2], {
-            size : 32, 
+            font: "DefaultFont",
+            textSize: 32 
+        }),
+        k.pos(780, 290),
+        k.color(27,29,52)
+    ])
+
+    const titre4 = k.add([ //C
+        k.text(Textes[4], {
+            textSize : 32, 
             font: "DefaultFont"
         }),
-        k.anchor("center"),
-        k.pos(k.center().x, k.center().y +200)
+        k.pos(780, 590),
+        k.color(27,29,52)
     ])
-    k.onKeyPress("f", ()=>{
+
+    ShowKey (k, "e","e-down", 700, 270, 225, 240, 1, 0.25,"ToucheE")
+    ShowKey (k, "fleche_gauche","fleche_gauche-down" ,700, 420, 689, 490, 0.9, 0.25,"ToucheF")
+    ShowKey (k, "c", "c-down", 700, 570, 689, 490, 0.9, 0.25,"ToucheC")
+
+    k.onKeyPress("left", ()=>{
         if(!NeedLecture.getLecture()){
             NeedLecture.setLecture(true)
             titre2.text = Textes[3]
+            titre2.font = "LectureMenu"
+            titre2.textSize = (22)
             titre3.font = "LectureMenu"
+            titre3.textSize = (22)
             titre1.font = "LectureMenu"
+            titre1.textSize = (37)
+            titre4.font = "LectureMenu"
+            titre4.textSize = (22)
             return
         }
         if(NeedLecture.getLecture()){
             NeedLecture.setLecture(false)
             titre2.text = Textes[1]
+            titre2.font = "DefaultFont"
+            titre2.textSize = (32)
             titre3.font = "DefaultFont"
+            titre3.textSize = (32)
             titre1.font = "DefaultFont"
+            titre1.textSize = (47)
+            titre4.font = "DefaultFont"
+            titre4.textSize = (32)
             return
         }
 
@@ -118,7 +150,9 @@ export default async function menu(k){
             Guillot_x = 660
 
         }
-        k.go("pont")
+        k.go("intro_1")
     })
-
+    k.onKeyPress("c", ()=>{
+        k.go("credit")
+    })
 }

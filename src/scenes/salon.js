@@ -66,7 +66,7 @@ export default async function salon(k){
     }
     ShowKey (k, "c",  "c-down", 1150, 55, 289, 359, 1, 0.2,"InstructionF")
 
-
+ 
     const inside = k.play("inside", {
         volume: 0.02,
         loop: true

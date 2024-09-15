@@ -8,11 +8,17 @@ import outro_1 from "./scenes/outro_1.js"
 import outro_2 from "./scenes/outro_2.js"
 import salon from "./scenes/salon.js"
 import menu from "./scenes/menu.js"
+import credit from "./scenes/credits.js";
 import historio from "./scenes/historio.js"
 import { Music_Outside,NeedLecture} from "./state/stateManagers.js"
 
 
+
 //assets map en png
+k.loadSpriteAtlas("./assets/png_map/intro_credit_1.png", {
+    "assets_credit_1" : {x:0 , y:0 , width: 1219 , height:688 },
+});
+
 k.loadSpriteAtlas("./assets/png_map/scene_intro_1.png", {
     "assets_intro_1" : {x:0 , y:0 , width: 1216 , height:688 },
 });
@@ -35,6 +41,10 @@ k.loadSpriteAtlas("./assets/png_map/bureau.png", {
 
 k.loadSpriteAtlas("./assets/png_map/salon.png", {
     "assets_salon" : {x:24 , y:15 , width: 1216 , height:688 },
+});
+
+k.loadSpriteAtlas("./assets/png_map/salleoutro2.png", {
+    "assets_outro" : {x:171 , y:177 , width: 1215 , height:688 },
 });
  
 //assets player et pnj
@@ -162,6 +172,10 @@ k.loadSpriteAtlas( "./assets/pnj/pnj_Dufour.png",{
     "pnj_Dufour_down" : {x:77 , y:80, width: 84 , height:207 },
     "pnj_Dufour_right" : {x:197 , y:80, width: 78 , height:208 },
     "pnj_Dufour_left" :{x:306 , y:78, width: 73 , height:210 },
+})
+
+k.loadSpriteAtlas( "./assets/pnj/Delphine.png",{
+    "Delphine_credit" : {x:0 , y:0, width: 1023 , height:1788 },
 })
     
 //objects
@@ -374,6 +388,7 @@ k.loadSpriteAtlas( "./assets/carnet/carnet_Historio_3.png",{
 // instructions 
 k.loadSpriteAtlas( "./assets/instructions/Instructions_1.png",{ 
     "a_w_s_d" : {x:15 , y:817, width: 712 , height:505 },
+    
     "e": {sliceX: 2,sliceY: 1,x: 850,y: 339,width: 461,height: 278,
         anims: {
             'e-down': {from: 0, to:1, speed : 2, loop: true}
@@ -421,6 +436,7 @@ k.loadSound("outside", "./assets/music/outside.mp3")
 k.loadSound("inside", "./assets/music/inside.mp3")
 k.loadSound("book", "./assets/music/book.mp3")
 k.loadSound("pailettes", "./assets/music/pailette.mp3")
+k.loadSound("correct", "./assets/music/correct.mp3")
 
 
 // start la musique
@@ -441,6 +457,7 @@ const scenes = {
     outro_2,
     historio,
     menu,
+    credit
 
 }
 

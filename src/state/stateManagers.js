@@ -3,7 +3,7 @@ import {globalStateManager_Lecture, globalStateManager1,globalStateManager2, glo
     globalStateManagerRivaz_Meet, globalStateManagerRivaz, globalStateManagerDufour, globalStateManagerDufour_Meet, globalStateManagerVuilloud,
     globalStateManagerRobriquet, globalStateManagerRobriquet_Meet, globalStateManagerGuillot, globalStateManagerGuillot_Meet, globalStateManagerDuFay,
     globalStateManagerDuFay_Meet, globalStateManagerCarnet_lecture,globalStateManagerTuto, globalStateManagerTuto2,
-    globalStateManagerOutside, globalStateManagerDufourCollide
+    globalStateManagerOutside, globalStateManagerDufourCollide, globalStateManagerHistorio
     } from "./globalState.js";
 
 export const NeedLecture = globalStateManager_Lecture().getLecture();
@@ -63,3 +63,5 @@ export const Meet_DuFay_ok = globalStateManagerDuFay_Meet().getinstanceDuFay()
 export const Music_Outside = globalStateManagerOutside().getinstanceOutside()
 
 export const DufourExist = globalStateManagerDufourCollide().getinstanceDufourCollide()
+
+export const HistorioNow = globalStateManagerHistorio().getinstanceHistorioCollide()

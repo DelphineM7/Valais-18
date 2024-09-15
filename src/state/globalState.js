@@ -694,3 +694,27 @@ export function globalStateManagerDufourCollide(){
         }
     }
 }
+
+export function globalStateManagerHistorio(){
+    let instanceHistorioCollide = null; 
+
+    function createinstanceHistorioCollide(){
+        let HistorioCollide = false //false
+
+        return{
+            setinstanceHistorioCollide(value){
+                HistorioCollide = value; 
+            },
+            getinstanceHistorioCollide : () =>HistorioCollide,
+        }
+    }
+    return{
+        getinstanceHistorioCollide(){
+            if (!instanceHistorioCollide){
+                instanceHistorioCollide = createinstanceHistorioCollide()
+            }
+
+            return instanceHistorioCollide;
+        }
+    }
+}

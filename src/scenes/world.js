@@ -49,6 +49,10 @@ export default async function world(k){
                     entities.chat = map.add([k.area({shape: new k.Rect(k.vec2(object.x, object.y), 61, 55)}),"chat"]);
                     continue; 
                 }
+                if (object.name === "door-entrance"){
+                    entities.door= map.add([k.area({shape: new k.Rect(k.vec2(object.x, object.y), 41, 150)}),"door-entrance"]);
+                    continue; 
+                }
             }
             
             continue;
@@ -120,7 +124,7 @@ export default async function world(k){
                 dialog(k, k.vec2(32,16), DialogueBellet[1])
             }        
         }
-        if(DufourCollide && !CarnetOpen){
+        if(DufourCollide && !CarnetOpen && !gameState.getFreezePlayer()){
             const DialogueDufour = pnj_DufourLines.french_Dufour;
             await dialog(k, k.vec2(32,16), DialogueDufour[0])   
             gameState.setFreezePlayer(true); 
@@ -133,7 +137,7 @@ export default async function world(k){
             })
 
         }
-
+ 
         if(CollideChat && !CarnetOpen){
             const DialogueChat = pnj_chatLines.french_chat;
             dialog(k, k.vec2(32,16), DialogueChat[0])  

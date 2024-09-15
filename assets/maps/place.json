@@ -41,6 +41,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":13,
+         "name":"Spawn",
+         "objects":[
+                {
+                 "height":0,
+                 "id":51,
+                 "name":"door-entrance",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":435.011363636364,
+                 "y":399.443181818182
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":10,
          "name":"Spawn",
          "objects":[
@@ -147,39 +170,6 @@
                  "y":688.666666666667
                 }, 
                 {
-                 "height":18,
-                 "id":28,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":218,
-                 "x":209,
-                 "y":497.666666666667
-                }, 
-                {
-                 "height":43.5000000000001,
-                 "id":29,
-                 "name":"door-entrance",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":61.6496212121212,
-                 "x":427.850378787878,
-                 "y":481.25
-                }, 
-                {
-                 "height":18,
-                 "id":37,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":214.083,
-                 "x":488.666833333333,
-                 "y":497.666666666667
-                }, 
-                {
                  "height":40.6666666666666,
                  "id":38,
                  "name":"",
@@ -255,6 +245,17 @@
                  "width":32.75,
                  "x":751.75,
                  "y":624
+                }, 
+                {
+                 "height":17,
+                 "id":54,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":492.5,
+                 "x":210,
+                 "y":498.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -262,8 +263,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":13,
- "nextobjectid":50,
+ "nextlayerid":14,
+ "nextobjectid":55,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

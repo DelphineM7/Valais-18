@@ -6,14 +6,29 @@ const french_Menu = [
         "Le Carnet Mystérieux et le portrait inconnu"
     ],
     [
-        "Appuie sur f pour une version du jeu adaptée aux personnes malvoyantes ou dyslexiques"
+        "version non adaptée aux personnes malvoyantes ou dyslexiques"
     ],
     [
-        "Appuie sur e pour commencer à jouer"
+        "pour commencer à jouer"
     ],
     [
-        "Appuie sur f pour une version du jeu non adaptée aux personnes malvoyantes ou dyslexiques",
-    ]
+        "version adaptée aux personnes malvoyantes ou dyslexiques",
+    ],
+    [
+        "pour lire les crédits"
+    ],
+    [
+        "J'ai créé ce jeu en 2024 dans le cadre du cours 'Developpement Jeu Vidéo 2D' (printemps 2022) enseigné par le professeur Isaac Pante (SLI, Lettres, UNIL)."
+    ],
+    [
+        "Afin que le jeu soit utilisé au delà d'une validation de cours, j'ai proposé à madame Cindy Jaggy et Monsieur Pierre Abbet de le créer pour l'intégrer à leur corpus de cours 'Valais 18'."
+    ],
+    [
+        "pour retourner au menu"
+    ],
+    [
+        "pour retourner à l'historiographie"
+    ],
 ]
 
 export const Textes_Menu = {
@@ -197,10 +212,16 @@ export const Textes_Outro1 = {
 // Textes Outro 2 
 const french_Outro2 = [
     [   
-        "Félicitations ! Tu as fini le jeu !"
+        "Félicitations !"
     ],
     [
-        "Appuie sur e pour découvrir les documents, les tableaux et les photos qui ont inspiré le jeu !"
+        "Tu as fini le jeu !"
+    ],
+    [
+        "pour retourner au menu"
+    ],
+    [
+        "pour découvrir les documents, les tableaux et les photos qui ont inspiré le jeu !"
     ],
 
 ]
@@ -249,4 +270,15 @@ const french_carnet = [
 
 export const Textes_Carnet = {
     french_carnet,
+};
+
+// Textes Historio
+const french_historio = [
+    ["pour retourner au menu"],
+    ["pour lire les crédits"],
+
+]
+
+export const Textes_Historio = {
+    french_historio,
 };

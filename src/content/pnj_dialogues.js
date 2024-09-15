@@ -85,7 +85,7 @@ const french_Dufour = [
         "En août de cette année, j'ai signé l'Acte de réunion du Valais à la Confédération ! ",
         "J'ai commandé un tableau à Félix Cortey et j'ai rendez-vous aujourd'hui pour le recevoir à Monthey.",
         "Je suis en retard, j'espère que la personne ne m'a pas cherché trop longtemps.",
-        "C'est toi qui me livre ?! Merci beaucoup de m'avoir trouvé.",
+        "C'est toi qui me livres ?! Merci beaucoup de m'avoir trouvé.",
 
     ]
 ]
